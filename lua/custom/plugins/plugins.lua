@@ -33,7 +33,7 @@ local plugins = {
     },
     config = function(_, opts)
       local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-      require "custom.configs.dap"
+      -- require "custom.configs.dap"
       require("dap-python").setup(path)
       require("core.utils").load_mappings("dap_python")
     end,
@@ -52,6 +52,9 @@ local plugins = {
         "black",
         "debugpy",
         "mypy",
+        "isort",
+        "flake8",
+        "pylint",
         "ruff",
         "pyright",
         "eslint-lsp",
@@ -68,19 +71,20 @@ local plugins = {
       require "custom.configs.lspconfig"
     end,
   },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
     "mhartington/formatter.nvim",
     event = "VeryLazy",
     opts = function()
       return require "custom.configs.formatter"
     end
-  }, {
-  "mfussenegger/nvim-lint",
-  event = "VeryLazy",
-  config = function()
-    require "custom.configs.lint"
-  end
-},
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.lint"
+    end
+  },
+  { "lukas-reineke/indent-blankline.nvim" },
 }
 return plugins
