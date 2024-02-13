@@ -5,7 +5,6 @@ local capabilities = config.capabilities
 
 local lspconfig = require("lspconfig")
 
-
 local function organize_imports()
   local params = {
     command = "_typescript.organizeImports",
@@ -14,25 +13,25 @@ local function organize_imports()
   vim.lsp.buf.execute_command(params)
 end
 
-lspconfig.tsserver.setup {
+lspconfig.tsserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
     preferences = {
       disableSuggestions = true,
-    }
+    },
   },
   commands = {
     OrganizeImports = {
       organize_imports,
       description = "Organize Imports",
-    }
-  }
-}
+    },
+  },
+})
 
 lspconfig.pyright.setup({
   on_attach = on_attach,
+  -- this is qrong text
   capabilities = capabilities,
   filetypes = { "python" },
 })
-
