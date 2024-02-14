@@ -20,12 +20,12 @@ local plugins = {
   --   end,
   -- },
 
-  -- {
-  --   "mfussenegger/nvim-dap",
-  --   config = function(_, opts)
-  --     require("core.utils").load_mappings("dap")
-  --   end,
-  -- },
+  {
+    "mfussenegger/nvim-dap",
+    config = function(_, opts)
+      require("core.utils").load_mappings("dap")
+    end,
+  },
 
   -- {
   --   "mhartington/formatter.nvim",
