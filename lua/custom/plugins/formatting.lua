@@ -20,7 +20,8 @@ return {
         markdown = { "prettier" },
         graphql = { "prettier" },
         lua = { "stylua" },
-        python = { "black" },
+        python = { "isort", "black" },
+        htmldjango = { "djlint" },
       },
       format_on_save = {
         lsp_fallback = true,
