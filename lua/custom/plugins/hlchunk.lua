@@ -81,11 +81,14 @@ return {
 			blank = {
 				enable = false,
 				chars = {
-					"․",
+					"-",
+					"=",
+					"x",
+					"c",
+					"v",
+					"b",
 				},
-				style = {
-					vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"),
-				},
+				style = colors,
 			},
 		})
 	end,

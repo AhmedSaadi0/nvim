@@ -1,0 +1,14 @@
+snippet jqajax "jQuery Ajax Call" b
+$.ajax({
+  url: '${1:url}',
+  type: '${2:GET}',
+  dataType: '${3:json}',
+  success: function(data) {
+    ${4:// handle success}
+  },
+  error: function(error) {
+    ${5:// handle error}
+  }
+});
+endsnippet
+
