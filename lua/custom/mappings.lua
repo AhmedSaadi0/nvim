@@ -37,6 +37,24 @@ M.general = {
 			end,
 			"Toggle snake_case camelCase",
 		},
+		["<leader>bd"] = {
+			function()
+				vim.cmd("bd")
+			end,
+			"اغلاق الملف المفتوح",
+		},
+		["<leader>tn"] = {
+			function()
+				vim.cmd("tabnew")
+			end,
+			"فتح تاب جديد",
+		},
+		["<leader>td"] = {
+			function()
+				vim.cmd("tabclose")
+			end,
+			"اغلاق التب المحدد",
+		},
 	},
 }
 
