@@ -43,6 +43,26 @@ M.general = {
 			end,
 			"اغلاق الملف المفتوح",
 		},
+		["<leader>ba"] = {
+			function()
+				local buffers = vim.api.nvim_list_bufs()
+				local toDelete = ""
+				for _, buf in ipairs(buffers) do
+					if vim.api.nvim_buf_is_loaded(buf) then
+						local bufname = vim.api.nvim_buf_get_name(buf)
+						local current = vim.api.nvim_get_current_buf()
+						local modified = vim.api.nvim_buf_get_option(buf, "modified")
+
+						if buf ~= current and not modified then
+							toDelete = toDelete .. " " .. buf
+						end
+					end
+				end
+				vim.cmd("silent! bd " .. toDelete)
+				vim.cmd("redraw!")
+			end,
+			"اغلاق كل الملفات المفتوحة الا المعدل عليها",
+		},
 		["<leader>tn"] = {
 			function()
 				vim.cmd("tabnew")
