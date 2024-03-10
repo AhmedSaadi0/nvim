@@ -4,6 +4,6 @@ return {
 		require("plugins.configs.lspconfig")
 		require("custom.lsp.django")
 		require("custom.lsp.pyright")
-		-- require("custom.lsp.eslint")
+		require("custom.lsp.eslint")
 	end,
 }

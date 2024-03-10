@@ -21,7 +21,7 @@ return {
 				graphql = { "prettier" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				htmldjango = { "djlint" },
+				htmldjango = { "djlint", "djhtml" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
@@ -34,6 +34,9 @@ return {
 						args = { "--single-quote" },
 					},
 				},
+				-- black = {
+				-- 	args = { "line-length", "79" },
+				-- },
 			},
 		})
 

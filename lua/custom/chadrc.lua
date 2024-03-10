@@ -2,7 +2,7 @@
 local M = {}
 M.ui = {
 	theme = "chadracula",
-	transparency = true,
+	transparency = false,
 	statusline = {
 		-- separator_style = "round",
 		theme = "default",
@@ -20,5 +20,18 @@ M.ui = {
 }
 M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
+local opt = vim.opt
+
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.shiftround = false
+opt.expandtab = true
+-- opt.autoindent = true
+-- opt.smartindent = true
+
+opt.spell = true
+opt.spelllang = { "en" } --"ar" }
+opt.relativenumber = true
 
 return M

@@ -28,6 +28,7 @@ local mason_config = {
 			"html-lsp",
 			"css-lsp",
 			"djlint",
+			"djhtml",
 			"pyright",
 			"pylint",
 			"eslint_d",
@@ -36,12 +37,12 @@ local mason_config = {
 			"cql-language-server",
 			-- "djls",
 		},
-		indent = {
-			enable = true,
-			-- disable = {
-			--   "python"
-			-- },
-		},
+		-- indent = {
+		-- 	enable = true,
+		-- 	-- disable = {
+		-- 	--   "python"
+		-- 	-- },
+		-- },
 	},
 }
 

@@ -4,6 +4,7 @@ local servers = {
 	"tsserver",
 	"clangd",
 	"djlint",
+	"djhtml",
 	"eslint",
 }
 

@@ -37,11 +37,19 @@ M.general = {
 			end,
 			"Toggle snake_case camelCase",
 		},
-		["<leader>bd"] = {
+		-- ["<leader>bd"] = {
+		-- 	function()
+		-- 		local current = vim.api.nvim_get_current_buf()
+		-- 		vim.cmd("silent! bd " .. current)
+		-- 		vim.cmd("redraw!")
+		-- 	end,
+		-- 	"اغلاق الملف المفتوح",
+		-- },
+		["<leader>bo"] = {
 			function()
-				vim.cmd("bd")
+				vim.cmd("only")
 			end,
-			"اغلاق الملف المفتوح",
+			"اغلاق اي بفر اخر",
 		},
 		["<leader>ba"] = {
 			function()
@@ -49,7 +57,6 @@ M.general = {
 				local toDelete = ""
 				for _, buf in ipairs(buffers) do
 					if vim.api.nvim_buf_is_loaded(buf) then
-						local bufname = vim.api.nvim_buf_get_name(buf)
 						local current = vim.api.nvim_get_current_buf()
 						local modified = vim.api.nvim_buf_get_option(buf, "modified")
 
@@ -74,6 +81,20 @@ M.general = {
 				vim.cmd("tabclose")
 			end,
 			"اغلاق التب المحدد",
+		},
+	},
+	v = {
+		["<leader>re"] = {
+			function()
+				require("refactoring").refactor("Extract Function")
+			end,
+			"إعادة بناء التعليمات البرمجية",
+		},
+		["<leader>rv"] = {
+			function()
+				require("refactoring").refactor("Extract Variable")
+			end,
+			"إعادة بناء التعليمات البرمجية",
 		},
 	},
 }
