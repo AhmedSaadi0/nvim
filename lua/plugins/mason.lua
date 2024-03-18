@@ -25,7 +25,7 @@ local mason_config = {
 			"eslint_d",
 			"stylua",
 			"bash-language-server",
-			"cql-language-server",
+			-- "cql-language-server",
 		},
 		-- indent = {
 		-- 	enable = true,

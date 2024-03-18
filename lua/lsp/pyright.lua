@@ -11,7 +11,7 @@ lspconfig.pyright.setup({
 	settings = {
 		python = {
 			analysis = {
-				-- typeCheckingMode = "off",
+				typeCheckingMode = "off",
 				-- extraPaths = { "/media/linux/projects/hopofy/stable/" },
 				useLibraryCodeForTypes = true,
 			},

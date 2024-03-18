@@ -17,8 +17,8 @@ return {
 			"htmldjango",
 
 			-- low level
-			"c",
-			"zig",
+			-- "c",
+			-- "zig",
 		},
 	},
 }

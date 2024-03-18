@@ -1,7 +1,7 @@
 local M = {}
 
 M.ui = {
-	theme = "tundra",
+	theme = "catppuccin",
 	statusline = {
 		-- theme = "minimal",
 		separator_style = "block",

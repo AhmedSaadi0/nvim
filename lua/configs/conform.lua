@@ -17,21 +17,21 @@ local options = {
 		lua = { "stylua" },
 		python = { "isort", "black" },
 		htmldjango = { "djlint", "djhtml" },
+		bash = { "beautysh" },
 	},
+
 	format_on_save = {
 		lsp_fallback = true,
 		async = true,
 		timeout_ms = 10000,
 	},
+
 	formatters = {
 		prettier = {
 			javascript = {
 				args = { "--single-quote" },
 			},
 		},
-		-- black = {
-		-- 	args = { "line-length", "79" },
-		-- },
 	},
 }
 
