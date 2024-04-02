@@ -115,3 +115,12 @@ vim.keymap.set("n", "<leader>rbf", function()
 	require("refactoring").refactor("Extract Block To File")
 end, { desc = "استخراج البلوك الى ملف" })
 -- Extract block supports only normal mode
+vim.keymap.set("n", "<leader><Right>", function()
+  vim.cmd(":vertical resize +5")
+end, { desc = "تكبير العرض +5" })
+
+vim.keymap.set("n", "<leader><Left>", function()
+  vim.cmd(":vertical resize -5")
+end, { desc = "تصغير العرضض -5" })
+
+

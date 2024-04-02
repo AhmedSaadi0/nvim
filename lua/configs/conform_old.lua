@@ -1,5 +1,4 @@
 local options = {
-	lsp_fallback = true,
 
 	formatters_by_ft = {
 		javascript = { "prettier" },
@@ -33,6 +32,10 @@ local options = {
 			},
 		},
 	},
+
+	lsp_fallback = true,
+	async = true,
+	timeout_ms = 10000,
 }
 
 require("conform").setup(options)

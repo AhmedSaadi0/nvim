@@ -25,8 +25,8 @@ require("ibl").setup({
 	indent = { highlight = highlight },
 
 	whitespace = {
-		highlight = spaceHighlight,
-		remove_blankline_trail = false,
+		-- highlight = spaceHighlight,
+		remove_blankline_trail = true,
 	},
-	scope = { enabled = false },
+	scope = { enabled = true },
 })
