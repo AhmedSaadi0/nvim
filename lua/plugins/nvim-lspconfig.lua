@@ -15,5 +15,6 @@ return {
 		require("lsp.kotlin")
 		require("lsp.vim")
 		require("lsp.cairo")
+		require("lsp.others")
 	end,
 }

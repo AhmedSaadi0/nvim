@@ -2,6 +2,9 @@ local mason_config = {
 	"williamboman/mason.nvim",
 	opts = {
 		ensure_installed = {
+			-- "luacheck",
+			"shellcheck",
+			"shfmt",
 			"black",
 			"debugpy",
 			"mypy",
@@ -25,8 +28,8 @@ local mason_config = {
 			"eslint_d",
 			"cairo-language-server",
 			"vim-language-server",
-      "yaml-language-server",
-      "kotlin-language-server",
+			"yaml-language-server",
+			"kotlin-language-server",
 		},
 		-- indent = {
 		-- 	enable = true,
