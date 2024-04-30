@@ -4,6 +4,7 @@ local settings = {
 		require("nvim-tree").setup({
 			view = {
 				width = 50, -- Set your desired default width here
+				relativenumber = true,
 			},
 			update_focused_file = {
 				enable = true, -- Enable this to have the file highlighted
@@ -18,6 +19,7 @@ local settings = {
 				enable = true, -- Show git status icons
 				ignore = false, -- Set to true to ignore git status for certain files
 			},
+
 			-- diagnostics = {
 			-- 	enable = true, -- Enable LSP diagnostics in the tree
 			-- 	icons = {

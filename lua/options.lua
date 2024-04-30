@@ -12,6 +12,7 @@ vim.opt.tabstop = 2
 vim.opt.wrap = false
 vim.opt.backspace = { "start", "eol", "indent" }
 vim.opt.path:append({ "**" })
+vim.opt.mouse = ""
 
 -- opt.tabstop = 4
 -- opt.softtabstop = 4
@@ -24,3 +25,5 @@ vim.opt.path:append({ "**" })
 vim.opt.spell = true
 vim.opt.spelllang = { "en_us" } --"ar" }
 vim.opt.relativenumber = true
+
+vim.opt.shell = "/usr/bin/fish"
