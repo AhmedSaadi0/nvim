@@ -122,3 +122,7 @@ end, { desc = "تكبير العرض +5" })
 vim.keymap.set("n", "<leader>-", function()
 	vim.cmd(":vertical resize -5")
 end, { desc = "تصغير العرضض -5" })
+
+-- vim.keymap.set("n", "<C-i>", function()
+-- 	vim.cmd(":b-")
+-- end, { desc = "تصغير العرضض -5" })

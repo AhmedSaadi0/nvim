@@ -30,6 +30,7 @@ local mason_config = {
 			"vim-language-server",
 			"yaml-language-server",
 			"kotlin-language-server",
+			"python-lsp-server",
 		},
 		-- indent = {
 		-- 	enable = true,
