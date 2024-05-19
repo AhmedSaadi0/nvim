@@ -22,11 +22,12 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				htmldjango = { "djlint" },
+				bash = { "beautysh" },
 			},
-			format_on_save = {
+			format_after_save = {
 				lsp_fallback = true,
 				async = true,
-				timeout_ms = 10000,
+				timeout_ms = 20000,
 			},
 			formatters = {
 				prettier = {
@@ -37,6 +38,7 @@ return {
 			},
 		})
 
+		-- Keymap for formatting
 		vim.keymap.set({ "n", "v" }, "<leader>fm", function()
 			conform.format({
 				lsp_fallback = true,

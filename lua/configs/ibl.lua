@@ -26,7 +26,8 @@ require("ibl").setup({
 
 	whitespace = {
 		-- highlight = spaceHighlight,
-		remove_blankline_trail = true,
+		remove_blankline_trail = false,
 	},
-	scope = { enabled = true },
+	scope = { enabled = false },
 })
+hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)

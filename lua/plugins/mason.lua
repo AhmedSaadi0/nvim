@@ -12,7 +12,7 @@ local mason_config = {
 			"ruff",
 			"js-debug-adapter",
 			"prettier",
-			"djhtml",
+			-- "djhtml",
 			"stylua",
 			-- LSP
 			"bash-language-server",
