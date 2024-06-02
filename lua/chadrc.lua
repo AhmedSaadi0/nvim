@@ -1,7 +1,7 @@
 local M = {}
 
 M.ui = {
-	theme = "chadracula",
+	theme = "bearded-arc",
 	statusline = {
 		-- theme = "minimal",
 		separator_style = "block",

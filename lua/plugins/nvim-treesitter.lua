@@ -1,29 +1,31 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	run = ":TSUpdate",
 	opts = {
 		ensure_installed = {
-			-- defaults
-			"vim",
-			"lua",
-			"vimdoc",
-
-			-- web dev
-			"html",
 			"css",
-			"javascript",
-			"typescript",
-			"tsx",
-			"python",
-			"htmldjango",
 			"gitignore",
+			"graphql",
+			"html",
+			"htmldjango",
 			"http",
+			"javascript",
 			"json",
+			"lua",
+			"markdown",
+			"python",
 			"scss",
 			"sql",
-			"graphql",
-			-- low level
-			-- "c",
-			-- "zig",
+			"tsx",
+			"typescript",
+			"vim",
+			"vimdoc",
+		},
+		highlight = {
+			enable = true,
+		},
+		indent = {
+			enable = true,
 		},
 		query_linter = {
 			enable = true,

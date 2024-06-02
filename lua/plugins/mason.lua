@@ -2,7 +2,6 @@ local mason_config = {
 	"williamboman/mason.nvim",
 	opts = {
 		ensure_installed = {
-			-- "luacheck",
 			"shellcheck",
 			"shfmt",
 			"black",
@@ -12,9 +11,7 @@ local mason_config = {
 			"ruff",
 			"js-debug-adapter",
 			"prettier",
-			-- "djhtml",
 			"stylua",
-			-- LSP
 			"bash-language-server",
 			"nginx-language-server",
 			"lua-language-server",
