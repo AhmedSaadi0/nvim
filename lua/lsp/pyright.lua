@@ -1,7 +1,7 @@
-local config = require("nvchad.configs.lspconfig")
+local config = require("lspconfig")
 
-local on_attach = config.on_attach
-local capabilities = config.capabilities
+-- local on_attach = config.on_attach
+-- local capabilities = config.capabilities
 
 local lspconfig = require("lspconfig")
 

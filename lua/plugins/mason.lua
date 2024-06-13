@@ -1,41 +1,75 @@
 local mason_config = {
 	"williamboman/mason.nvim",
-	opts = {
-		ensure_installed = {
-			"shellcheck",
-			"shfmt",
-			"black",
-			"debugpy",
-			"mypy",
-			"isort",
-			"ruff",
-			"js-debug-adapter",
-			"prettier",
-			"stylua",
-			"bash-language-server",
-			"nginx-language-server",
-			"lua-language-server",
-			"typescript-language-server",
-			"eslint-lsp",
-			"html-lsp",
-			"css-lsp",
-			"djlint",
-			"pyright",
-			"pylint",
-			"eslint_d",
-			"cairo-language-server",
-			"vim-language-server",
-			"yaml-language-server",
-			"kotlin-language-server",
-			"python-lsp-server",
-		},
-		-- indent = {
-		-- 	enable = true,
-		-- 	-- disable = {
-		-- 	--   "python"
-		-- 	-- },
-		-- },
+	dependencies = {
+		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
+
+	config = function()
+		-- import mason
+		local mason = require("mason")
+
+		-- import mason-lspconfig
+		local mason_lspconfig = require("mason-lspconfig")
+
+		local mason_tool_installer = require("mason-tool-installer")
+
+		-- enable mason and configure icons
+		mason.setup({
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		})
+
+		mason_lspconfig.setup({
+			-- list of servers for mason to install
+			ensure_installed = {
+				"efm",
+				"ruff",
+				"pyright",
+			},
+		})
+
+		mason_tool_installer.setup({
+			ensure_installed = {
+				"prettier", -- prettier formatter
+				"stylua", -- lua formatter
+				"isort", -- python formatter
+				"black", -- python formatter
+				"pylint",
+				"eslint_d",
+				"shellcheck",
+				"shfmt",
+				"black",
+				"debugpy",
+				"mypy",
+				"isort",
+				"js-debug-adapter",
+				"prettier",
+				"stylua",
+				"bash-language-server",
+				-- "nginx-language-server",
+				"lua-language-server",
+				"typescript-language-server",
+				"eslint-lsp",
+				"html-lsp",
+				"css-lsp",
+				"djlint",
+				"pylint",
+				"typos-lsp",
+				"eslint_d",
+				"cairo-language-server",
+				"vim-language-server",
+				"yaml-language-server",
+				"kotlin-language-server",
+				"python-lsp-server",
+			},
+		})
+	end,
 }
 
 return mason_config

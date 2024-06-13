@@ -1,4 +1,4 @@
-require("nvchad.mappings")
+-- require("nvchad.mappings")
 
 -- add yours here
 
@@ -12,9 +12,9 @@ end, { desc = "File Format with conform" })
 
 map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
 
-map("n", "<leader>tt", function()
-	require("base46").toggle_transparency()
-end, { desc = "Toggle transperancy" })
+-- map("n", "<leader>tt", function()
+-- 	require("base46").toggle_transparency()
+-- end, { desc = "Toggle transperancy" })
 
 map("n", "<leader>tt", function()
 	require("base46").toggle_transparency()
@@ -123,6 +123,10 @@ vim.keymap.set("n", "<leader>-", function()
 	vim.cmd(":vertical resize -5")
 end, { desc = "تصغير العرضض -5" })
 
+vim.keymap.set("n", "<c-a>", function()
+	vim.cmd("normal! ggVG")
+end, { desc = "تصغير العرضض -5" })
+
 -- delete instead of cut
 vim.keymap.set("n", "x", '"_x')
 vim.keymap.set("n", "d", '"_d')
@@ -140,3 +144,8 @@ vim.keymap.set("v", "<leader>d", "d")
 vim.keymap.set("n", "<leader>c", "c")
 vim.keymap.set("n", "<leader>C", "C")
 vim.keymap.set("v", "<leader>c", "c")
+
+vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
+vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
+vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window

@@ -1,6 +1,8 @@
 local settings = {
 	"kyazdani42/nvim-tree.lua",
 	config = function()
+		vim.g.loaded_netrw = 1
+		vim.g.loaded_netrwPlugin = 1
 		require("nvim-tree").setup({
 			view = {
 				width = 50, -- Set your desired default width here
@@ -30,6 +32,11 @@ local settings = {
 			-- 	},
 			-- },
 		})
+		local keymap = vim.keymap -- for conciseness
+
+		keymap.set("n", "<c-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
+		keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
+		keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
 	end,
 }
 

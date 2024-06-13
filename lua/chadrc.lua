@@ -1,10 +1,22 @@
 local M = {}
 
 M.ui = {
-	theme = "bearded-arc",
+	theme = "poimandres",
+
+	hl_override = {
+		CursorLine = {
+			-- bg = "#ffffff",
+		},
+		CursorColumn = {
+			-- bg = "#ffffff",
+		},
+	},
+
 	statusline = {
+		theme = "vscode_colored",
 		-- theme = "minimal",
-		separator_style = "block",
+		-- separator_style = "block",
+		separator_style = "round",
 		-- separator_style = "arrow",
 		order = {
 			"mode",

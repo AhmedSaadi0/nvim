@@ -1,0 +1,20 @@
+local lspconfig = require("lspconfig")
+local util = require("lspconfig/util")
+
+lspconfig.efm.setup({
+	init_options = { documentFormatting = true, codeAction = false },
+	filetypes = { "htmldjango" },
+	settings = {
+		rootMarkers = { ".git/" },
+		languages = {
+			htmldjango = {
+				{
+					lintCommand = "djlint --reformat --quiet ${INPUT}",
+					lintStdin = true,
+					lintFormats = { "%f:%l:%c: %m" },
+				},
+			},
+		},
+	},
+	root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+})

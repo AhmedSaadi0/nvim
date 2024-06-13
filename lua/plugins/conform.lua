@@ -1,7 +1,8 @@
+-- ~/.config/nvim/lua/custom/plugins.lua
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
-	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local conform = require("conform")
 
@@ -14,7 +15,6 @@ return {
 				svelte = { "prettier" },
 				css = { "prettier" },
 				scss = { "prettier" },
-				-- html = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
@@ -26,8 +26,7 @@ return {
 			},
 			format_after_save = {
 				lsp_fallback = true,
-				async = true,
-				timeout_ms = 20000,
+				timeout_ms = 10000,
 			},
 			formatters = {
 				prettier = {
@@ -42,8 +41,7 @@ return {
 		vim.keymap.set({ "n", "v" }, "<leader>fm", function()
 			conform.format({
 				lsp_fallback = true,
-				async = true,
-				timeout_ms = 10000,
+				timeout_ms = 10000, -- Increased timeout to handle large files
 			})
 		end, { desc = "Format file or range (in visual mode)" })
 	end,
