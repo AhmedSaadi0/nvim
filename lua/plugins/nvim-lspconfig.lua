@@ -85,21 +85,6 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["svelte"] = function()
-				-- configure svelte server
-				lspconfig["svelte"].setup({
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePost", {
-							pattern = { "*.js", "*.ts" },
-							callback = function(ctx)
-								-- Here use ctx.match instead of ctx.file
-								client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-							end,
-						})
-					end,
-				})
-			end,
 			["graphql"] = function()
 				-- configure graphql language server
 				lspconfig["graphql"].setup({
@@ -126,34 +111,175 @@ return {
 			["lua_ls"] = function()
 				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
+					cmd = { "lua-language-server" },
 					settings = {
 						Lua = {
-							-- make the language server recognize "vim" global
-							diagnostics = {
-								globals = { "vim" },
+							runtime = {
+								version = "LuaJIT", -- or "Lua 5.1", "Lua 5.2", etc.
+								path = vim.split(package.path, ";"),
 							},
-							completion = {
-								callSnippet = "Replace",
+							diagnostics = {
+								globals = { "vim" }, -- Add any global variables you use
+							},
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+									[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+								},
+								completion = {
+									workspaceWord = true,
+									callSnippet = "Both",
+								},
+								misc = {
+									parameters = {
+										-- "--log-level=trace",
+									},
+								},
+								hint = {
+									enable = true,
+									setType = false,
+									paramType = true,
+									paramName = "Disable",
+									semicolon = "Disable",
+									arrayIndex = "Disable",
+								},
+								doc = {
+									privateName = { "^_" },
+								},
+								type = {
+									castNumberToInteger = true,
+								},
+								diagnostics = {
+									disable = { "incomplete-signature-doc", "trailing-space" },
+									-- enable = false,
+									groupSeverity = {
+										strong = "Warning",
+										strict = "Warning",
+									},
+									groupFileStatus = {
+										["ambiguity"] = "Opened",
+										["await"] = "Opened",
+										["codestyle"] = "None",
+										["duplicate"] = "Opened",
+										["global"] = "Opened",
+										["luadoc"] = "Opened",
+										["redefined"] = "Opened",
+										["strict"] = "Opened",
+										["strong"] = "Opened",
+										["type-check"] = "Opened",
+										["unbalanced"] = "Opened",
+										["unused"] = "Opened",
+									},
+									unusedLocalExclude = { "_*" },
+								},
+								format = {
+									enable = false,
+									defaultConfig = {
+										indent_style = "space",
+										indent_size = "2",
+										continuation_indent_size = "2",
+									},
+								},
+							},
+						},
+					},
+				})
+			end,
+			["pyright"] = function()
+				lspconfig["pyright"].setup({
+					capabilities = capabilities,
+					settings = {
+						python = {
+							analysis = {
+								typeCheckingMode = "off",
+								-- extraPaths = { "/media/linux/projects/hopofy/stable/" },
+								useLibraryCodeForTypes = true,
+							},
+						},
+					},
+					filetypes = { "python" },
+				})
+			end,
+			["pylsp"] = function()
+				lspconfig["pylsp"].setup({
+					settings = {
+						pylsp = {
+							plugins = {
+								autopep8 = {
+									enabled = false,
+								},
+								pylsp_mypy = { enabled = true },
+								pycodestyle = {
+									enabled = true,
+									ignore = { "E501", "E231", "W503" },
+									maxLineLength = 79,
+								},
+								pylint = {
+									enabled = true,
+									executable = "pylint",
+									args = {
+										"--disable=C0111",
+										"--enable=W0614",
+										"--load-plugins=pylint_celery,pylint_django",
+										"--django-settings-module=hopofy.settings",
+										"--suggestion-mode=yes",
+										"--function-naming-style=snake_case",
+										"--include-naming-hint=yes",
+									},
+								},
+							},
+						},
+					},
+				})
+			end,
+			["tsserver"] = function()
+				lspconfig["tsserver"].setup({
+					-- on_attach = on_attach,
+					-- capabilities = capabilities,
+					init_options = {
+						preferences = {
+							disableSuggestions = true,
+						},
+					},
+					commands = {
+						OrganizeImports = {
+							function()
+								local params = {
+									command = "_typescript.organizeImports",
+									arguments = { vim.api.nvim_buf_get_name(0) },
+								}
+								vim.lsp.buf.execute_command(params)
+							end,
+							description = "Organize Imports",
+						},
+					},
+					settings = {
+						typescript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "literal",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = false,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
+						},
+						javascript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "all",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
 							},
 						},
 					},
 				})
 			end,
 		})
-		require("lsp.django")
-		require("lsp.pyright")
-		require("lsp.eslint")
-		require("lsp.tsserver")
-		require("lsp.lua_ls")
-		require("lsp.bash")
-		require("lsp.css")
-		require("lsp.yaml")
-		require("lsp.html")
-		require("lsp.kotlin")
-		require("lsp.vim")
-		require("lsp.cairo")
-		require("lsp.others")
-		-- require("lsp.emf")
 	end,
 }
