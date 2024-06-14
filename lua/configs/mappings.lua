@@ -1,20 +1,12 @@
--- require("nvchad.mappings")
-
--- add yours here
-
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+map("n", ";", ":", { desc = "دخول وضع الاوامر" })
 
 map("n", "<leader>fm", function()
 	require("conform").format()
-end, { desc = "File Format with conform" })
+end, { desc = "اعادة ترتيب الكود" })
 
-map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
-
--- map("n", "<leader>tt", function()
--- 	require("base46").toggle_transparency()
--- end, { desc = "Toggle transperancy" })
+-- map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
 
 map("n", "<leader>tt", function()
 	require("base46").toggle_transparency()
@@ -22,7 +14,7 @@ end, { desc = "Toggle transparency" })
 
 map("n", "<leader>sf", function()
 	vim.cmd("noautocmd w")
-end, { desc = "Save without formatting" })
+end, { desc = "حفظ بدون اعادة ترتيب" })
 
 map("n", "<leader>ss", function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -38,17 +30,89 @@ map("n", "<leader>ss", function()
 		end)
 		vim.api.nvim_buf_set_text(0, line - 1, word_start, line - 1, word_start + #word, { camel_case_word })
 	else
-		print("Not a snake_case or camelCase word")
+		print("لم يتم العثور على نص مطابق")
 	end
-end, { desc = "Toggle snake_case camelCase" })
+end, { desc = "تحويل الى snake_case" })
 
---[[
-map("n", "<leader>bd", function()
-  local current = vim.api.nvim_get_current_buf()
-  vim.cmd("silent! bd " .. current)
-  vim.cmd("redraw!")
-end, { desc = "اغلاق الملف المفتوح" })
-]]
+-- Visual mappings
+-- map("v", "<leader>re", function()
+-- 	require("refactoring").refactor("Extract Function")
+-- end, { desc = "إعادة بناء التعليمات البرمجية" })
+--
+-- map("v", "<leader>rv", function()
+-- 	require("refactoring").refactor("Extract Variable")
+-- end, { desc = "إعادة بناء التعليمات البرمجية" })
+
+map("x", "<leader>re", function()
+	require("refactoring").refactor("Extract Function")
+end, { desc = "استخراج الى دالة" })
+map("x", "<leader>rf", function()
+	require("refactoring").refactor("Extract Function To File")
+end, { desc = "استخراج الدالة الى ملف" })
+-- Extract function supports only visual mode
+map("x", "<leader>rv", function()
+	require("refactoring").refactor("Extract Variable")
+end, { desc = "استخراج المتغير" })
+-- Extract variable supports only visual mode
+map("n", "<leader>rI", function()
+	require("refactoring").refactor("Inline Function")
+end, { desc = "جعل الدالة بسطر واحد" })
+-- Inline func supports only normal
+map({ "n", "x" }, "<leader>ri", function()
+	require("refactoring").refactor("Inline Variable")
+end, { desc = "جعل المتغير في سطر" })
+-- Inline var supports both normal and visual mode
+
+map("n", "<leader>rb", function()
+	require("refactoring").refactor("Extract Block")
+end, { desc = "استخراج البلوك" })
+map("n", "<leader>rbf", function()
+	require("refactoring").refactor("Extract Block To File")
+end, { desc = "استخراج البلوك الى ملف" })
+-- Extract block supports only normal mode
+map("n", "<leader>+", function()
+	vim.cmd(":vertical resize +5")
+end, { desc = "تكبير العرض +5" })
+
+map("n", "<leader>-", function()
+	vim.cmd(":vertical resize -5")
+end, { desc = "تصغير العرضض -5" })
+
+map("n", "<c-a>", function()
+	vim.cmd("normal! ggVG")
+end, { desc = "تصغير العرضض -5" })
+
+-- delete instead of cut
+-- map("n", "x", '"_x')
+-- map("n", "d", '"_d')
+-- map("n", "D", '"_D')
+-- map("v", "d", '"_d')
+--
+-- map("n", "c", '"_c')
+-- map("n", "C", '"_C')
+-- map("v", "c", '"_c')
+--
+-- map("n", "<leader>d", "d")
+-- map("n", "<leader>D", "D")
+-- map("v", "<leader>d", "d")
+--
+-- map("n", "<leader>c", "c")
+-- map("n", "<leader>C", "C")
+-- map("v", "<leader>c", "c")
+
+map("n", "<leader>sv", "<C-w>v", { desc = "تقسيم النافذة عموديا" }) -- split window vertically
+map("n", "<leader>sh", "<C-w>s", { desc = "تقسيم النافذة افقيا" }) -- split window horizontally
+map("n", "<leader>se", "<C-w>=", { desc = "تقسيم النافذة بالتتساوي" }) -- make split windows equal width & height
+map("n", "<leader>sx", "<cmd>close<CR>", { desc = "اغلاق النافذة المحددة" }) -- close current split window
+
+----------------------
+-- buffers and tabs --
+----------------------
+map("n", "<C-S-Left>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+map("n", "<C-S-Right>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+map("n", "<S-h>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+map("n", "<S-l>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+map("n", "<leader>x", ":bdelete<CR>", { noremap = true, silent = true })
 
 map("n", "<leader>bo", function()
 	vim.cmd("only")
@@ -78,74 +142,6 @@ end, { desc = "فتح تاب جديد" })
 map("n", "<leader>td", function()
 	vim.cmd("tabclose")
 end, { desc = "اغلاق التب المحدد" })
-
--- Visual mappings
--- map("v", "<leader>re", function()
--- 	require("refactoring").refactor("Extract Function")
--- end, { desc = "إعادة بناء التعليمات البرمجية" })
---
--- map("v", "<leader>rv", function()
--- 	require("refactoring").refactor("Extract Variable")
--- end, { desc = "إعادة بناء التعليمات البرمجية" })
-
-vim.keymap.set("x", "<leader>re", function()
-	require("refactoring").refactor("Extract Function")
-end, { desc = "استخراج الى دالة" })
-vim.keymap.set("x", "<leader>rf", function()
-	require("refactoring").refactor("Extract Function To File")
-end, { desc = "استخراج الدالة الى ملف" })
--- Extract function supports only visual mode
-vim.keymap.set("x", "<leader>rv", function()
-	require("refactoring").refactor("Extract Variable")
-end, { desc = "استخراج المتغير" })
--- Extract variable supports only visual mode
-vim.keymap.set("n", "<leader>rI", function()
-	require("refactoring").refactor("Inline Function")
-end, { desc = "جعل الدالة بسطر واحد" })
--- Inline func supports only normal
-vim.keymap.set({ "n", "x" }, "<leader>ri", function()
-	require("refactoring").refactor("Inline Variable")
-end, { desc = "جعل المتغير في سطر" })
--- Inline var supports both normal and visual mode
-
-vim.keymap.set("n", "<leader>rb", function()
-	require("refactoring").refactor("Extract Block")
-end, { desc = "استخراج البلوك" })
-vim.keymap.set("n", "<leader>rbf", function()
-	require("refactoring").refactor("Extract Block To File")
-end, { desc = "استخراج البلوك الى ملف" })
--- Extract block supports only normal mode
-vim.keymap.set("n", "<leader>+", function()
-	vim.cmd(":vertical resize +5")
-end, { desc = "تكبير العرض +5" })
-
-vim.keymap.set("n", "<leader>-", function()
-	vim.cmd(":vertical resize -5")
-end, { desc = "تصغير العرضض -5" })
-
-vim.keymap.set("n", "<c-a>", function()
-	vim.cmd("normal! ggVG")
-end, { desc = "تصغير العرضض -5" })
-
--- delete instead of cut
--- vim.keymap.set("n", "x", '"_x')
--- vim.keymap.set("n", "d", '"_d')
--- vim.keymap.set("n", "D", '"_D')
--- vim.keymap.set("v", "d", '"_d')
---
--- vim.keymap.set("n", "c", '"_c')
--- vim.keymap.set("n", "C", '"_C')
--- vim.keymap.set("v", "c", '"_c')
---
--- vim.keymap.set("n", "<leader>d", "d")
--- vim.keymap.set("n", "<leader>D", "D")
--- vim.keymap.set("v", "<leader>d", "d")
---
--- vim.keymap.set("n", "<leader>c", "c")
--- vim.keymap.set("n", "<leader>C", "C")
--- vim.keymap.set("v", "<leader>c", "c")
-
-vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
-vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
-vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
-vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+----------------------
+-- buffers and tabs --
+----------------------

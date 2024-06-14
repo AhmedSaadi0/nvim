@@ -24,7 +24,8 @@ vim.opt.shell = "/usr/bin/fish"
 
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
-
+vim.opt.clipboard = "unnamedplus"
+vim.opt.termguicolors = true
 -- opt.tabstop = 4
 -- opt.softtabstop = 4
 -- opt.shiftwidth = 4
