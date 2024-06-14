@@ -1,10 +1,17 @@
 return {
-	"folke/tokyonight.nvim",
-	lazy = false,
-	priority = 1000,
-	config = function()
-		-- load the colorscheme here
-		vim.cmd([[colorscheme tokyonight]])
-	end,
+	require("plugins.themes.tokyonight"),
+	require("plugins.themes.onedark"),
+	-- require("plugins.themes.doki-theme"),
+	require("plugins.themes.cyberdream"),
+	require("plugins.themes.rose"),
+	require("plugins.themes.kanagawa"),
+	require("plugins.themes.material"),
+	require("plugins.themes.dracula"),
+	require("plugins.themes.synthweave"),
+	require("plugins.themes.nightfox"),
+	require("plugins.themes.starry"),
+	require("plugins.themes.catppuccin"),
+	require("plugins.themes.colorbuddy"),
+	require("plugins.themes.calvera-dark"),
+	require("plugins.themes.zephyr"),
 }
-

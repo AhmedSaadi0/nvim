@@ -26,6 +26,7 @@ vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
+vim.opt.background = "dark"
 -- opt.tabstop = 4
 -- opt.softtabstop = 4
 -- opt.shiftwidth = 4
