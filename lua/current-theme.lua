@@ -1,1 +1,1 @@
-vim.cmd("colorscheme moonlight")
+vim.cmd("colorscheme tokyonight")
