@@ -9,9 +9,9 @@ return {
 		lualine.setup({
 			options = {
 				theme = "auto", -- Automatically use colors from the current theme
-				component_separators = { left = "", right = "" },
-				section_separators = { left = "", right = "" },
-				disabled_filetypes = {},
+				-- component_separators = { left = "", right = "" },
+				-- section_separators = { left = "", right = "" },
+				-- disabled_filetypes = {},
 			},
 			sections = {
 				lualine_a = { "mode" },
