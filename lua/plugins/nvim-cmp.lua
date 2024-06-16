@@ -27,7 +27,7 @@ return {
 
 		cmp.setup({
 			completion = {
-				completeopt = "menu,menuone,preview,noselect",
+				completeopt = "menu,menuone,preview,select",
 			},
 			snippet = { -- configure how nvim-cmp interacts with snippet engine
 				expand = function(args)
@@ -35,13 +35,15 @@ return {
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
-				["<S-Tab>"] = cmp.mapping.select_prev_item(), -- previous suggestion
 				["<Tab>"] = cmp.mapping.select_next_item(), -- next suggestion
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<S-Tab>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+				["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+				["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+				["<C-u>"] = cmp.mapping.scroll_docs(-4),
+				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
 				["<C-e>"] = cmp.mapping.abort(), -- close completion window
-				["<CR>"] = cmp.mapping.confirm({ select = false }),
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
@@ -52,12 +54,13 @@ return {
 				{ name = "path" }, -- file system paths
 			}),
 
-			-- configure lspkind for vs-code like pictograms in completion menu
 			formatting = {
+				fields = { "abbr", "kind", "menu" },
 				format = lspkind.cmp_format({
-					maxwidth = 50,
+					maxwidth = 100,
 					ellipsis_char = "...",
 				}),
+				expandable_indicator = true,
 			},
 		})
 	end,

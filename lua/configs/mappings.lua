@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 map("n", ";", ":", { desc = "دخول وضع الاوامر" })
 
@@ -8,9 +9,9 @@ end, { desc = "اعادة ترتيب الكود" })
 
 -- map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
 
-map("n", "<leader>tt", function()
-	require("base46").toggle_transparency()
-end, { desc = "Toggle transparency" })
+-- map("n", "<leader>tt", function()
+-- 	require("base46").toggle_transparency()
+-- end, { desc = "Toggle transparency" })
 
 map("n", "<leader>sf", function()
 	vim.cmd("noautocmd w")
@@ -108,11 +109,31 @@ map("n", "<leader>sx", "<cmd>close<CR>", { desc = "اغلاق النافذة ا�
 ----------------------
 -- buffers and tabs --
 ----------------------
-map("n", "<C-S-Left>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
-map("n", "<C-S-Right>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-map("n", "<S-h>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
-map("n", "<S-l>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-map("n", "<leader>x", ":bdelete<CR>", { noremap = true, silent = true })
+map(
+	"n",
+	"<C-S-Left>",
+	":BufferLineCyclePrev<CR>",
+	{ noremap = true, silent = true, desc = "الانتقال الى الملف التالي" }
+)
+map(
+	"n",
+	"<C-S-Right>",
+	":BufferLineCycleNext<CR>",
+	{ noremap = true, silent = true, desc = "الانتقال الى الملف السابق" }
+)
+map(
+	"n",
+	"<S-h>",
+	":BufferLineCyclePrev<CR>",
+	{ noremap = true, silent = true, desc = "الانتقال الى الملف السابق" }
+)
+map(
+	"n",
+	"<S-l>",
+	":BufferLineCycleNext<CR>",
+	{ noremap = true, silent = true, desc = "الانتقال الى الملف التالي" }
+)
+map("n", "<leader>x", ":bdelete<CR>", { noremap = true, silent = true, desc = "اغلاق الملف المفتوح" })
 
 map("n", "<leader>bo", function()
 	vim.cmd("only")
@@ -145,3 +166,8 @@ end, { desc = "اغلاق التب المحدد" })
 ----------------------
 -- buffers and tabs --
 ----------------------
+
+-- Save file and quit
+map("n", "<Leader>w", ":update<Return>", opts)
+map("n", "<Leader>q", ":quit<Return>", opts)
+map("n", "<Leader>Q", ":qa<Return>", opts)
