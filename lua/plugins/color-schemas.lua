@@ -1,7 +1,7 @@
 return {
 	require("plugins.themes.tokyonight"),
 	require("plugins.themes.onedark"),
-	-- require("plugins.themes.doki-theme"),
+	require("plugins.themes.doki-theme"),
 	require("plugins.themes.cyberdream"),
 	require("plugins.themes.rose"),
 	require("plugins.themes.kanagawa"),
