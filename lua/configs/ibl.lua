@@ -19,34 +19,26 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 	end
 end)
 
-local highlight = {
-	-- "IndentSymbolRed",
-	-- "IndentSymbolOrange",
-	-- "IndentSymbolYellow",
-	-- "IndentSymbolGreen",
-	-- "IndentSymbolBlue",
-	-- "IndentSymbolPurple",
-	-- "IndentSymbolCyan",
-}
 -- Configuration for the indent-blankline plugin with different symbols
 require("ibl").setup({
 	indent = {
-		char = { "│" }, -- Characters to use for indentation
+		-- char = { "│" }, -- Characters to use for indentation
 		highlight = vim.tbl_map(function(group)
 			return group.name
 		end, highlight_groups),
 	},
 	whitespace = {
-		-- Uncomment the following line if you want to highlight whitespace
-		-- highlight = space_highlight,
+		-- Use the same highlight groups for whitespace
+		highlight = vim.tbl_map(function(group)
+			return group.name
+		end, highlight_groups),
 		remove_blankline_trail = false,
-		-- highlight = highlight,
 	},
 	scope = {
 		enabled = true,
-		show_start = false,
-		show_end = false,
-		highlight = "IndentSymbolPurple", -- Use the purple color for scope highlight
+		show_start = true,
+		show_end = true,
+		-- highlight = highlight_groups_highlight, -- Use the purple color for scope highlight
 	},
 })
 

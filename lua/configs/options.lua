@@ -23,7 +23,6 @@ vim.opt.spell = true
 vim.opt.spelllang = { "en_us" } --"ar" }
 vim.opt.relativenumber = true
 vim.opt.number = true
-
 vim.opt.shell = "/usr/bin/fish"
 
 vim.opt.cursorline = true

@@ -202,33 +202,29 @@ return {
 				})
 			end,
 			["efm"] = function()
-				lspconfig.efm.setup({
+				lspconfig["efm"].setup({
 					init_options = { documentFormatting = true, codeAction = true },
 					settings = {
-						rootMarkers = { ".git/" },
+						-- rootMarkers = { ".git/" },
 						languages = {
-							djangohtml = {
-								{
-									lintCommand = "djlint --lint --quiet --reformat",
-									lintStdin = true,
-									lintFormats = { "%f:%l:%c: %m" },
-									formatCommand = "djlint --reformat --quiet -",
-									formatStdin = true,
-								},
+							htmldjango = {
+								lintCommand = "/media/linux/projects/hopofy/stable/.vent/bin/djlint --lint",
+								lintStdin = true,
+								lintFormats = { "%f:%l:%c: %m" },
+								formatCommand = "djlint --reformat",
+								formatStdin = true,
 							},
 							html = {
-								{
-									lintCommand = "djlint --lint --quiet --reformat",
-									lintStdin = true,
-									lintFormats = { "%f:%l:%c: %m" },
-									formatCommand = "djlint --reformat --quiet -",
-									formatStdin = true,
-								},
+								lintCommand = "djlint --lint --quiet",
+								lintStdin = true,
+								lintFormats = { "%f:%l:%c: %m" },
+								formatCommand = "djlint --reformat --quiet",
+								formatStdin = true,
 							},
 							-- Add additional configurations for other filetypes if needed
 						},
 					},
-					filetypes = { "djangohtml", "html" }, -- Add more filetypes if needed
+					filetypes = { "htmldjango", "html" }, -- Add more filetypes if needed
 				})
 			end,
 			["pylsp"] = function()
