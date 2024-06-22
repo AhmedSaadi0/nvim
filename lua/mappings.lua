@@ -179,3 +179,5 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true 
 
 vim.keymap.del("n", "<tab>")
 vim.keymap.del("n", "<S-tab>")
+vim.keymap.del("n", "<Leader>wk")
+vim.keymap.del("n", "<Leader>wK")
