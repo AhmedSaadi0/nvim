@@ -18,17 +18,33 @@ return {
 				lualine_b = { "branch" },
 				lualine_c = { { "filename", path = 1 } }, -- Show full path
 				lualine_x = {
+					{ "diagnostics", sources = { "nvim_lsp" } }, -- Adding diagnostics from LSP
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
 						color = { fg = "#ff9e64" }, -- Keeping the custom color for updates
 					},
-					"encoding",
-					"fileformat",
+					-- "encoding",
+					-- "fileformat",
 					"filetype",
 				},
 				lualine_y = { "progress" },
-				lualine_z = { "location" },
+				lualine_z = {
+					{
+						function()
+							local clients = vim.lsp.get_clients()
+							if next(clients) == nil then
+								return "No LSP"
+							end
+							local names = {}
+							for _, client in pairs(clients) do
+								table.insert(names, client.name)
+							end
+							return table.concat(names, ",")
+						end,
+						icon = " LSP:",
+					},
+				},
 			},
 			inactive_sections = {
 				lualine_a = { { "filename", path = 1 } }, -- Show full path

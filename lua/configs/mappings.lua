@@ -164,7 +164,7 @@ map("n", "<leader>td", function()
 	vim.cmd("tabclose")
 end, { desc = "اغلاق التب المحدد" })
 ----------------------
--- buffers and tabs --
+-- ---------------- --
 ----------------------
 
 -- Save file and quit
