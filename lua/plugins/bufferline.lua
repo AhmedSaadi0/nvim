@@ -19,7 +19,7 @@ return {
 				show_buffer_close_icons = false,
 				show_close_icon = false,
 				show_tab_indicators = true,
-				separator_style = "slant",
+				separator_style = "slop",
 				enforce_regular_tabs = true,
 				always_show_bufferline = true,
 				offsets = {

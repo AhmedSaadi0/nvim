@@ -30,10 +30,10 @@ return {
 				keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
 				opts.desc = "الانتقال إلى التصريح"
-				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
+				keymap.set("n", "gd", vim.lsp.buf.declaration, opts) -- go to declaration
 
 				opts.desc = "عرض تعريفات LSP"
-				keymap.set("n", "gd", "<cmd:Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+				keymap.set("n", "gD", "<cmd:Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 
 				opts.desc = "عرض تطبيقات LSP"
 				keymap.set("n", "gi", "<cmd:Telescope lsp_implementations<CR>", opts) -- show lsp implementations
@@ -48,10 +48,10 @@ return {
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 
 				opts.desc = "عرض تشخيصات الملف"
-				keymap.set("n", "<leader>d", "<cmd:Telescope diagnostics bufnr=0<CR>", opts) -- show diagnostics for file
+				keymap.set("n", "<leader>D", "<cmd:Telescope diagnostics bufnr=0<CR>", opts) -- show diagnostics for file
 
 				opts.desc = "عرض تشخيصات السطر"
-				keymap.set("n", "<leader>D", vim.diagnostic.open_float, opts) -- show diagnostics for line
+				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
 				opts.desc = "الانتقال إلى التشخيص السابق"
 				keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
