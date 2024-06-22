@@ -1,5 +1,9 @@
 local mason_config = {
 	"williamboman/mason.nvim",
+	dependencies = {
+		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+	},
 	opts = {
 		ensure_installed = {
 			"shellcheck",
