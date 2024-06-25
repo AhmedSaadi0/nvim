@@ -4,6 +4,7 @@ return {
 	config = function()
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+		local noice = require("noice")
 
 		-- Configure Lualine with theme colors
 		lualine.setup({
@@ -18,6 +19,10 @@ return {
 				lualine_b = { "branch" },
 				lualine_c = { { "filename", path = 1 } }, -- Show full path
 				lualine_x = {
+					{
+						noice.api.status.mode.get,
+						cond = noice.api.status.mode.has,
+					},
 					{ "diagnostics", sources = { "nvim_lsp" } }, -- Adding diagnostics from LSP
 					{
 						lazy_status.updates,
