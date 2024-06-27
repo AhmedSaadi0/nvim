@@ -21,4 +21,5 @@ return {
 	require("plugins.themes.eldritch"),
 	require("plugins.themes.bluloco"),
 	require("plugins.themes.embark"),
+	require("plugins.themes.iceberg"),
 }

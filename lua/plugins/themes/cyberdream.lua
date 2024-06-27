@@ -5,7 +5,7 @@ return {
 		-- Apply the theme
 		require("cyberdream").setup({
 			-- Enable transparent background
-			transparent = false,
+			transparent = true,
 
 			-- Enable italics comments
 			italic_comments = false,
@@ -26,7 +26,7 @@ return {
 					-- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
 
 					-- Example:
-					Comment = { fg = "#696969", bg = "NONE", italic = true },
+					-- Comment = { fg = "#696969", bg = "NONE", italic = true },
 
 					-- Complete list can be found in `lua/cyberdream/theme.lua`
 				},
@@ -44,9 +44,9 @@ return {
 				colors = {
 					-- For a list of colors see `lua/cyberdream/colours.lua`
 					-- Example:
-					bg = "#000000",
-					green = "#00ff00",
-					magenta = "#ff00ff",
+					-- bg = "#000000",
+					-- green = "#00ff00",
+					-- magenta = "#ff00ff",
 				},
 			},
 		})
