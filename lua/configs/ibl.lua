@@ -3,13 +3,13 @@ local hooks = require("ibl.hooks")
 
 -- Define highlight groups with a mix of vibrant colors
 local highlight_groups = {
-	{ name = "IndentSymbolRed", fg = "#FF6B6B" },
-	{ name = "IndentSymbolOrange", fg = "#FFA726" },
-	{ name = "IndentSymbolYellow", fg = "#FFD54F" },
 	{ name = "IndentSymbolGreen", fg = "#66BB6A" },
-	{ name = "IndentSymbolBlue", fg = "#42A5F5" },
+	{ name = "IndentSymbolOrange", fg = "#FFA726" },
+	{ name = "IndentSymbolRed", fg = "#FF6B6B" },
 	{ name = "IndentSymbolPurple", fg = "#AB47BC" },
+	{ name = "IndentSymbolYellow", fg = "#FFD54F" },
 	{ name = "IndentSymbolCyan", fg = "#26C6DA" },
+	{ name = "IndentSymbolBlue", fg = "#42A5F5" },
 }
 
 -- Register highlight setup hook

@@ -2,11 +2,12 @@ return {
 	"doki-theme/doki-theme-vim",
 	priority = 1000,
 	config = function()
-		-- Apply the specific theme you want to use
-		-- vim.cmd("colorscheme doki") -- Change to your desired theme, e.g., doki-theme-<variant>
-		-- require("doki").setup({
-		-- 	transparent = false,
-		-- })
-		-- vim.api.nvim_set_hl(0, "Normal", { bg = "#1e1e1e" })
+		-- vim.o.background = "dark"
+		-- vim.cmd("colorscheme doki")
+		-- vim.g.neovide_transparency = 1.0
+		vim.cmd([[
+			highlight Normal guibg=#1d1f21
+			highlight NonText guibg=#1d1f21
+		  ]])
 	end,
 }

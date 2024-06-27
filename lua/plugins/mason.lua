@@ -29,7 +29,7 @@ local mason_config = {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"efm",
-				"ruff",
+				-- "ruff",
 				"pyright",
 			},
 		})

@@ -18,29 +18,29 @@ return {
 			-- Change code style ---
 			-- Options are italic, bold, underline, none
 			-- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
-			code_style = {
-				comments = "italic",
-				keywords = "none",
-				functions = "none",
-				strings = "none",
-				variables = "none",
-			},
+			-- code_style = {
+			-- 	comments = "italic",
+			-- 	keywords = "none",
+			-- 	functions = "none",
+			-- 	strings = "none",
+			-- 	variables = "none",
+			-- },
 
 			-- Lualine options --
-			lualine = {
-				transparent = false, -- lualine center bar transparency
-			},
+			-- lualine = {
+			-- 	transparent = false, -- lualine center bar transparency
+			-- },
 
 			-- Custom Highlights --
-			colors = {}, -- Override default colors
-			highlights = {}, -- Override highlight groups
+			-- colors = {}, -- Override default colors
+			-- highlights = {}, -- Override highlight groups
 
 			-- Plugins Config --
-			diagnostics = {
-				darker = true, -- darker colors for diagnostic
-				undercurl = true, -- use undercurl instead of underline for diagnostics
-				background = true, -- use background color for virtual text
-			},
+			-- diagnostics = {
+			-- 	darker = true, -- darker colors for diagnostic
+			-- 	undercurl = true, -- use undercurl instead of underline for diagnostics
+			-- 	background = true, -- use background color for virtual text
+			-- },
 		})
 	end,
 }

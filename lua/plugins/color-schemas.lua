@@ -1,7 +1,7 @@
 return {
 	require("plugins.themes.tokyonight"),
 	require("plugins.themes.onedark"),
-	require("plugins.themes.doki-theme"),
+	-- require("plugins.themes.doki-theme"),
 	require("plugins.themes.cyberdream"),
 	require("plugins.themes.rose"),
 	require("plugins.themes.kanagawa"),
@@ -14,4 +14,11 @@ return {
 	require("plugins.themes.colorbuddy"),
 	require("plugins.themes.calvera-dark"),
 	require("plugins.themes.zephyr"),
+	require("plugins.themes.sonokai"),
+	require("plugins.themes.nyoom"),
+	require("plugins.themes.sweetie"),
+	require("plugins.themes.fluoromachine"),
+	require("plugins.themes.eldritch"),
+	require("plugins.themes.bluloco"),
+	require("plugins.themes.embark"),
 }

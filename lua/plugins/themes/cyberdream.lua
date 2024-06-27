@@ -1,5 +1,6 @@
 return {
 	"scottmckendry/cyberdream.nvim",
+	priority = 1000,
 	config = function()
 		-- Apply the theme
 		require("cyberdream").setup({
