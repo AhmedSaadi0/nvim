@@ -10,7 +10,7 @@ local mason_config = {
 		local mason = require("mason")
 
 		-- import mason-lspconfig
-		local mason_lspconfig = require("mason-lspconfig")
+		-- local mason_lspconfig = require("mason-lspconfig")
 
 		local mason_tool_installer = require("mason-tool-installer")
 
@@ -25,17 +25,17 @@ local mason_config = {
 			},
 		})
 
-		mason_lspconfig.setup({
-			-- list of servers for mason to install
-			ensure_installed = {
-				"efm",
-				-- "ruff",
-				"pyright",
-			},
-		})
+		-- mason_lspconfig.setup({
+		-- 	-- list of servers for mason to install
+		-- 	ensure_installed = {},
+		-- })
 
 		mason_tool_installer.setup({
 			ensure_installed = {
+				"efm",
+				"ruff",
+				"pyright",
+
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
 				"isort", -- python formatter
@@ -46,7 +46,7 @@ local mason_config = {
 				"shfmt",
 				"black",
 				"debugpy",
-				"mypy",
+				-- "mypy",
 				"isort",
 				"js-debug-adapter",
 				"prettier",
@@ -62,11 +62,11 @@ local mason_config = {
 				"pylint",
 				"typos-lsp",
 				"eslint_d",
-				"cairo-language-server",
+				-- "cairo-language-server",
 				"vim-language-server",
 				"yaml-language-server",
-				"kotlin-language-server",
-				"python-lsp-server",
+				-- "kotlin-language-server",
+				-- "python-lsp-server",
 			},
 		})
 	end,

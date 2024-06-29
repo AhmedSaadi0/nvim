@@ -1,1 +1,1 @@
-vim.cmd("colorscheme synthweave-transparent")
+vim.cmd("colorscheme eldritch")

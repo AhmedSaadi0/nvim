@@ -1,6 +1,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
+	-- event = { "BufWritePost", "InsertLeave" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
@@ -66,6 +67,14 @@ return {
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 			end,
 		})
+
+		-- Create autocommands for BufWritePost and InsertLeave events
+		-- vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+		-- 	group = vim.api.nvim_create_augroup("LspOnChange", {}),
+		-- 	callback = function()
+		-- 		vim.lsp.buf.formatting_sync() -- Replace with the desired LSP function if needed
+		-- 	end,
+		-- })
 
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
