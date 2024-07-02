@@ -31,13 +31,13 @@ return {
 				keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
 				opts.desc = "الانتقال إلى التصريح"
-				keymap.set("n", "gd", vim.lsp.buf.declaration, opts) -- go to declaration
+				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
 				opts.desc = "عرض تعريفات LSP"
-				keymap.set("n", "gD", "<cmd:Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+				keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- show lsp definitions
 
 				opts.desc = "عرض تطبيقات LSP"
-				keymap.set("n", "gi", "<cmd:Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+				keymap.set("n", "gi", vim.lsp.buf.implementation, opts) -- show lsp implementations
 
 				opts.desc = "عرض تعريفات نوع LSP"
 				keymap.set("n", "gt", "<cmd:Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
@@ -65,6 +65,22 @@ return {
 
 				opts.desc = "إعادة تشغيل LSP"
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+				opts.desc = "اصلاح الاستيراد لبيثون"
+				keymap.set("n", "<leader>pfi", function()
+					if vim.bo.filetype == "python" then
+						-- Organize imports with isort
+						-- vim.cmd("!isort " .. vim.fn.shellescape(vim.api.nvim_buf_get_name(0)))
+						-- Remove unused imports with flake8
+						vim.cmd(
+							"!flake8 --select=F401 "
+								.. vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
+								.. " | xargs sed -i '' -e 's/import.*//g'"
+						)
+						-- Reload buffer to reflect changes
+						vim.cmd("edit!")
+					end
+				end, opts)
 			end,
 		})
 
@@ -92,6 +108,32 @@ return {
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
+				})
+			end,
+			["eslint"] = function()
+				lspconfig["eslint"].setup({
+					capabilities = capabilities,
+					settings = {
+						codeAction = {
+							disableRuleComment = {
+								enable = true,
+								location = "separateLine",
+							},
+							showDocumentation = {
+								enable = true,
+							},
+						},
+						run = "onSave",
+						workingDirectory = { mode = "auto" },
+					},
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"svelte",
+					},
 				})
 			end,
 			["graphql"] = function()

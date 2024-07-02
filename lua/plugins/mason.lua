@@ -35,6 +35,7 @@ local mason_config = {
 				"efm",
 				"ruff",
 				"pyright",
+				"flake8",
 
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter

@@ -9,6 +9,7 @@ return {
 		-- Configure Lualine with theme colors
 		lualine.setup({
 			options = {
+				globalstatus = true,
 				theme = "auto", -- Automatically use colors from the current theme
 				-- component_separators = { left = "", right = "" },
 				-- section_separators = { left = "", right = "" },

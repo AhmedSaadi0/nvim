@@ -39,7 +39,7 @@ end, { desc = "تحويل الى snake_case" })
 -- map("v", "<leader>re", function()
 -- 	require("refactoring").refactor("Extract Function")
 -- end, { desc = "إعادة بناء التعليمات البرمجية" })
---
+
 -- map("v", "<leader>rv", function()
 -- 	require("refactoring").refactor("Extract Variable")
 -- end, { desc = "إعادة بناء التعليمات البرمجية" })
@@ -173,23 +173,26 @@ map("n", "<Leader>q", ":quit<Return>", opts)
 map("n", "<Leader>Q", ":qa<Return>", opts)
 
 -- Function to move the current line up
-vim.api.nvim_set_keymap("n", "<S-A-k>", ":m .-2<CR>==", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<S-A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+map("n", "<S-A-k>", ":m .-2<CR>==", { noremap = true, silent = true })
+map("v", "<S-A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- Function to move the current line down
-vim.api.nvim_set_keymap("n", "<S-A-j>", ":m .+1<CR>==", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<S-A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+map("n", "<S-A-j>", ":m .+1<CR>==", { noremap = true, silent = true })
+map("v", "<S-A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 
 -- Move cursor to the first character in the line
-vim.api.nvim_set_keymap("n", "<A-h>", "^", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<A-h>", "^", { noremap = true, silent = true })
+map("n", "<A-h>", "^", { noremap = true, silent = true })
+map("v", "<A-h>", "^", { noremap = true, silent = true })
 
 -- Move cursor to the last character in the line
-vim.api.nvim_set_keymap("n", "<A-l>", "g_", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<A-l>", "g_", { noremap = true, silent = true })
+map("n", "<A-l>", "g_", { noremap = true, silent = true })
+map("v", "<A-l>", "g_", { noremap = true, silent = true })
 
 -- Function to navigate between split screens
-vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+map("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+map("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+map("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+map("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+
+-- Enable Ctrl-Backspace to delete the whole word in insert mode
+map("i", "<C-h>", "<C-w>", { noremap = true, silent = true })

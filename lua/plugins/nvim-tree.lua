@@ -34,9 +34,24 @@ local settings = {
 		})
 		local keymap = vim.keymap -- for conciseness
 
-		keymap.set("n", "<c-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
-		keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
-		keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
+		keymap.set("n", "<c-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+		keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
+
+		vim.api.nvim_create_augroup("NvimTreeMappings", { clear = true })
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = "NvimTreeMappings",
+			pattern = "NvimTree",
+			callback = function()
+				vim.api.nvim_buf_set_keymap(
+					0,
+					"n",
+					"<C-h>",
+					"<cmd>NvimTreeCollapse<CR>",
+					{ noremap = true, silent = true, desc = "Collapse file explorer" }
+				)
+			end,
+		})
 	end,
 }
 
