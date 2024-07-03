@@ -1,7 +1,6 @@
 local M = {}
 
 M.ui = {
-	theme = "poimandres",
 
 	hl_override = {
 		CursorLine = {
@@ -11,7 +10,7 @@ M.ui = {
 			-- bg = "#ffffff",
 		},
 	},
-
+	theme = "chadracula",
 	statusline = {
 		theme = "vscode_colored",
 		-- theme = "minimal",
