@@ -362,5 +362,29 @@ return {
 				})
 			end,
 		})
+		-- Define functions to enable and disable LSP diagnostics
+		local function disable_lsp_diagnostics()
+			vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+		end
+
+		local function enable_lsp_diagnostics()
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					-- add any other configurations here if needed
+				})
+		end
+
+		-- Set up autocmd events for entering and leaving insert mode
+		vim.api.nvim_create_autocmd("InsertEnter", {
+			callback = function()
+				-- disable_lsp_diagnostics()
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("InsertLeave", {
+			callback = function()
+				enable_lsp_diagnostics()
+			end,
+		})
 	end,
 }
