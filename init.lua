@@ -1,7 +1,6 @@
 require("configs.options")
 require("configs.mappings")
 
--- Enable true color support
 if vim.fn.has("termguicolors") == 1 then
 	vim.opt.termguicolors = true
 end
@@ -13,7 +12,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
+		"--branch=stable",
 		lazypath,
 	})
 end
@@ -30,3 +29,16 @@ require("lazy").setup({ { import = "plugins" } }, {
 })
 
 require("current-theme")
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_matchparen = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_shada_plugin = 1
+vim.g.loaded_spellfile_plugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.opt.lazyredraw = true
+vim.opt.ttyfast = true

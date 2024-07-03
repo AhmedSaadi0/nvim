@@ -1,5 +1,4 @@
--- require("nvchad.options")
-
+-- options.lua
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
@@ -20,7 +19,7 @@ vim.opt.mouse = ""
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.spell = true
-vim.opt.spelllang = { "en_us" } --"ar" }
+vim.opt.spelllang = { "en_us" }
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.shell = "/usr/bin/fish"
@@ -28,12 +27,3 @@ vim.opt.shell = "/usr/bin/fish"
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 vim.opt.clipboard = "unnamedplus"
-
--- vim.opt.background = "dark"
--- opt.tabstop = 4
--- opt.softtabstop = 4
--- opt.shiftwidth = 4
--- opt.shiftround = false
--- opt.expandtab = true
--- opt.autoindent = true
--- opt.smartindent = true

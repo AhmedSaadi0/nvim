@@ -136,29 +136,29 @@ return {
 					},
 				})
 			end,
-			["graphql"] = function()
-				-- configure graphql language server
-				lspconfig["graphql"].setup({
-					capabilities = capabilities,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
-			["emmet_ls"] = function()
-				-- configure emmet language server
-				lspconfig["emmet_ls"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"html",
-						"typescriptreact",
-						"javascriptreact",
-						"css",
-						"sass",
-						"scss",
-						"less",
-						"svelte",
-					},
-				})
-			end,
+			-- ["graphql"] = function()
+			-- 	-- configure graphql language server
+			-- 	lspconfig["graphql"].setup({
+			-- 		capabilities = capabilities,
+			-- 		filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+			-- 	})
+			-- end,
+			-- ["emmet_ls"] = function()
+			-- 	-- configure emmet language server
+			-- 	lspconfig["emmet_ls"].setup({
+			-- 		capabilities = capabilities,
+			-- 		filetypes = {
+			-- 			"html",
+			-- 			"typescriptreact",
+			-- 			"javascriptreact",
+			-- 			"css",
+			-- 			"sass",
+			-- 			"scss",
+			-- 			"less",
+			-- 			"svelte",
+			-- 		},
+			-- 	})
+			-- end,
 			["lua_ls"] = function()
 				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
@@ -237,51 +237,51 @@ return {
 					},
 				})
 			end,
-			["pyright"] = function()
-				lspconfig["pyright"].setup({
-					capabilities = capabilities,
-					settings = {
-						python = {
-							analysis = {
-								typeCheckingMode = "off",
-								-- extraPaths = { "/media/linux/projects/hopofy/stable/" },
-								useLibraryCodeForTypes = true,
-							},
-						},
-					},
-					filetypes = { "python" },
-				})
-			end,
-			["efm"] = function()
-				lspconfig["efm"].setup({
-					init_options = { documentFormatting = true, codeAction = true },
-					settings = {
-						rootMarkers = { ".git/" },
-						languages = {
-							htmldjango = {
-								{
-									lintCommand = "djlint",
-									lintStdin = true,
-									-- lintFormats = { "%f:%l:%c: %m" },
-									-- formatCommand = "djlint --reformat",
-									-- formatStdin = true,
-								},
-							},
-							html = {
-								{
-									lintCommand = "djlint --lint --quiet",
-									lintStdin = true,
-									lintFormats = { "%f:%l:%c: %m" },
-									formatCommand = "djlint --reformat --quiet",
-									formatStdin = true,
-								},
-							},
-							-- Add additional configurations for other filetypes if needed
-						},
-					},
-					filetypes = { "htmldjango", "html" }, -- Add more filetypes if needed
-				})
-			end,
+			-- ["pyright"] = function()
+			-- 	lspconfig["pyright"].setup({
+			-- 		capabilities = capabilities,
+			-- 		settings = {
+			-- 			python = {
+			-- 				analysis = {
+			-- 					typeCheckingMode = "off",
+			-- 					-- extraPaths = { "/media/linux/projects/hopofy/stable/" },
+			-- 					useLibraryCodeForTypes = true,
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 		filetypes = { "python" },
+			-- 	})
+			-- end,
+			-- ["efm"] = function()
+			-- 	lspconfig["efm"].setup({
+			-- 		init_options = { documentFormatting = true, codeAction = true },
+			-- 		settings = {
+			-- 			rootMarkers = { ".git/" },
+			-- 			languages = {
+			-- 				htmldjango = {
+			-- 					{
+			-- 						lintCommand = "djlint",
+			-- 						lintStdin = true,
+			-- 						-- lintFormats = { "%f:%l:%c: %m" },
+			-- 						-- formatCommand = "djlint --reformat",
+			-- 						-- formatStdin = true,
+			-- 					},
+			-- 				},
+			-- 				html = {
+			-- 					{
+			-- 						lintCommand = "djlint --lint --quiet",
+			-- 						lintStdin = true,
+			-- 						lintFormats = { "%f:%l:%c: %m" },
+			-- 						formatCommand = "djlint --reformat --quiet",
+			-- 						formatStdin = true,
+			-- 					},
+			-- 				},
+			-- 				-- Add additional configurations for other filetypes if needed
+			-- 			},
+			-- 		},
+			-- 		filetypes = { "htmldjango", "html" }, -- Add more filetypes if needed
+			-- 	})
+			-- end,
 			["pylsp"] = function()
 				lspconfig["pylsp"].setup({
 					settings = {

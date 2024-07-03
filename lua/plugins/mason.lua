@@ -33,15 +33,15 @@ local mason_config = {
 		mason_tool_installer.setup({
 			ensure_installed = {
 				"efm",
-				"ruff",
-				"pyright",
-				"flake8",
+				-- "ruff",
+				-- "pyright",
+				-- "flake8",
 
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
-				"pylint",
+				-- "pylint",
 				"eslint_d",
 				"shellcheck",
 				"shfmt",
@@ -49,8 +49,7 @@ local mason_config = {
 				"debugpy",
 				-- "mypy",
 				"isort",
-				"js-debug-adapter",
-				"prettier",
+				-- "js-debug-adapter",
 				"stylua",
 				"bash-language-server",
 				-- "nginx-language-server",
@@ -62,10 +61,8 @@ local mason_config = {
 				"djlint",
 				"pylint",
 				"typos-lsp",
-				"eslint_d",
-				-- "cairo-language-server",
 				"vim-language-server",
-				"yaml-language-server",
+				-- "yaml-language-server",
 				-- "kotlin-language-server",
 				-- "python-lsp-server",
 			},

@@ -1,12 +1,15 @@
 local settings = {
 	"kyazdani42/nvim-tree.lua",
+	-- cmd = { "NvimTreeToggle", "NvimTreeOpen" },
 	config = function()
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 		require("nvim-tree").setup({
 			view = {
 				width = 50, -- Set your desired default width here
-				relativenumber = true,
+				-- relativeside = "left",
+				number = false,
+				relativenumber = false,
 			},
 			update_focused_file = {
 				enable = true, -- Enable this to have the file highlighted
@@ -21,7 +24,12 @@ local settings = {
 				enable = true, -- Show git status icons
 				ignore = false, -- Set to true to ignore git status for certain files
 			},
-
+			renderer = {
+				indent_markers = {
+					enable = true,
+				},
+				highlight_git = false,
+			},
 			-- diagnostics = {
 			-- 	enable = true, -- Enable LSP diagnostics in the tree
 			-- 	icons = {
