@@ -34,7 +34,7 @@ local mason_config = {
 			ensure_installed = {
 				"efm",
 				-- "ruff",
-				-- "pyright",
+				"pyright",
 				-- "flake8",
 
 				"prettier", -- prettier formatter
@@ -64,7 +64,7 @@ local mason_config = {
 				"vim-language-server",
 				-- "yaml-language-server",
 				-- "kotlin-language-server",
-				-- "python-lsp-server",
+				"python-lsp-server",
 			},
 		})
 	end,

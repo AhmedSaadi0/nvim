@@ -237,21 +237,21 @@ return {
 					},
 				})
 			end,
-			-- ["pyright"] = function()
-			-- 	lspconfig["pyright"].setup({
-			-- 		capabilities = capabilities,
-			-- 		settings = {
-			-- 			python = {
-			-- 				analysis = {
-			-- 					typeCheckingMode = "off",
-			-- 					-- extraPaths = { "/media/linux/projects/hopofy/stable/" },
-			-- 					useLibraryCodeForTypes = true,
-			-- 				},
-			-- 			},
-			-- 		},
-			-- 		filetypes = { "python" },
-			-- 	})
-			-- end,
+			["pyright"] = function()
+				lspconfig["pyright"].setup({
+					capabilities = capabilities,
+					settings = {
+						python = {
+							analysis = {
+								typeCheckingMode = "off",
+								-- extraPaths = { "/media/linux/projects/hopofy/stable/" },
+								useLibraryCodeForTypes = true,
+							},
+						},
+					},
+					filetypes = { "python" },
+				})
+			end,
 			-- ["efm"] = function()
 			-- 	lspconfig["efm"].setup({
 			-- 		init_options = { documentFormatting = true, codeAction = true },
@@ -377,7 +377,7 @@ return {
 		-- Set up autocmd events for entering and leaving insert mode
 		vim.api.nvim_create_autocmd("InsertEnter", {
 			callback = function()
-				-- disable_lsp_diagnostics()
+				disable_lsp_diagnostics()
 			end,
 		})
 
