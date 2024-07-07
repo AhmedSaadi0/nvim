@@ -1,0 +1,88 @@
+[directories]
+include = [
+  "."  # Include the current working directory
+]
+exclude = [
+  "migrations",
+  "static",
+  "media",
+  "node_modules",
+  "__pycache__",
+  "build",
+  "dist",
+  ".git"
+]
+
+# Specify the file extensions to check for typos
+[filetypes]
+include = [
+  ".rs",
+  ".md",
+  ".txt",
+  ".py",
+  ".html",
+  ".css",
+  ".js",
+  ".jsx",
+  ".ts",
+  ".tsx",
+  ".json",
+  ".yml",
+  ".yaml",
+  ".toml",
+  ".xml",
+  ".ini"
+]
+exclude = [
+  ".bin",
+  ".log",
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".gif",
+  ".svg",
+  ".ico",
+  ".zip",
+  ".tar",
+  ".gz",
+  ".rar"
+]
+
+# Specify the severity of diagnostics
+[diagnostics]
+severity = "warning" # Possible values: "info", "warning", "error"
+
+# Custom dictionary for words to ignore or add
+[dictionary]
+ignore = [
+  "QuerySet",
+  "APIView",
+  "CharField",
+  "URLField",
+  "UUIDField",
+  "ForeignKey",
+  "ManyToManyField",
+  "OneToOneField",
+  "django",
+  "admin",
+  "url",
+  "urlpatterns",
+  "serializer",
+  "self",
+  "__init__"
+]
+add = [
+  # Add any project-specific terms or acronyms
+]
+
+# Rules configuration
+[rules]
+enable = [
+  "CamelCase",
+  "snake_case",
+  "PascalCase",
+  "kebab-case"
+]
+disable = [
+  # Disable any rules that are too strict or unnecessary
+]
