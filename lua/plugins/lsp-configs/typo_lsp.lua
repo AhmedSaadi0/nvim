@@ -16,14 +16,14 @@ local typo_lsp_config = {
 	cmd_env = { RUST_LOG = "debug" }, -- Increase log level to debug
 	init_options = {
 		config = typos_config_path,
-		diagnosticSeverity = "Error",
+		diagnosticSeverity = "Warning",
 	},
-	on_attach = function(client, bufnr)
-		print("Typos LSP attached to buffer " .. bufnr)
-	end,
-	on_init = function(client)
-		print("Typos LSP initialized")
-	end,
+	-- on_attach = function(client, bufnr)
+	-- 	print("Typos LSP attached to buffer " .. bufnr)
+	-- end,
+	-- on_init = function(client)
+	-- 	print("Typos LSP initialized")
+	-- end,
 }
 
 return typo_lsp_config

@@ -50,7 +50,7 @@ exclude = [
 
 # Specify the severity of diagnostics
 [diagnostics]
-severity = "warning" # Possible values: "info", "warning", "error"
+severity = "info" # Possible values: "info", "warning", "error"
 
 # Custom dictionary for words to ignore or add
 [dictionary]

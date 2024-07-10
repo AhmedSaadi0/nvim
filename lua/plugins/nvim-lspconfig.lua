@@ -81,15 +81,26 @@ return {
 			end,
 		})
 
+		local function update_pylsp_settings(enable_linting)
+			local clients = vim.lsp.get_clients()
+			for _, client in ipairs(clients) do
+				if client.name == "pylsp" then
+					client.config.settings.pylsp.plugins.pylint.enabled = enable_linting
+					client.config.settings.pylsp.plugins.pycodestyle.enabled = enable_linting
+					client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+				end
+			end
+		end
+
 		vim.api.nvim_create_autocmd("InsertEnter", {
 			callback = function()
-				-- vim.cmd("LspStop")
+				update_pylsp_settings(false)
 			end,
 		})
 
 		vim.api.nvim_create_autocmd("InsertLeave", {
 			callback = function()
-				-- vim.cmd("LspStart")
+				update_pylsp_settings(true)
 			end,
 		})
 	end,
