@@ -37,13 +37,5 @@ return {
 				},
 			},
 		})
-
-		-- Keymap for formatting
-		vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-			conform.format({
-				lsp_fallback = true,
-				timeout_ms = 10000, -- Increased timeout to handle large files
-			})
-		end, { desc = "Format file or range (in visual mode)" })
 	end,
 }

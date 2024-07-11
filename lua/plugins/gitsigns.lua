@@ -61,7 +61,7 @@ return {
 				end, { desc = "عرض الفرق مع النسخة السابقة" })
 				map(
 					"n",
-					"<leader>td",
+					"<leader>hh",
 					gitsigns.toggle_deleted,
 					{ desc = "تبديل عرض الأجزاء المحذوفة" }
 				)
