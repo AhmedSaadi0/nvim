@@ -2,6 +2,7 @@
 include = [
   "."  # Include the current working directory
 ]
+
 exclude = [
   "migrations",
   "static",

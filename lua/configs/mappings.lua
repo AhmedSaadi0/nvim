@@ -133,7 +133,7 @@ map(
 	":BufferLineCycleNext<CR>",
 	{ noremap = true, silent = true, desc = "الانتقال الى الملف التالي" }
 )
-map("n", "<leader>x", ":bdelete<CR>", { noremap = true, silent = true, desc = "اغلاق الملف المفتوح" })
+-- map("n", "<leader>x", ":bdelete<CR>", { noremap = true, silent = true, desc = "اغلاق الملف المفتوح" })
 
 map("n", "<leader>bo", function()
 	vim.cmd("only")
