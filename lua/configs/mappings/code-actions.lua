@@ -65,3 +65,34 @@ vim.keymap.set({ "n", "v" }, "<leader>fm", function()
 		timeout_ms = 10000,
 	})
 end, { desc = "Format file or range (in visual mode)" })
+
+local function update_pylsp_settings(enable_linting)
+	local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+	for _, client in ipairs(clients) do
+		if client.name == "pylsp" then
+			client.config.settings.pylsp.plugins.pylint.enabled = enable_linting
+			client.config.settings.pylsp.plugins.pycodestyle.enabled = enable_linting
+			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+		end
+	end
+end
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+	callback = function()
+		update_pylsp_settings(false)
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufReadPre", {
+	callback = function()
+		update_pylsp_settings(false)
+	end,
+})
+
+map("n", "<leader>le", function()
+	update_pylsp_settings(true)
+end, { desc = "تشغيل pylsp linting" })
+
+map("n", "<leader>ld", function()
+	update_pylsp_settings(false)
+end, { desc = "ايقاف pylsp linting" })
