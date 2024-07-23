@@ -65,6 +65,7 @@ local mason_config = {
 				-- "yaml-language-server",
 				-- "kotlin-language-server",
 				"python-lsp-server",
+				"autoflake",
 			},
 		})
 	end,

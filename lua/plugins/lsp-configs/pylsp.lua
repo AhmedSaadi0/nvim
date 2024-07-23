@@ -13,16 +13,9 @@ local pylsp_consigs = {
 				pylint = {
 					enabled = true,
 					executable = "pylint",
-					-- using .pylintrc for each project is better
-					-- args = {
-					-- 	"--disable=C0111",
-					-- 	"--enable=W0614",
-					-- 	"--load-plugins=pylint_celery,pylint_django",
-					-- 	"--django-settings-module=hopofy.settings",
-					-- 	"--suggestion-mode=yes",
-					-- 	"--function-naming-style=snake_case",
-					-- 	"--include-naming-hint=yes",
-					-- },
+					args = {
+						"--enable=W0611,W0614",
+					},
 				},
 			},
 		},

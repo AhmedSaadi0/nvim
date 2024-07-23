@@ -21,7 +21,8 @@ return {
 				markdown = { "prettier" },
 				graphql = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				-- python = { "isort", "black" },
+				python = { "isort", "black", "autoflake" },
 				htmldjango = { "djlint" },
 				bash = { "beautysh" },
 			},
@@ -33,6 +34,21 @@ return {
 				prettier = {
 					javascript = {
 						args = { "--single-quote" },
+					},
+				},
+				autoflake = {
+					python = {
+						args = { "--remove-all-unused-imports", "--remove-unused-variables" },
+					},
+				},
+				isort = {
+					python = {
+						args = { "--profile", "black" },
+					},
+				},
+				black = {
+					python = {
+						args = { "--fast" },
 					},
 				},
 			},
