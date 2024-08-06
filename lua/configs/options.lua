@@ -15,7 +15,7 @@ vim.opt.tabstop = 4
 vim.opt.wrap = false
 vim.opt.backspace = { "start", "eol", "indent" }
 vim.opt.path:append({ "**" })
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.spell = true

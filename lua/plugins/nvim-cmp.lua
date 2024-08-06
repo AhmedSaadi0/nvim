@@ -46,18 +46,19 @@ return {
 				["<C-e>"] = cmp.mapping.abort(), -- close completion window
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<Up>"] = function(fallback)
-					fallback()
+					if cmp.visible() then
+						cmp.close() -- Close the completion menu
+					else
+						fallback() -- Allow normal behavior if the menu is not visible
+					end
 				end,
 				["<Down>"] = function(fallback)
-					fallback()
+					if cmp.visible() then
+						cmp.close() -- Close the completion menu
+					else
+						fallback() -- Allow normal behavior if the menu is not visible
+					end
 				end,
-				["<Left>"] = function(fallback)
-					fallback()
-				end,
-				["<Right>"] = function(fallback)
-					fallback()
-				end,
-				-- Add other mappings here as needed
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({

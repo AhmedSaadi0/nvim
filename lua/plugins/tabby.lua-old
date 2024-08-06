@@ -1,0 +1,4 @@
+return {
+	"nanozuki/tabby.nvim",
+	requires = "akinsho/bufferline.nvim",
+}
