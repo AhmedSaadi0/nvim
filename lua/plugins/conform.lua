@@ -22,7 +22,7 @@ return {
 				graphql = { "prettier" },
 				lua = { "stylua" },
 				-- python = { "isort", "black" },
-				python = { "isort", "black", "autoflake" },
+				python = { "autoflake", "isort", "black" },
 				htmldjango = { "djlint" },
 				bash = { "beautysh" },
 			},

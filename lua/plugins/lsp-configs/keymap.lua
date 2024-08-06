@@ -45,16 +45,15 @@ local keymapping = {
 		keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 
 		opts.desc = "اصلاح الاستيراد لبيثون"
-		keymap.set("n", "<leader>pfi", function()
+		keymap.set("n", "<leader>ii", function()
 			if vim.bo.filetype == "python" then
-				-- Organize imports with isort
-				-- vim.cmd("!isort " .. vim.fn.shellescape(vim.api.nvim_buf_get_name(0)))
-				-- Remove unused imports with flake8
+				-- Remove unused imports with autoflake
 				vim.cmd(
-					"!flake8 --select=F401 "
+					"!autoflake --in-place --remove-all-unused-imports "
 						.. vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
-						.. " | xargs sed -i '' -e 's/import.*//g'"
 				)
+				-- Organize imports with isort
+				vim.cmd("!isort " .. vim.fn.shellescape(vim.api.nvim_buf_get_name(0)))
 				vim.cmd("edit!")
 			end
 		end, opts)
