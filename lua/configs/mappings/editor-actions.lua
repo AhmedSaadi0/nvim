@@ -97,3 +97,17 @@ vim.api.nvim_set_keymap(
 	":lua close_buffer()<CR>",
 	{ noremap = true, silent = true, desc = "اغلاق الملف المفتوح" }
 )
+
+-- Function to toggle mouse
+local function toggle_mouse()
+	if vim.o.mouse == "" then
+		vim.o.mouse = "a"
+		print("Mouse enabled")
+	else
+		vim.o.mouse = ""
+		print("Mouse disabled")
+	end
+end
+
+-- Key mapping to toggle mouse
+map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Toggle Mouse" }))
