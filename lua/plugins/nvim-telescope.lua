@@ -26,8 +26,8 @@ return {
 		vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find Symbols" })
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find Old Files" })
 		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word under Cursor" })
-		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Search Git Commits" })
-		vim.keymap.set("n", "<leader>gb", builtin.git_bcommits, { desc = "Search Git Commits for Buffer" })
+		-- vim.keymap.set("n", "<leader>fgc", builtin.git_commits, { desc = "Search Git Commits" })
+		-- vim.keymap.set("n", "<leader>fgb", builtin.git_bcommits, { desc = "Search Git Commits for Buffer" })
 		vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Find Keymaps" })
 		vim.keymap.set("n", "<leader>/", function()
 			builtin.current_buffer_fuzzy_find(themes.get_dropdown({
