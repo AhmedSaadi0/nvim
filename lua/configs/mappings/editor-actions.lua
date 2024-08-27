@@ -111,3 +111,18 @@ end
 
 -- Key mapping to toggle mouse
 map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Toggle Mouse" }))
+
+-- Function to toggle transparency
+function ToggleTransparency()
+	local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+	local current_bg = normal_hl.bg
+	if current_bg == nil then
+		vim.cmd("colorscheme " .. vim.g.colors_name)
+	else
+		vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
+		vim.cmd([[highlight NonText guibg=NONE ctermbg=NONE]])
+	end
+end
+
+-- Map the function to a keybinding (e.g., <leader>t)
+vim.api.nvim_set_keymap("n", "<leader>tt", ":lua ToggleTransparency()<CR>", { noremap = true, silent = true })
