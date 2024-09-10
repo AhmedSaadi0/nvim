@@ -23,7 +23,7 @@ return {
 				lua = { "stylua" },
 				-- python = { "isort", "black" },
 				python = { "autoflake", "isort", "black" },
-				htmldjango = { "djlint" },
+				htmldjango = { "djlint", "djhtml" },
 				bash = { "beautysh" },
 			},
 			format_after_save = {
@@ -50,6 +50,16 @@ return {
 					python = {
 						args = { "--fast" },
 					},
+				},
+				djlint = {
+					htmldjango = {
+						args = { "--reformat" },
+					},
+				},
+				-- Custom formatter definition for djhtml
+				djhtml = {
+					command = "djhtml",
+					args = { "$FILENAME" },
 				},
 			},
 		})

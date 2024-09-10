@@ -7,5 +7,18 @@ return {
 	},
 	opts = {
 		-- Your setup opts here
+		symbol_folding = {
+			autofold_depth = 1,
+
+			auto_unfold = {
+				only = 2,
+			},
+		},
+		symbols = {
+			filter = {
+				default = { "String", exclude = true },
+				-- python = { "Function", "Class" },
+			},
+		},
 	},
 }

@@ -8,7 +8,7 @@ local efo_configs = {
 					lintCommand = "djlint",
 					lintStdin = true,
 					-- lintFormats = { "%f:%l:%c: %m" },
-					-- formatCommand = "djlint --reformat",
+					-- formatCommand = "djhtml",
 					-- formatStdin = true,
 				},
 			},
@@ -16,9 +16,9 @@ local efo_configs = {
 				{
 					lintCommand = "djlint --lint --quiet",
 					lintStdin = true,
-					lintFormats = { "%f:%l:%c: %m" },
-					formatCommand = "djlint --reformat --quiet",
-					formatStdin = true,
+					-- lintFormats = { "%f:%l:%c: %m" },
+					-- formatCommand = "djhtml",
+					-- formatStdin = true,
 				},
 			},
 			-- Add additional configurations for other filetypes if needed
