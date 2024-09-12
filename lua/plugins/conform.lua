@@ -2,7 +2,6 @@
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
-	-- event = { "BufReadPre", "BufNewFile" },
 	event = { "BufWritePost", "InsertLeave" },
 	config = function()
 		local conform = require("conform")
@@ -21,8 +20,8 @@ return {
 				markdown = { "prettier" },
 				graphql = { "prettier" },
 				lua = { "stylua" },
-				-- python = { "isort", "black" },
 				python = { "autoflake", "isort", "black" },
+				-- Ensure djlint runs first, then djhtml
 				htmldjango = { "djlint", "djhtml" },
 				bash = { "beautysh" },
 			},
@@ -51,12 +50,12 @@ return {
 						args = { "--fast" },
 					},
 				},
+				-- Add the djlint formatter
 				djlint = {
-					htmldjango = {
-						args = { "--reformat" },
-					},
+					command = "djlint",
+					args = { "--reformat", "$FILENAME" },
 				},
-				-- Custom formatter definition for djhtml
+				-- Add the djhtml formatter
 				djhtml = {
 					command = "djhtml",
 					args = { "$FILENAME" },

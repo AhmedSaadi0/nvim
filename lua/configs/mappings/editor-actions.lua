@@ -112,26 +112,6 @@ end
 -- Key mapping to toggle mouse
 map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Toggle Mouse" }))
 
--- Function to toggle transparency
-function ToggleTransparency()
-	local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
-	local current_bg = normal_hl.bg
-	if current_bg == nil then
-		vim.cmd("colorscheme " .. vim.g.colors_name)
-	else
-		vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
-		vim.cmd([[highlight NonText guibg=NONE ctermbg=NONE]])
-		vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "NvimTreeFolderName", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "NvimTreeGitDirty", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "NvimTreeGitStaged", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "NvimTreeRootFolder", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "NvimTreeNormalFloat", { bg = "NONE" })
-	end
-end
-
--- Map the function to a keybinding (e.g., <leader>t)
-vim.api.nvim_set_keymap("n", "<leader>tt", ":lua ToggleTransparency()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>tt", ":TransparentToggle<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
