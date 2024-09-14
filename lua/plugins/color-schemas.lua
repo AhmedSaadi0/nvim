@@ -23,4 +23,5 @@ return {
 	require("plugins.themes.embark"),
 	require("plugins.themes.iceberg"),
 	require("plugins.themes.github"),
+	require("plugins.themes.gruvbox"),
 }
