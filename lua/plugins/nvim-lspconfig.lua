@@ -79,6 +79,21 @@ return {
 			["emmet_ls"] = function()
 				lspconfig["emmet_ls"].setup(add_capabilities(emmet_ls_consigs))
 			end,
+			["vala"] = function()
+				local lspconfig = require("lspconfig")
+				lspconfig.valalsp.setup({
+					-- on_attach = on_attach,
+					capabilities = capabilities,
+					settings = {
+						vala = {
+							lint = {
+								style = true, -- Enable style checking
+								fix = true, -- Enable automatic fixing
+							},
+						},
+					},
+				})
+			end,
 		})
 
 		-- vim.api.nvim_create_autocmd("BufWritePost", {

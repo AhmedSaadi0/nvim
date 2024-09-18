@@ -66,6 +66,10 @@ local mason_config = {
 				-- "kotlin-language-server",
 				"python-lsp-server",
 				"autoflake",
+
+				"vala-language-server",
+				"clang-format",
+				"clangd",
 			},
 		})
 	end,

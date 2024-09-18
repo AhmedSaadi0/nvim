@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/custom/plugins.lua
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
@@ -21,9 +20,10 @@ return {
 				graphql = { "prettier" },
 				lua = { "stylua" },
 				python = { "autoflake", "isort", "black" },
-				-- Ensure djlint runs first, then djhtml
 				htmldjango = { "djlint", "djhtml" },
 				bash = { "beautysh" },
+				-- Add Vala formatting support
+				vala = { "vala_format" }, -- Add the Vala formatter here
 			},
 			format_after_save = {
 				lsp_fallback = true,
@@ -50,15 +50,18 @@ return {
 						args = { "--fast" },
 					},
 				},
-				-- Add the djlint formatter
 				djlint = {
 					command = "djlint",
 					args = { "--reformat", "$FILENAME" },
 				},
-				-- Add the djhtml formatter
 				djhtml = {
 					command = "djhtml",
 					args = { "$FILENAME" },
+				},
+				-- Add the Vala formatter (vala_format)
+				vala_format = {
+					command = "clang-format",
+					-- args = { "--assume-filename=.vala" },
 				},
 			},
 		})
