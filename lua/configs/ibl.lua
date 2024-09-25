@@ -3,13 +3,13 @@ local hooks = require("ibl.hooks")
 
 -- Define highlight groups with a mix of vibrant colors
 local highlight_groups = {
-	{ name = "IndentSymbolGreen", fg = "#66BB6A" },
-	{ name = "IndentSymbolOrange", fg = "#FFA726" },
-	{ name = "IndentSymbolRed", fg = "#FF6B6B" },
-	{ name = "IndentSymbolPurple", fg = "#AB47BC" },
+	{ name = "IndentSymbolBlue", fg = "#42A5F5" },
 	{ name = "IndentSymbolYellow", fg = "#FFD54F" },
 	{ name = "IndentSymbolCyan", fg = "#26C6DA" },
-	{ name = "IndentSymbolBlue", fg = "#42A5F5" },
+	{ name = "IndentSymbolOrange", fg = "#FFA726" },
+	{ name = "IndentSymbolGreen", fg = "#66BB6A" },
+	{ name = "IndentSymbolRed", fg = "#FF6B6B" },
+	{ name = "IndentSymbolPurple", fg = "#AB47BC" },
 }
 
 -- Register highlight setup hook
@@ -19,7 +19,6 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 	end
 end)
 
--- Configuration for the indent-blankline plugin with different symbols
 require("ibl").setup({
 	indent = {
 		-- char = { "│" }, -- Characters to use for indentation
@@ -30,7 +29,6 @@ require("ibl").setup({
 		repeat_linebreak = true,
 	},
 	whitespace = {
-		-- Use the same highlight groups for whitespace
 		highlight = vim.tbl_map(function(group)
 			return group.name
 		end, highlight_groups),
@@ -41,7 +39,7 @@ require("ibl").setup({
 		show_start = true,
 		show_end = true,
 		char = "ǀ",
-		-- highlight = highlight_groups_highlight, -- Use the purple color for scope highlight
+		-- highlight = spaceHighlight, -- Use the purple color for scope highlight
 	},
 })
 

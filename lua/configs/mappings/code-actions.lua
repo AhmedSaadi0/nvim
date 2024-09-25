@@ -96,3 +96,65 @@ end, { desc = "تشغيل pylsp linting" })
 map("n", "<leader>ld", function()
 	update_pylsp_settings(false)
 end, { desc = "ايقاف pylsp linting" })
+
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>k",
+	":lua ShowPath()<CR>",
+	{ noremap = true, silent = true, desc = "عرض مسار المتغير" }
+)
+
+function ShowPath()
+	local params = vim.lsp.util.make_position_params()
+
+	vim.lsp.buf_request(0, "textDocument/definition", params, function(_, result)
+		if result == nil or vim.tbl_isempty(result) then
+			print("No definition found")
+			return
+		end
+
+		local definition = result[1]
+		local uri = definition.uri or definition.targetUri
+		local path = vim.uri_to_fname(uri)
+
+		-- Get the project root (assuming LSP has set the project root correctly)
+		local project_root = vim.fn.getcwd()
+
+		-- If the path is within the project, show a relative path, otherwise show full path
+		if vim.startswith(path, project_root) then
+			path = vim.fn.fnamemodify(path, ":~:.") -- Display as relative to the current directory
+		end
+
+		-- Define the window size and position
+		local width = math.min(80, #path + 2)
+		local height = 1
+		local row = 1
+		local col = 1
+
+		-- Create a new buffer
+		local buf = vim.api.nvim_create_buf(false, true)
+
+		-- Set buffer content to the file path
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, { path })
+
+		-- Create a floating window
+		local opts = {
+			style = "minimal",
+			relative = "cursor",
+			width = width,
+			height = height,
+			row = row,
+			col = col,
+			border = "rounded",
+		}
+		local win = vim.api.nvim_open_win(buf, false, opts)
+
+		-- Auto-close window on cursor move or keypress
+		vim.cmd(
+			string.format(
+				"autocmd CursorMoved,CursorMovedI,InsertCharPre <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)",
+				win
+			)
+		)
+	end)
+end
