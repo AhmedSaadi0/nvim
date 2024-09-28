@@ -158,3 +158,9 @@ function ShowPath()
 		)
 	end)
 end
+
+vim.api.nvim_set_keymap("n", "<leader>fd", ":lua run_djhtml()<CR>", { noremap = true, silent = true })
+function run_djhtml()
+	local filename = vim.fn.expand("%:p")
+	vim.cmd("!djhtml " .. filename)
+end

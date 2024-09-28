@@ -20,14 +20,12 @@ return {
 				graphql = { "prettier" },
 				lua = { "stylua" },
 				python = { "autoflake", "isort", "black" },
-				htmldjango = { "djlint", "djhtml" },
+				htmldjango = { "djlint" },
 				bash = { "beautysh" },
-				-- Add Vala formatting support
-				vala = { "vala_format" }, -- Add the Vala formatter here
 			},
 			format_after_save = {
-				lsp_fallback = true,
-				timeout_ms = 10000,
+				lsp_format = "fallback",
+				timeout_ms = 500,
 			},
 			formatters = {
 				prettier = {
@@ -50,15 +48,6 @@ return {
 						args = { "--fast" },
 					},
 				},
-				djlint = {
-					command = "djlint",
-					args = { "--reformat", "$FILENAME" },
-				},
-				djhtml = {
-					command = "djhtml",
-					args = { "$FILENAME" },
-				},
-				-- Add the Vala formatter (vala_format)
 				vala_format = {
 					command = "clang-format",
 					-- args = { "--assume-filename=.vala" },
