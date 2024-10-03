@@ -24,4 +24,13 @@ return {
 	require("plugins.themes.iceberg"),
 	require("plugins.themes.github"),
 	require("plugins.themes.gruvbox"),
+	require("plugins.themes.newpaper"),
+	require("plugins.themes.flow"),
+	require("plugins.themes.poimandres"),
+	require("plugins.themes.onedarkpro"),
+	require("plugins.themes.bamboo"),
+	require("plugins.themes.everforest"),
+	require("plugins.themes.vim-nightfly-colors"),
+	require("plugins.themes.edge"),
+	require("plugins.themes.kanagawa-paper"),
 }

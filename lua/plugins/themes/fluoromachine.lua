@@ -9,9 +9,7 @@ return {
 			glow = true,
 			theme = "fluoromachine",
 			-- theme = "retrowave",
-			transparent = true,
+			transparent = false,
 		})
-
-		vim.cmd.colorscheme("fluoromachine")
 	end,
 }
