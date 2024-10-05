@@ -30,7 +30,7 @@ return {
 		local pyright_config = require("plugins.lsp-configs.pyright")
 		local efm_configs = require("plugins.lsp-configs.efm")
 		local pylsp_config = require("plugins.lsp-configs.pylsp")
-		local tsserver_configs = require("plugins.lsp-configs.tsserver")
+		-- local tsserver_configs = require("plugins.lsp-configs.tsserver")
 		local graphql_configs = require("plugins.lsp-configs.graphql")
 		local emmet_ls_consigs = require("plugins.lsp-configs.emmet_ls")
 
@@ -70,9 +70,9 @@ return {
 			["pylsp"] = function()
 				lspconfig["pylsp"].setup(add_capabilities(pylsp_config))
 			end,
-			["tsserver"] = function()
-				lspconfig["tsserver"].setup(add_capabilities(tsserver_configs))
-			end,
+			-- ["tsserver"] = function()
+			-- 	lspconfig["tsserver"].setup(add_capabilities(tsserver_configs))
+			-- end,
 			["graphql"] = function()
 				lspconfig["graphql"].setup(add_capabilities(graphql_configs))
 			end,
