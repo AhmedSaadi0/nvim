@@ -33,4 +33,5 @@ return {
 	require("plugins.themes.vim-nightfly-colors"),
 	require("plugins.themes.edge"),
 	require("plugins.themes.kanagawa-paper"),
+	require("plugins.themes.aurora"),
 }
