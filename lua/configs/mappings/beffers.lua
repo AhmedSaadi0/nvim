@@ -5,13 +5,6 @@ local opt = {
 	silent = true,
 }
 
-map("n", "<C-S-Left>", ":BufferNext<CR>", opt)
-map("n", "<C-S-Right>", ":BufferPrevious<CR>", opt)
-map("n", "<S-h>", ":BufferPrevious<CR>", opt)
-map("n", "<S-l>", ":BufferNext<CR>", opt)
-
-map("n", "<leader>x", ":BufferClose<CR>", opt)
-
 map("n", "<leader>bo", function()
 	vim.cmd("only")
 end, { noremap = true, silent = true, desc = "اغلاق اي بفر اخر" })
@@ -33,14 +26,11 @@ map("n", "<leader>ba", function()
 	vim.cmd("redraw!")
 end, { noremap = true, silent = true, desc = "اغلاق اي بفر اخر لم يتم تعديلة" })
 
-map("n", "<leader>bi", ":BufferPin<CR>", opt)
-map("n", "<leader>bp", ":BufferPick<CR>", opt)
-map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opt)
-map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opt)
-map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opt)
-map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", opt)
-map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", opt)
-map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opt)
+-- Navigate buffers
+map("n", "<C-S-Left>", ":bnext<CR>", opt)
+map("n", "<C-S-Right>", ":bprevious<CR>", opt)
+map("n", "<S-h>", ":bprevious<CR>", opt)
+map("n", "<S-l>", ":bnext<CR>", opt)
 
 map("n", "<leader>tn", function()
 	vim.cmd("tabnew")
