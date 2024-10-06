@@ -115,3 +115,7 @@ map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Tog
 vim.api.nvim_set_keymap("n", "<leader>tt", ":TransparentToggle<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
+
+vim.keymap.set("n", "<leader>th", function()
+	require("nvchad.themes").open()
+end, { desc = "تغيير الثيم" })

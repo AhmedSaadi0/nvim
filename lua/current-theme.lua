@@ -1,1 +1,1 @@
-vim.cmd("colorscheme bluloco-dark")
+vim.cmd("colorscheme nvchad")

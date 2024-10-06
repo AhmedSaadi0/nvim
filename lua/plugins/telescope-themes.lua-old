@@ -1,0 +1,9 @@
+return {
+	"andrew-george/telescope-themes",
+	config = function()
+		-- require("telescope").load_extension("themes")
+		vim.keymap.set("n", "<leader>th", function()
+			require("nvchad.themes").open()
+		end, { desc = "تغيير الثيم" })
+	end,
+}
