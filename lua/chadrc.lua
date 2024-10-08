@@ -3,13 +3,13 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "palenight", -- default theme
+		theme = "nightfox", -- default theme
 		hl_add = {},
 		hl_override = {},
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "palenight", "one_light" },
+		theme_toggle = { "nightfox", "one_light" },
 	},
 
 	ui = {

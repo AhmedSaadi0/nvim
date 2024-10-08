@@ -34,13 +34,13 @@ require("lazy").setup({ { import = "plugins" } }, {
 })
 
 -- (method 1, For heavy lazyloaders)
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
-dofile(vim.g.base46_cache .. "syntax")
-dofile(vim.g.base46_cache .. "treesitter")
--- for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
--- 	dofile(vim.g.base46_cache .. v)
--- end
+-- dofile(vim.g.base46_cache .. "defaults")
+-- dofile(vim.g.base46_cache .. "statusline")
+-- dofile(vim.g.base46_cache .. "syntax")
+-- dofile(vim.g.base46_cache .. "treesitter")
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+	dofile(vim.g.base46_cache .. v)
+end
 
 -- require("current-theme")
 vim.g.loaded_netrw = 1
@@ -54,7 +54,7 @@ vim.g.loaded_2html_plugin = 1
 vim.g.loaded_shada_plugin = 1
 vim.g.loaded_spellfile_plugin = 1
 vim.g.loaded_tutor_mode_plugin = 1
-vim.opt.lazyredraw = true
+-- vim.opt.lazyredraw = true
 vim.opt.ttyfast = true
 
 -- Set all .html files to be treated as htmldjango

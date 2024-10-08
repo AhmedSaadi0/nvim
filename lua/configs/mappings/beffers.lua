@@ -27,10 +27,19 @@ map("n", "<leader>ba", function()
 end, { noremap = true, silent = true, desc = "اغلاق اي بفر اخر لم يتم تعديلة" })
 
 -- Navigate buffers
-map("n", "<C-S-Left>", ":bnext<CR>", opt)
-map("n", "<C-S-Right>", ":bprevious<CR>", opt)
-map("n", "<S-h>", ":bprevious<CR>", opt)
-map("n", "<S-l>", ":bnext<CR>", opt)
+map("n", "<C-S-Left>", function()
+	require("nvchad.tabufline").next()
+end, opt)
+map("n", "<C-S-Right>", function()
+	require("nvchad.tabufline").prev()
+end, opt)
+
+map("n", "<S-h>", function()
+	require("nvchad.tabufline").prev()
+end, opt)
+map("n", "<S-l>", function()
+	require("nvchad.tabufline").next()
+end, opt)
 
 map("n", "<leader>tn", function()
 	vim.cmd("tabnew")
