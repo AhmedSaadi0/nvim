@@ -6,8 +6,8 @@ local opt = {
 }
 
 map("n", "<leader>bo", function()
-	vim.cmd("only")
-end, { noremap = true, silent = true, desc = "اغلاق اي بفر اخر" })
+	require("nvchad.tabufline").closeAllBufs()
+end, opt)
 
 map("n", "<leader>ba", function()
 	local buffers = vim.api.nvim_list_bufs()
@@ -39,6 +39,10 @@ map("n", "<S-h>", function()
 end, opt)
 map("n", "<S-l>", function()
 	require("nvchad.tabufline").next()
+end, opt)
+
+map("n", "<leader>x", function()
+	require("nvchad.tabufline").close_buffer()
 end, opt)
 
 map("n", "<leader>tn", function()

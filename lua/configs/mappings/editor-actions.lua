@@ -91,13 +91,6 @@ _G.close_buffer = function()
 	vim.cmd("bdelete " .. current_buffer)
 end
 
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>x",
-	":lua close_buffer()<CR>",
-	{ noremap = true, silent = true, desc = "اغلاق الملف المفتوح" }
-)
-
 -- Function to toggle mouse
 local function toggle_mouse()
 	if vim.o.mouse == "" then

@@ -3,13 +3,13 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "nightfox", -- default theme
+		theme = "bearded-arc", -- default theme
 		hl_add = {},
 		hl_override = {},
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "nightfox", "one_light" },
+		theme_toggle = { "bearded-arc", "one_light" },
 	},
 
 	ui = {
@@ -23,7 +23,7 @@ local options = {
 			},
 		},
 
-		telescope = { style = "borderless" }, -- borderless / bordered
+		telescope = { style = "bordered" }, -- borderless / bordered
 
 		statusline = {
 			enabled = true,
