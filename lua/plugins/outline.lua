@@ -29,7 +29,7 @@ return {
 			},
 		},
 		outline_window = {
-			width = 15,
+			width = 20,
 			keymaps = {
 				close = "q",
 				jump = "<CR>",

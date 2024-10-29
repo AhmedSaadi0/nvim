@@ -42,6 +42,8 @@ return {
 		telescope.setup({
 			defaults = {
 				initial_mode = "insert",
+				file_sorter = require("telescope.sorters").get_fzf_sorter,
+				generic_sorter = require("telescope.sorters").get_fzf_sorter,
 				selection_strategy = "reset",
 				sorting_strategy = "ascending",
 				layout_strategy = "horizontal",
@@ -49,24 +51,26 @@ return {
 					horizontal = {
 						prompt_position = "top",
 						preview_width = 0.55,
-						results_width = 0.8,
+						results_width = 0.4,
 					},
 					vertical = {
-						mirror = false,
+						mirror = true,
 					},
-					width = 0.87,
-					height = 0.80,
-					preview_cutoff = 120,
+					width = 0.9,
+					height = 0.9,
+					-- preview_cutoff = 120,
 				},
 				vimgrep_arguments = {
 					"rg",
 					"-L",
-					"--color=never",
 					"--no-heading",
 					"--with-filename",
 					"--line-number",
 					"--column",
 					"--smart-case",
+					"--max-depth",
+					"5", -- Reduce search depth
+					-- "--color=never",
 				},
 				path_display = { "truncate" },
 				mappings = {

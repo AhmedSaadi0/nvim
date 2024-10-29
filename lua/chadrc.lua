@@ -3,13 +3,13 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "bearded-arc", -- default theme
+		theme = "jabuti", -- default theme
 		hl_add = {},
 		hl_override = {},
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "bearded-arc", "one_light" },
+		theme_toggle = { "jabuti", "aquarium" },
 	},
 
 	ui = {

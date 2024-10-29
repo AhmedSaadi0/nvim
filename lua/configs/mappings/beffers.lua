@@ -7,7 +7,11 @@ local opt = {
 
 map("n", "<leader>bo", function()
 	require("nvchad.tabufline").closeAllBufs()
-end, opt)
+end, {
+	noremap = true,
+	silent = true,
+	desc = "اغلاق كل البفرز",
+})
 
 map("n", "<leader>ba", function()
 	local buffers = vim.api.nvim_list_bufs()
