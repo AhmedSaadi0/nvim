@@ -23,14 +23,14 @@ return {
 
 		local lspkind = require("lspkind")
 
-		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-		require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_vscode").load()
+		require("luasnip.loaders.from_lua").load({ paths = { "./lua/snippets" } })
 
 		cmp.setup({
 			completion = {
 				completeopt = "menu,menuone,preview,select",
 			},
-			snippet = { -- configure how nvim-cmp interacts with snippet engine
+			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
 				end,
@@ -51,16 +51,27 @@ return {
 				["<Down>"] = function(fallback)
 					fallback() -- Allow normal behavior if the menu is not visible
 				end,
+				-- ["<C-l>"] = cmp.mapping(function(fallback)
+				-- 	if luasnip.jumpable(1) then
+				-- 		luasnip.jump(1)
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end, { "i", "s" }),
+				-- ["<C-h>"] = cmp.mapping(function(fallback)
+				-- 	if luasnip.jumpable(-1) then
+				-- 		luasnip.jump(-1)
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end, { "i", "s" }),
 			}),
-			-- sources for autocompletion
 			sources = cmp.config.sources({
-				-- { name = "lsp" },
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- snippets
-				{ name = "buffer" }, -- text within current buffer
-				{ name = "path" }, -- file system paths
+				{ name = "nvim_lsp", priority = 10 },
+				{ name = "luasnip", priority = 9 },
+				{ name = "buffer", priority = 8 },
+				{ name = "path", priority = 7 },
 			}),
-
 			formatting = {
 				fields = { "abbr", "kind", "menu" },
 				format = lspkind.cmp_format({
@@ -68,6 +79,22 @@ return {
 					ellipsis_char = "...",
 				}),
 				expandable_indicator = true,
+			},
+			sorting = {
+				priority_weight = 2,
+				comparators = {
+					cmp.config.compare.offset,
+					cmp.config.compare.exact,
+					cmp.config.compare.score,
+					cmp.config.compare.recently_used,
+					cmp.config.compare.kind,
+					cmp.config.compare.sort_text,
+					cmp.config.compare.length,
+					cmp.config.compare.order,
+				},
+			},
+			window = {
+				documentation = cmp.config.window.bordered(),
 			},
 		})
 	end,

@@ -9,7 +9,7 @@ local options = {
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "jabuti", "aquarium" },
+		theme_toggle = { "jabuti", "jabuti" },
 	},
 
 	ui = {
