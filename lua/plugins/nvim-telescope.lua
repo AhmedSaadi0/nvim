@@ -113,6 +113,9 @@ return {
 			telescope.load_extension("fzf")
 			telescope.load_extension("ui-select")
 			telescope.load_extension("live_grep_args")
+			telescope.load_extension("noice")
+			-- telescope.load_extension("smart_goto")
+			-- telescope.load_extension("undo")
 			-- Load more extensions here as needed
 		end, 100)
 	end,

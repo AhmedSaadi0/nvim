@@ -49,19 +49,13 @@ return {
 				map("n", "<leader>gb", function()
 					gitsigns.blame_line({ full = true })
 				end, { desc = "عرض اللوم الكامل للسطر" })
-				-- map(
-				-- 	"n",
-				-- 	"<leader>gtb",
-				-- 	gitsigns.toggle_current_line_blame,
-				-- 	{ desc = "تبديل عرض اللوم للسطر الحالي" }
-				-- )
 				map("n", "<leader>gd", gitsigns.diffthis, { desc = "عرض الفرق لهذا الملف" })
 				map("n", "<leader>gD", function()
 					gitsigns.diffthis("~")
 				end, { desc = "عرض الفرق مع النسخة السابقة" })
 				map(
 					"n",
-					"<leader>ghh",
+					"<leader>gth",
 					gitsigns.toggle_deleted,
 					{ desc = "تبديل عرض الأجزاء المحذوفة" }
 				)

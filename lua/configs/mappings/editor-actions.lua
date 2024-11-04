@@ -115,3 +115,17 @@ map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Tog
 vim.api.nvim_set_keymap("n", "<leader>tt", ":TransparentToggle<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
+
+map(
+	"n",
+	"<leader>nd",
+	"<cmd>NoiceDismiss<CR>",
+	{ noremap = true, silent = true, desc = "اخفاء الاشعارات" }
+)
+
+map(
+	"n",
+	"<leader>gh",
+	"<cmd>Telescope git_bcommits<CR>",
+	{ noremap = true, silent = true, desc = "تاريخ GIT للملف" }
+)
