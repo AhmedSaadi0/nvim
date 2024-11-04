@@ -54,13 +54,11 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				-- { name = "lsp" },
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- snippets
-				{ name = "buffer" }, -- text within current buffer
-				{ name = "path" }, -- file system paths
+				{ name = "nvim_lsp", priority = 10 },
+				{ name = "luasnip", priority = 9 },
+				{ name = "buffer", priority = 8 },
+				{ name = "path", priority = 7 },
 			}),
-
 			formatting = {
 				fields = { "abbr", "kind", "menu" },
 				format = lspkind.cmp_format({
@@ -68,6 +66,22 @@ return {
 					ellipsis_char = "...",
 				}),
 				expandable_indicator = true,
+			},
+			sorting = {
+				priority_weight = 2,
+				comparators = {
+					cmp.config.compare.offset,
+					cmp.config.compare.exact,
+					cmp.config.compare.score,
+					cmp.config.compare.recently_used,
+					cmp.config.compare.kind,
+					cmp.config.compare.sort_text,
+					cmp.config.compare.length,
+					cmp.config.compare.order,
+				},
+			},
+			window = {
+				documentation = cmp.config.window.bordered(),
 			},
 		})
 	end,
