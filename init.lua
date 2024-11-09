@@ -28,6 +28,10 @@ require("lazy").setup({ { import = "plugins" } }, {
 	},
 })
 
+if vim.g.neovide then
+	require("neovide")
+end
+
 require("current-theme")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -42,6 +46,7 @@ vim.g.loaded_spellfile_plugin = 1
 vim.g.loaded_tutor_mode_plugin = 1
 vim.opt.lazyredraw = true
 vim.opt.ttyfast = true
+-- vim.opt.linespace = 4
 
 -- Set all .html files to be treated as htmldjango
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

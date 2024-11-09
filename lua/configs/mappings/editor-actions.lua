@@ -112,7 +112,17 @@ end
 -- Key mapping to toggle mouse
 map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Toggle Mouse" }))
 
-vim.api.nvim_set_keymap("n", "<leader>tt", ":TransparentToggle<CR>", { noremap = true, silent = true })
+-- Define the toggle function for transparency
+local function toggle_transparency() end
+
+-- Map the function to a keybinding
+map("n", "<leader>tt", function()
+	if vim.g.neovide_transparency == 1.0 then
+		vim.g.neovide_transparency = 0.9
+	else
+		vim.g.neovide_transparency = 1.0
+	end
+end, { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
 
@@ -129,3 +139,8 @@ map(
 	"<cmd>Telescope git_bcommits<CR>",
 	{ noremap = true, silent = true, desc = "تاريخ GIT للملف" }
 )
+
+vim.api.nvim_set_keymap("n", "<C-v>", '"+p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-v>", "<C-r>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-c>", '"+yy', { noremap = true, silent = true })
