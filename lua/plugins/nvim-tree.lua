@@ -6,7 +6,7 @@ local settings = {
 		vim.g.loaded_netrwPlugin = 1
 		require("nvim-tree").setup({
 			view = {
-				width = 50, -- Set your desired default width here
+				width = 35, -- Set your desired default width here
 				-- relativeside = "left",
 				number = false,
 				relativenumber = false,

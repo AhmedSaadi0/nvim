@@ -105,12 +105,23 @@ end
 -- Key mapping to toggle mouse
 map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Toggle Mouse" }))
 
+-- map("n", "<leader>tt", function()
+-- 	require("base46").toggle_transparency()
+-- end, { desc = "Toggle transparency" })
+
 map("n", "<leader>tt", function()
-	require("base46").toggle_transparency()
-end, { desc = "Toggle transparency" })
+	if vim.g.neovide_transparency == 1.0 then
+		vim.g.neovide_transparency = 0.9
+	else
+		vim.g.neovide_transparency = 1.0
+	end
+end, { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
 
 vim.keymap.set("n", "<leader>th", function()
 	require("nvchad.themes").open()
 end, { desc = "تغيير الثيم" })
+
+vim.api.nvim_set_keymap("i", "<C-v>", "<C-r>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
