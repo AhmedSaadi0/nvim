@@ -117,6 +117,13 @@ map("n", "<leader>tt", function()
 	end
 end, { noremap = true, silent = true })
 
+map(
+	"n",
+	"<leader>gh",
+	"<cmd>Telescope git_bcommits<CR>",
+	{ noremap = true, silent = true, desc = "تاريخ GIT للملف" }
+)
+
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
 
 vim.keymap.set("n", "<leader>th", function()
@@ -124,4 +131,6 @@ vim.keymap.set("n", "<leader>th", function()
 end, { desc = "تغيير الثيم" })
 
 vim.api.nvim_set_keymap("i", "<C-v>", "<C-r>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-v>", "<C-r>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("!", "<C-v>", "<C-r>+", { noremap = true, silent = true })

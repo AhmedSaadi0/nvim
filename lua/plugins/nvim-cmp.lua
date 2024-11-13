@@ -4,31 +4,37 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for file system paths
+		"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 		{
 			"L3MON4D3/LuaSnip",
-			-- follow latest release.
-			version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-			-- install jsregexp (optional!).
+			version = "v2.*",
 			build = "make install_jsregexp",
 		},
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
 		"onsails/lspkind.nvim", -- vs-code like pictograms
 		"Jezda1337/nvim-html-css",
+		"ray-x/lsp_signature.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
-
 		local luasnip = require("luasnip")
-
 		local lspkind = require("lspkind")
+		local signature = require("lsp_signature")
+
+		signature.setup({
+			bind = true,
+			handler_opts = { border = "single" },
+			hint_enable = false, -- disable virtual text hints if you only want the popup
+			always_trigger = true,
+		})
 
 		require("luasnip.loaders.from_vscode").load()
 		require("luasnip.loaders.from_lua").load({ paths = { "./lua/snippets" } })
 
 		cmp.setup({
 			completion = {
-				completeopt = "menu,menuone,preview,select",
+				completeopt = "menu,menuone,preview",
 			},
 			snippet = {
 				expand = function(args)
@@ -83,11 +89,11 @@ return {
 			sorting = {
 				priority_weight = 2,
 				comparators = {
-					cmp.config.compare.offset,
+					cmp.config.compare.locality,
 					cmp.config.compare.exact,
 					cmp.config.compare.score,
+					cmp.config.compare.offset,
 					cmp.config.compare.recently_used,
-					cmp.config.compare.kind,
 					cmp.config.compare.sort_text,
 					cmp.config.compare.length,
 					cmp.config.compare.order,

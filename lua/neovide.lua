@@ -1,9 +1,9 @@
 -- Basic appearance
-vim.g.neovide_transparency = 0.8
+vim.g.neovide_transparency = 0.85
 -- vim.opt.guifont = "FiraCode Nerd Font:h12"
 
 -- Cursor effects
-vim.g.neovide_cursor_animation_length = 0.1
+vim.g.neovide_cursor_animation_length = 0.08
 vim.g.neovide_cursor_trail_length = 0.5
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
@@ -21,11 +21,11 @@ vim.g.neovide_no_idle_tiling = true
 vim.g.neovide_scale_factor = 1.0
 
 -- Performance and refresh rate
-vim.g.neovide_refresh_rate = 60
+vim.g.neovide_refresh_rate = 240
 vim.g.neovide_refresh_rate_idle = 5
 
 -- Miscellaneous
 vim.g.neovide_remember_window_size = true
-vim.g.neovide_input_use_logo = true -- Enable Cmd as meta on MacOS
+-- vim.g.neovide_input_use_logo = true -- Enable Cmd as meta on MacOS
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_input_use_alt_key = true -- Use Alt key for shortcuts on Windows

@@ -30,6 +30,9 @@ map("n", "<leader>ba", function()
 	vim.cmd("redraw!")
 end, { noremap = true, silent = true, desc = "اغلاق اي بفر اخر لم يتم تعديلة" })
 
+map("n", "<C-S-h>", ":tabnext<CR>", opt)
+map("n", "<C-S-l>", ":tabprevious<CR>", opt)
+
 -- Navigate buffers
 map("n", "<C-S-Left>", function()
 	require("nvchad.tabufline").next()
