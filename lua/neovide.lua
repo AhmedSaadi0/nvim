@@ -10,11 +10,11 @@ vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
 vim.g.neovide_cursor_vfx_opacity = 200.0
 
 vim.g.neovide_cursor_vfx_mode = "sonicboom"
-vim.g.neovide_cursor_vfx_particle_lifetime = 2.0
+vim.g.neovide_cursor_vfx_particle_lifetime = 1.0
 
 -- Window effects and scaling
-vim.g.neovide_initial_window_width = 1280
-vim.g.neovide_initial_window_height = 720
+-- vim.g.neovide_initial_window_width = 1280
+-- vim.g.neovide_initial_window_height = 720
 vim.g.neovide_fullscreen = false
 vim.g.neovide_maximized = false
 vim.g.neovide_no_idle_tiling = true
