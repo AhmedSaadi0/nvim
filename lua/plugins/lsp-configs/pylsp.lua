@@ -1,3 +1,5 @@
+local navic = require("nvim-navic")
+
 local pylsp_consigs = {
 	settings = {
 		pylsp = {
@@ -20,6 +22,11 @@ local pylsp_consigs = {
 			},
 		},
 	},
+	on_attach = function(client, bufnr)
+		if client.server_capabilities.documentSymbolProvider then
+			navic.attach(client, bufnr)
+		end
+	end,
 }
 
 return pylsp_consigs

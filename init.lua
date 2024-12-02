@@ -67,3 +67,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.cmd("set filetype=htmldjango")
 	end,
 })
+
+-- local navic = require("nvim-navic")
+vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
