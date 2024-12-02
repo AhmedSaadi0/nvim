@@ -5,6 +5,10 @@ return {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-telescope/telescope-live-grep-args.nvim",
+		{
+			"nvim-treesitter/nvim-treesitter",
+			build = ":TSUpdate",
+		},
 		-- "nvim-telescope/telescope-ui-select.nvim",
 	},
 	config = function()
