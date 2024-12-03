@@ -125,6 +125,7 @@ map(
 )
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
+vim.api.nvim_set_keymap("n", "<leader>o", ":Navbuddy<CR>", opts)
 
 vim.keymap.set("n", "<leader>th", function()
 	require("nvchad.themes").open()
