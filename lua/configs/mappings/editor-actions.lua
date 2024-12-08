@@ -139,7 +139,7 @@ map(
 	"<cmd>Telescope git_bcommits<CR>",
 	{ noremap = true, silent = true, desc = "تاريخ GIT للملف" }
 )
-
+vim.api.nvim_set_keymap("n", "<leader>o", ":Navbuddy<CR>", opts)
 -- vim.api.nvim_set_keymap("n", "<C-v>", '"+p', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("i", "<C-v>", "<C-r>+", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
