@@ -1,4 +1,11 @@
+local navic = require("nvim-navic")
+
 local lua_ls_config = {
+	on_attach = function(client, bufnr)
+		if client.server_capabilities.documentSymbolProvider then
+			navic.attach(client, bufnr)
+		end
+	end,
 	cmd = { "lua-language-server" },
 	settings = {
 		Lua = {

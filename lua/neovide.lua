@@ -28,3 +28,40 @@ vim.g.neovide_remember_window_size = true
 vim.g.neovide_input_use_logo = true -- Enable Cmd as meta on MacOS
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_input_use_alt_key = true -- Use Alt key for shortcuts on Windows
+
+-- Copy to system clipboard in normal, visual, and insert modes
+vim.keymap.set({ "n", "x" }, "<C-S-C>", '"+y', { desc = "Copy to system clipboard" })
+vim.keymap.set("i", "<C-S-C>", '"+y', { desc = "Copy to system clipboard" })
+
+-- Paste from system clipboard in normal, visual, and insert modes
+vim.keymap.set("n", "<C-S-V>", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set("x", "<C-S-V>", '"+P', { desc = "Paste from system clipboard" })
+vim.keymap.set("i", "<C-S-V>", function()
+	return vim.fn.getreg("+")
+end, { expr = true, desc = "Paste system clipboard" })
+
+vim.keymap.set("!", "<C-S-V>", "<C-r>+", { noremap = true, silent = true })
+
+-- Apply mappings in Telescope prompt
+local telescope_mappings = function()
+	vim.api.nvim_buf_set_keymap(
+		0,
+		"i",
+		"<C-S-C>",
+		'"+y',
+		{ noremap = true, silent = true, desc = "Copy to system clipboard" }
+	)
+	vim.api.nvim_buf_set_keymap(
+		0,
+		"i",
+		"<C-S-V>",
+		"<C-r>+",
+		{ noremap = true, silent = true, desc = "Paste system clipboard" }
+	)
+end
+
+-- Autocmd to apply mappings in TelescopePrompt windows
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "TelescopePrompt",
+	callback = telescope_mappings,
+})
