@@ -1,30 +1,30 @@
-local efo_configs = {
-	init_options = { documentFormatting = true, codeAction = true },
+local efm_config = {
+	filetypes = {
+		"htmldjango",
+	},
+	init_options = {
+		documentFormatting = false, -- Disable formatting
+		documentRangeFormatting = false, -- Disable range formatting
+		hover = true,
+		documentSymbol = true,
+		codeAction = true,
+		completion = true,
+	},
 	settings = {
-		rootMarkers = { ".git/" },
 		languages = {
 			htmldjango = {
-				{
-					lintCommand = "djlint",
-					lintStdin = true,
-					-- lintFormats = { "%f:%l:%c: %m" },
-					-- formatCommand = "djhtml",
-					-- formatStdin = true,
-				},
+				command = "flake8", -- Linter command for htmldjango files
+				rootMarkers = { ".git/" }, -- This ensures flake8 runs in the root of a git project
+				args = { "--max-line-length=88" }, -- Custom arguments to flake8, adjust as needed
+				filetypes = { "htmldjango" }, -- Apply this linter specifically to htmldjango files
 			},
-			-- html = {
-			-- 	{
-			-- 		lintCommand = "djlint --lint --quiet",
-			-- 		lintStdin = true,
-			-- 		-- lintFormats = { "%f:%l:%c: %m" },
-			-- 		-- formatCommand = "djhtml",
-			-- 		-- formatStdin = true,
-			-- 	},
-			-- },
-			-- Add additional configurations for other filetypes if needed
 		},
 	},
-	filetypes = { "htmldjango", "html" }, -- Add more filetypes if needed
+	on_attach = function(client, bufnr)
+		if client.server_capabilities.documentSymbolProvider then
+			require("nvim-navic").attach(client, bufnr)
+		end
+	end,
 }
 
-return efo_configs
+return efm_config

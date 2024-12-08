@@ -6,14 +6,6 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
-		{
-			"SmiteshP/nvim-navbuddy",
-			dependencies = {
-				"SmiteshP/nvim-navic",
-				"MunifTanjim/nui.nvim",
-			},
-			opts = { lsp = { auto_attach = true } },
-		},
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -60,6 +52,13 @@ return {
 					capabilities = capabilities,
 				})
 			end,
+			["jinja_lsp"] = function()
+				lspconfig["jinja_lsp"].setup({
+					capabilities = capabilities,
+					cmd = { "jinja-lsp" },
+					filetypes = { "html", "htmldjango", "jinja", "django-html" }, -- Specify the filetypes
+				})
+			end,
 			["typos_lsp"] = function()
 				lspconfig["typos_lsp"].setup(add_capabilities(type_lsp_config))
 			end,
@@ -87,21 +86,20 @@ return {
 			["emmet_ls"] = function()
 				lspconfig["emmet_ls"].setup(add_capabilities(emmet_ls_consigs))
 			end,
-			["vala"] = function()
-				local lspconfig = require("lspconfig")
-				lspconfig.valalsp.setup({
-					-- on_attach = on_attach,
-					capabilities = capabilities,
-					settings = {
-						vala = {
-							lint = {
-								style = true, -- Enable style checking
-								fix = true, -- Enable automatic fixing
-							},
-						},
-					},
-				})
-			end,
+			-- ["vala"] = function()
+			-- 	lspconfig.valalsp.setup({
+			-- 		-- on_attach = on_attach,
+			-- 		capabilities = capabilities,
+			-- 		settings = {
+			-- 			vala = {
+			-- 				lint = {
+			-- 					style = true, -- Enable style checking
+			-- 					fix = true, -- Enable automatic fixing
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 	})
+			-- end,
 		})
 
 		-- vim.api.nvim_create_autocmd("BufWritePost", {
