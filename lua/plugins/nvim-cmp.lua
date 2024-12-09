@@ -74,9 +74,9 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp", priority = 10 },
-				{ name = "luasnip", priority = 9 },
 				{ name = "buffer", priority = 8 },
 				{ name = "path", priority = 7 },
+				{ name = "luasnip", priority = 6 },
 			}),
 			formatting = {
 				fields = { "abbr", "kind", "menu" },
@@ -89,10 +89,11 @@ return {
 			sorting = {
 				priority_weight = 2,
 				comparators = {
-					cmp.config.compare.locality,
+					cmp.config.compare.scopes,
 					cmp.config.compare.exact,
 					cmp.config.compare.score,
 					cmp.config.compare.offset,
+					cmp.config.compare.locality,
 					cmp.config.compare.recently_used,
 					cmp.config.compare.sort_text,
 					cmp.config.compare.length,
