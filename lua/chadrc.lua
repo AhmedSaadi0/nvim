@@ -23,10 +23,10 @@ local options = {
 			},
 		},
 
-		telescope = { style = "borderless" }, -- borderless / bordered
+		telescope = { style = "bordered" }, -- borderless / bordered
 
 		statusline = {
-			enabled = true,
+			enabled = false,
 			theme = "vscode", -- default/vscode/vscode_colored/minimal
 			-- default/round/block/arrow separators work only for default statusline theme
 			-- round and block will work for minimal theme only
@@ -50,6 +50,11 @@ local options = {
 					local icon = " 󰈚 "
 					local path = vim.fn.expand("%:~:.")
 					return "%#PmenuKindSel#" .. icon .. path .. " %#Normal#"
+				end,
+				cursor = function()
+					local current_line = vim.fn.line(".")
+					local total_lines = vim.fn.line("$")
+					return string.format("Ln %d/%d", current_line, total_lines)
 				end,
 			},
 		},
