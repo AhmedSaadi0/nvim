@@ -67,7 +67,7 @@ local mason_config = {
 				"python-lsp-server",
 				"autoflake",
 
-				"vala-language-server",
+				-- "vala-language-server",
 				"clang-format",
 				"clangd",
 			},
