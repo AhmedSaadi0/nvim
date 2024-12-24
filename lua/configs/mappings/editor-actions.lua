@@ -66,6 +66,29 @@ map("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 -- Enable Ctrl-Backspace to delete the whole word in insert mode
 map("i", "<C-h>", "<C-w>", { noremap = true, silent = true })
 
+-- Map Ctrl-E to move to the end of the line in insert mode
+vim.api.nvim_set_keymap("i", "<C-Right>", "<C-o>$", { noremap = true, silent = true })
+-- Map Ctrl-A to move to the start of the line in insert mode
+vim.api.nvim_set_keymap("i", "<C-Left>", "<C-o>^", { noremap = true, silent = true })
+
+-- Alt + H to move one character left in insert mode
+vim.api.nvim_set_keymap("i", "<M-h>", "<Left>", { noremap = true, silent = true })
+
+-- Alt + L to move one character right in insert mode
+vim.api.nvim_set_keymap("i", "<M-l>", "<Right>", { noremap = true, silent = true })
+
+-- Alt + J to move one line down in insert mode
+vim.api.nvim_set_keymap("i", "<M-j>", "<Down>", { noremap = true, silent = true })
+
+-- Alt + K to move one line up in insert mode
+vim.api.nvim_set_keymap("i", "<M-k>", "<Up>", { noremap = true, silent = true })
+
+-- Ctrl + H to move to the start of the line in insert mode
+vim.api.nvim_set_keymap("i", "<C-h>", "<C-o>^", { noremap = true, silent = true })
+
+-- Ctrl + L to move to the end of the line in insert mode
+vim.api.nvim_set_keymap("i", "<C-l>", "<C-o>$", { noremap = true, silent = true })
+
 ------------------
 -- Close buffer --
 ------------------

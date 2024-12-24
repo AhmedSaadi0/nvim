@@ -25,7 +25,7 @@ return {
 		signature.setup({
 			bind = true,
 			handler_opts = { border = "single" },
-			hint_enable = false, -- disable virtual text hints if you only want the popup
+			hint_enable = true, -- disable virtual text hints if you only want the popup
 			always_trigger = true,
 		})
 
@@ -89,11 +89,11 @@ return {
 			sorting = {
 				priority_weight = 2,
 				comparators = {
-					cmp.config.compare.scopes,
-					cmp.config.compare.exact,
 					cmp.config.compare.score,
-					cmp.config.compare.offset,
+					cmp.config.compare.exact,
 					cmp.config.compare.locality,
+					cmp.config.compare.scopes,
+					cmp.config.compare.offset,
 					cmp.config.compare.recently_used,
 					cmp.config.compare.sort_text,
 					cmp.config.compare.length,
@@ -101,7 +101,7 @@ return {
 				},
 			},
 			window = {
-				documentation = cmp.config.window.bordered(),
+				documentation = cmp.config.disable,
 			},
 		})
 	end,

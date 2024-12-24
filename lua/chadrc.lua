@@ -3,13 +3,13 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "chadracula-evondev", -- default theme
+		theme = "bearded-arc", -- default theme
 		hl_add = {},
 		hl_override = {},
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "chadracula-evondev", "chadracula-evondev" },
+		theme_toggle = { "bearded-arc", "bearded-arc" },
 	},
 
 	ui = {
