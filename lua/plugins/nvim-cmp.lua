@@ -25,7 +25,7 @@ return {
 		signature.setup({
 			bind = true,
 			handler_opts = { border = "single" },
-			hint_enable = true, -- disable virtual text hints if you only want the popup
+			hint_enable = false, -- disable virtual text hints if you only want the popup
 			always_trigger = true,
 		})
 
