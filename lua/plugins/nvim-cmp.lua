@@ -32,6 +32,13 @@ return {
 		require("luasnip.loaders.from_vscode").load()
 		require("luasnip.loaders.from_lua").load({ paths = { "./lua/snippets" } })
 
+		local function is_in_function_params()
+			local line = vim.api.nvim_get_current_line()
+			local col = vim.api.nvim_win_get_cursor(0)[2]
+			-- Check if the character before the cursor is '(' or ','
+			return string.sub(line, col - 1, col - 1) == "(" or string.sub(line, col - 1, col - 1) == ","
+		end
+
 		cmp.setup({
 			completion = {
 				completeopt = "menu,menuone,preview",
@@ -101,7 +108,13 @@ return {
 				},
 			},
 			window = {
-				documentation = cmp.config.disable,
+				documentation = {
+					border = "single",
+					winhighlight = "NormalFloat:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
+					enabled = function()
+						return not is_in_function_params()
+					end,
+				},
 			},
 		})
 	end,

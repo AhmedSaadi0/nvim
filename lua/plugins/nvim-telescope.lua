@@ -73,7 +73,7 @@ return {
 					"--column",
 					"--smart-case",
 					"--max-depth",
-					"5", -- Reduce search depth
+					"50", -- Reduce search depth
 					-- "--color=never",
 				},
 				path_display = { "truncate" },

@@ -153,3 +153,11 @@ vim.api.nvim_set_keymap("n", "<leader>o", ":Navbuddy<CR>", opts)
 vim.keymap.set("n", "<leader>th", function()
 	require("nvchad.themes").open()
 end, { desc = "تغيير الثيم" })
+
+vim.keymap.set("n", "<leader>nc", function()
+	require("notify").dismiss({ silent = true, pending = true })
+end, { desc = "Clear Notifications" })
+
+vim.keymap.set("n", "<leader>nv", function()
+	require("noice").cmd("history")
+end, { desc = "Show Notification History" })
