@@ -1,0 +1,45 @@
+# General Settings
+fork = false                           # Don't use a forked process (set to true to speed up startup)
+frame = "full"                         # Full frame rendering for better visual quality
+idle = true                            # Keep Neovide active even when idle (useful for background processes)
+maximized = false                      # Don't start in maximized mode
+neovim-bin = "/usr/bin/nvim"           # Path to Neovim binary (automatically found if not set)
+no-multigrid = false                   # Enable multigrid rendering for better performance
+srgb = false                           # Disable sRGB (use default color profile)
+tabs = true                            # Enable tabs in Neovim
+theme = "auto"                         # Automatically detect theme or set it explicitly (e.g., "dark", "light")
+mouse-cursor-icon = "arrow"            # Default cursor is arrow, could also use "beam" or "block"
+title-hidden = true                    # Hide window title bar (set to false to show the window title)
+vsync = true                           # Enable vsync for smooth rendering
+wsl = false                            # Disable WSL-specific configurations (set to true if using WSL)
+
+# Font Settings
+[font]
+size = 15                              # Font size for Neovide interface
+hinting = "full"                       # Enable full hinting for better text rendering
+edging = "antialias"                   # Enable antialiasing for smoother text edges
+
+# Primary font settings
+[[font.normal]]
+family = "FantasqueSansM Nerd Font Mono"    # Primary font family
+style = "W400"                         # Regular weight style
+
+# Fallback font for non-latin characters
+[[font.normal]]
+family = "Noto Sans CJK SC"            # Fallback font for CJK characters
+style = "Normal"
+
+# Bold font settings
+[[font.bold]]
+family = "FantasqueSansM Nerd Font Mono"  # Bold weight for primary font
+style = "W600"                            # Bold weight style
+
+# Fallback bold font for CJK characters
+[[font.bold]]
+family = "Noto Sans CJK SC"               # Fallback bold for CJK
+style = "Bold"
+
+# Alternative font for fallback (this could be set to a different family if you have additional needs)
+[[font.italic]]
+family = "RecmonoSmCasual Nerd Font Mono"  # Italic variant of the primary font
+style = "Italic"
