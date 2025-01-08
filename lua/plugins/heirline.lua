@@ -4,19 +4,35 @@ return {
 		local navic = require("nvim-navic")
 		local utils = require("heirline.utils")
 
-		-- Fallback to Neovim's highlight groups for colors
-		local function get_hl_color(hl_group, attr)
-			local hl = vim.api.nvim_get_hl_by_name(hl_group, true)
-			return string.format("#%06x", hl[attr] or 0x39CE76)
+		-- Function to adjust brightness (e.g., lighten/darken a color)
+		local function adjust_brightness(color, factor)
+			local r = math.min(255, math.max(0, bit.rshift(color, 16) + factor))
+			local g = math.min(255, math.max(0, bit.band(bit.rshift(color, 8), 0xFF) + factor))
+			local b = math.min(255, math.max(0, bit.band(color, 0xFF) + factor))
+			return string.format("#%02x%02x%02x", r, g, b)
 		end
 
-		local colors = {
-			bg = get_hl_color("NormalFloat", "foreground"), -- Fallback to "Normal" fg
-			fg = get_hl_color("NormalFloat", "background"), -- Fallback to "StatusLine" bg
-			separator = get_hl_color("Comment", "foreground"), -- Use "Comment" color for separators
-		}
+		-- Function to get highlight colors dynamically with fallbacks
+		local function get_hl_color(hl_group, attr, fallback)
+			local hl = vim.api.nvim_get_hl_by_name(hl_group, true)
+			local color = hl[attr] or fallback
+			return color
+		end
 
-		-- Define the Navic Winbar
+		-- Function to fetch colors for the winbar
+		local function get_colors()
+			local editor_bg = get_hl_color("Normal", "background", 0x1E1E1E)
+			local editor_fg = get_hl_color("Normal", "foreground", 0xFFFFFF)
+			local contrast_bg = adjust_brightness(editor_bg, -30) -- Darken editor background
+
+			return {
+				fg = editor_fg,
+				bg = contrast_bg,
+				separator = get_hl_color("Comment", "foreground", 0xAAAAAA), -- Use "Comment" color for separators
+			}
+		end
+
+		-- Dynamic Winbar configuration
 		local NavicWinbar = {
 			condition = function()
 				return navic.is_available()
@@ -25,35 +41,57 @@ return {
 				return navic.get_location()
 			end,
 			hl = function()
+				local colors = get_colors()
 				return {
 					fg = colors.fg,
-					bg = colors.bg,
-					-- bold = true,
+					bg = colors.bg, -- Ensure distinct background
 				}
 			end,
 			update = "CursorMoved",
 		}
 
-		-- Define a separator for styling
 		local WinbarSeparator = {
 			provider = " > ",
-			hl = { fg = colors.separator, bg = colors.bg },
+			hl = function()
+				local colors = get_colors()
+				return {
+					fg = colors.separator,
+					bg = colors.bg,
+				}
+			end,
 		}
 
-		-- Fallback when Navic is unavailable
 		local FallbackWinbar = {
 			provider = function()
 				return " "
 			end,
-			hl = { fg = colors.separator, bg = colors.bg },
+			hl = function()
+				local colors = get_colors()
+				return {
+					fg = colors.separator,
+					bg = colors.bg,
+				}
+			end,
 		}
 
-		-- Set up the Winbar
+		-- Set up Heirline
 		require("heirline").setup({
 			winbar = {
 				utils.insert(NavicWinbar, FallbackWinbar),
 				WinbarSeparator,
 			},
+		})
+
+		-- Reconfigure on colorscheme change
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				require("heirline").setup({
+					winbar = {
+						utils.insert(NavicWinbar, FallbackWinbar),
+						WinbarSeparator,
+					},
+				})
+			end,
 		})
 	end,
 }
