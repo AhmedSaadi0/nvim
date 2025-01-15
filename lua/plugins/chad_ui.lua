@@ -1,5 +1,9 @@
 return {
 	{
+		"nvzone/minty",
+		cmd = { "Shades", "Huefy" },
+	},
+	{
 		"nvchad/ui",
 		config = function()
 			require("nvchad")

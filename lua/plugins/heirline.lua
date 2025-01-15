@@ -21,7 +21,7 @@ return {
 
 		-- Function to fetch colors for the winbar
 		local function get_colors()
-			local editor_bg = get_hl_color("Normal", "background", 0x1E1E1E)
+			local editor_bg = get_hl_color("Normal", "PmenuSbar", 0x1E1E1E)
 			local editor_fg = get_hl_color("Normal", "foreground", 0xFFFFFF)
 			local contrast_bg = adjust_brightness(editor_bg, -30) -- Darken editor background
 

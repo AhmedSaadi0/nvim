@@ -161,3 +161,7 @@ end, { desc = "Clear Notifications" })
 vim.keymap.set("n", "<leader>nv", function()
 	require("noice").cmd("history")
 end, { desc = "Show Notification History" })
+
+vim.keymap.set("n", "<leader>m", function()
+	require("menu").open("default")
+end, { desc = "Open Main Menu" })
