@@ -9,7 +9,9 @@ vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
 vim.g.neovide_cursor_vfx_opacity = 200.0
 
-vim.g.neovide_cursor_vfx_mode = "sonicboom"
+-- vim.g.neovide_cursor_vfx_mode = "sonicboom"
+vim.g.neovide_cursor_vfx_mode = "railgun"
+-- vim.g.neovide_cursor_vfx_mode = "ripple"
 vim.g.neovide_cursor_vfx_particle_lifetime = 1.0
 
 -- Window effects and scaling

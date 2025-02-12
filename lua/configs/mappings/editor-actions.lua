@@ -165,3 +165,5 @@ end, { desc = "Show Notification History" })
 vim.keymap.set("n", "<leader>m", function()
 	require("menu").open("default")
 end, { desc = "Open Main Menu" })
+
+map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)

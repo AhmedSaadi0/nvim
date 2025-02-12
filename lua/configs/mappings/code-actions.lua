@@ -86,7 +86,7 @@ local function schedule_enable_linting()
 		timer:close()
 	end
 	timer = vim.loop.new_timer()
-	timer:start(30000, 0, function()
+	timer:start(60000, 0, function()
 		vim.schedule(function()
 			update_pylsp_settings(true)
 		end)

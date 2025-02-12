@@ -70,6 +70,8 @@ local mason_config = {
 				-- "vala-language-server",
 				"clang-format",
 				"clangd",
+				"alejandra", -- Nix
+				-- "nil", -- Nix Language server
 			},
 		})
 	end,

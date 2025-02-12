@@ -22,6 +22,7 @@ return {
 				python = { "autoflake", "isort", "black" },
 				htmldjango = { "djlint" },
 				bash = { "beautysh" },
+				nix = { "alejandra" },
 			},
 			format_after_save = {
 				lsp_format = "fallback",
