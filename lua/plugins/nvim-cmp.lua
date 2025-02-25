@@ -2,9 +2,9 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
+		"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for file system paths
-		"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 		{
 			"L3MON4D3/LuaSnip",
 			version = "v2.*",
@@ -25,21 +25,28 @@ return {
 		signature.setup({
 			bind = true,
 			handler_opts = { border = "single" },
-			hint_enable = false, -- disable virtual text hints if you only want the popup
+			hint_enable = false,
 			always_trigger = true,
 		})
 
 		require("luasnip.loaders.from_vscode").load()
 		require("luasnip.loaders.from_lua").load({ paths = { "./lua/snippets" } })
 
-		local function is_in_function_params()
-			local line = vim.api.nvim_get_current_line()
-			local col = vim.api.nvim_win_get_cursor(0)[2]
-			-- Check if the character before the cursor is '(' or ','
-			return string.sub(line, col - 1, col - 1) == "(" or string.sub(line, col - 1, col - 1) == ","
-		end
+		-- دالة مقارنة تعطي أولوية للاقتراحات التي تحتوي على '='
+		local function equal_sign_comparator(entry1, entry2)
+			local label1 = entry1.completion_item.label or ""
+			local label2 = entry2.completion_item.label or ""
+			local has_equal1 = label1:find("=") ~= nil
+			local has_equal2 = label2:find("=") ~= nil
 
-		cmp.setup({
+			if has_equal1 and not has_equal2 then
+				return true
+			elseif has_equal2 and not has_equal1 then
+				return false
+			end
+			return nil -- في الحالات الأخرى، نترك الفرز الافتراضي يتدخل
+		end
+		local options = {
 			completion = {
 				completeopt = "menu,menuone,preview",
 			},
@@ -80,8 +87,9 @@ return {
 				end, { "i", "s" }),
 			}),
 			sources = cmp.config.sources({
+				-- { name = "nvim_lsp", max_item_count = 8, keyword_length = 2 },
 				{ name = "nvim_lsp", priority = 10 },
-				{ name = "buffer", priority = 8 },
+				{ name = "buffer", priority = 8, keyword_length = 4 },
 				{ name = "path", priority = 7 },
 				{ name = "luasnip", priority = 6 },
 			}),
@@ -96,26 +104,20 @@ return {
 			sorting = {
 				priority_weight = 2,
 				comparators = {
+					equal_sign_comparator,
 					cmp.config.compare.score,
 					cmp.config.compare.exact,
 					cmp.config.compare.locality,
-					cmp.config.compare.scopes,
-					cmp.config.compare.offset,
 					cmp.config.compare.recently_used,
+					cmp.config.compare.offset,
 					cmp.config.compare.sort_text,
 					cmp.config.compare.length,
 					cmp.config.compare.order,
 				},
 			},
-			window = {
-				documentation = {
-					border = "single",
-					winhighlight = "NormalFloat:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
-					enabled = function()
-						return not is_in_function_params()
-					end,
-				},
-			},
-		})
+		}
+
+		options = vim.tbl_deep_extend("force", options, require("nvchad.cmp"))
+		cmp.setup(options)
 	end,
 }
