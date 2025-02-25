@@ -79,28 +79,28 @@ local function update_pylsp_settings(enable_linting)
 	end
 end
 
--- Function to handle enabling linting with a delay
-local function schedule_enable_linting()
-	if timer then
-		timer:stop()
-		timer:close()
-	end
-	timer = vim.loop.new_timer()
-	timer:start(60000, 0, function()
-		vim.schedule(function()
-			update_pylsp_settings(true)
-		end)
-	end)
-end
+-- -- Function to handle enabling linting with a delay
+-- local function schedule_enable_linting()
+-- 	if timer then
+-- 		timer:stop()
+-- 		timer:close()
+-- 	end
+-- 	timer = vim.loop.new_timer()
+-- 	timer:start(60000, 0, function()
+-- 		vim.schedule(function()
+-- 			update_pylsp_settings(true)
+-- 		end)
+-- 	end)
+-- end
 
 vim.api.nvim_create_autocmd("InsertEnter", {
 	callback = function()
-		if timer then
-			timer:stop()
-			timer:close()
-			timer = nil
-		end
-		update_pylsp_settings(false)
+		-- if timer then
+		-- 	timer:stop()
+		-- 	timer:close()
+		-- 	timer = nil
+		-- end
+		-- update_pylsp_settings(false)
 	end,
 })
 
@@ -113,7 +113,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 vim.api.nvim_create_autocmd("BufReadPre", {
 	callback = function()
-		update_pylsp_settings(false)
+		-- update_pylsp_settings(false)
 	end,
 })
 

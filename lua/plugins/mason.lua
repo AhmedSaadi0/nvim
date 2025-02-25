@@ -71,6 +71,7 @@ local mason_config = {
 				"clang-format",
 				"clangd",
 				"alejandra", -- Nix
+				"ruff",
 				-- "nil", -- Nix Language server
 			},
 		})

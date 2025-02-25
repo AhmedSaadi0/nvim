@@ -20,6 +20,7 @@ return {
 				graphql = { "prettier" },
 				lua = { "stylua" },
 				python = { "autoflake", "isort", "black" },
+				-- python = { "autoflake", "isort", "ruff" },
 				htmldjango = { "djlint" },
 				bash = { "beautysh" },
 				nix = { "alejandra" },
@@ -45,9 +46,9 @@ return {
 					},
 				},
 				black = {
-					python = {
-						args = { "--fast" },
-					},
+					command = "black",
+					args = { "--line-length", "79", "--quiet", "-" },
+					stdin = true,
 				},
 				vala_format = {
 					command = "clang-format",

@@ -3,7 +3,7 @@ vim.g.neovide_transparency = 0.85
 -- vim.opt.guifont = "FiraCode Nerd Font:h12"
 
 -- Cursor effects
-vim.g.neovide_cursor_animation_length = 0.08
+vim.g.neovide_cursor_animation_length = 0.04
 vim.g.neovide_cursor_trail_length = 0.5
 vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_vfx_particle_lifetime = 1.2

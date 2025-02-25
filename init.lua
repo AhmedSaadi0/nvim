@@ -68,5 +68,16 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	end,
 })
 
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+-- 	callback = function()
+-- 		-- إغلاق جميع النوافذ العائمة (Floating Windows)
+-- 		for _, win in ipairs(vim.api.nvim_list_wins()) do
+-- 			if vim.api.nvim_win_get_config(win).relative ~= "" then
+-- 				vim.api.nvim_win_close(win, true)
+-- 			end
+-- 		end
+-- 	end,
+-- })
+
 -- local navic = require("nvim-navic")
 vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"

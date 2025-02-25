@@ -167,3 +167,5 @@ vim.keymap.set("n", "<leader>m", function()
 end, { desc = "Open Main Menu" })
 
 map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+
+-- map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)

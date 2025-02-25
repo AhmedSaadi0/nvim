@@ -3,24 +3,24 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "bearded-arc", -- default theme
+		theme = "decay", -- default theme
 		hl_add = {},
 		hl_override = {},
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "bearded-arc", "bearded-arc" },
+		-- theme_toggle = { "decay", "decay" },
 	},
 
 	ui = {
 		cmp = {
-			icons_left = false, -- only for non-atom styles!
+			-- icons_left = true, -- only for non-atom styles!
 			lspkind_text = true,
 			style = "default", -- default/flat_light/flat_dark/atom/atom_colored
-			format_colors = {
-				tailwind = false, -- will work for css lsp too
-				icon = "󱓻",
-			},
+			-- format_colors = {
+			-- 	tailwind = false, -- will work for css lsp too
+			-- 	icon = "󱓻",
+			-- },
 		},
 
 		telescope = { style = "bordered" }, -- borderless / bordered
@@ -62,21 +62,21 @@ local options = {
 		-- lazyload it when there are 1+ buffers
 		tabufline = {
 			enabled = true,
-			lazyload = false,
+			lazyload = true,
+			-- lazyload = false,
 			order = { "treeOffset", "buffers", "tabs", "btns" },
 			modules = nil,
+			bufwidth = 21,
 		},
 	},
 
-	lsp = { signature = false },
+	-- lsp = { signature = false },
 
 	cheatsheet = {
 		enabled = false,
 		theme = "grid", -- simple/grid
 		excluded_groups = { "terminal (t)", "autopairs", "Nvim", "Opens" }, -- can add group name or with mode
 	},
-
-	mason = { pkgs = {} },
 
 	colorify = {
 		enabled = true,
