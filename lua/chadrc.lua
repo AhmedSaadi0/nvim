@@ -16,11 +16,11 @@ local options = {
 		cmp = {
 			-- icons_left = true, -- only for non-atom styles!
 			lspkind_text = true,
-			style = "default", -- default/flat_light/flat_dark/atom/atom_colored
-			-- format_colors = {
-			-- 	tailwind = false, -- will work for css lsp too
-			-- 	icon = "󱓻",
-			-- },
+			style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
+			format_colors = {
+				tailwind = true, -- will work for css lsp too
+				-- icon = "󱓻",
+			},
 		},
 
 		telescope = { style = "bordered" }, -- borderless / bordered
@@ -70,7 +70,7 @@ local options = {
 		},
 	},
 
-	-- lsp = { signature = false },
+	lsp = { signature = true },
 
 	cheatsheet = {
 		enabled = false,
