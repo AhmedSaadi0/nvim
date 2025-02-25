@@ -3,13 +3,15 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "decay", -- default theme
+		theme = "cherry", -- default theme
 		hl_add = {},
-		hl_override = {},
+		-- hl_override = {
+		--           Function = { "blue", "red", 20 }
+		--       },
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		-- theme_toggle = { "decay", "decay" },
+		-- theme_toggle = { "cherry", "cherry" },
 	},
 
 	ui = {
