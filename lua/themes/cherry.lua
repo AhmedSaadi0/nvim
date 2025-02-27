@@ -17,8 +17,8 @@ M.base_30 = {
 	grey_fg2 = "#64647a",
 	light_grey = "#73738a",
 	red = "#ff568e",
-	baby_pink = "#ff69a2",
-	pink = "#ff69a2",
+	baby_pink = "#FD02FF",
+	pink = "#A609AF",
 	line = "#2a2a38",
 	green = "#64de83",
 	vibrant_green = "#73de8a",
@@ -30,11 +30,11 @@ M.base_30 = {
 	purple = "#946ff7",
 	dark_purple = "#a481f7",
 	teal = "#71c2d9",
-	orange = "#ff69a2",
+	orange = "#2BF6E0",
 	cyan = "#62c6da",
 	statusline_bg = "#252533",
 	lightbg = "#2a2a38",
-	pmenu_bg = "#ff568e",
+	pmenu_bg = "#2AC9FD",
 	folder_bg = "#42A5F5",
 }
 
@@ -48,14 +48,14 @@ M.base_16 = {
 	base05 = "#bdc3df",
 	base06 = "#dedeff",
 	base07 = "#ebebff",
-	base08 = "#ff568e",
-	base09 = "#ff69a2",
+	base08 = "#2BF6E0",
+	base09 = "#ff568e",
 	base0A = "#efff73",
 	base0B = "#64de83",
 	base0C = "#62c6da",
 	base0D = "#73a9ff",
 	base0E = "#946ff7",
-	base0F = "#ff69a2",
+	base0F = "#26CCFD",
 }
 
 -- OPTIONAL: Custom highlights

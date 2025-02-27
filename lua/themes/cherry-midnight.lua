@@ -6,9 +6,9 @@ local M = {}
 -- UI (Cherry Theme)
 M.base_30 = {
 	white = "#dedeff",
-	black = "#101017", -- background
-	darker_black = "#181822", -- slightly darker
-	black2 = "#252533", -- slightly lighter
+	black = "#1b1b2f", -- background
+	darker_black = "#131321", -- slightly darker
+	black2 = "#0e0e19", -- slightly lighter
 	one_bg = "#2a2a38",
 	one_bg2 = "#323240",
 	one_bg3 = "#3a3a48",
@@ -17,8 +17,8 @@ M.base_30 = {
 	grey_fg2 = "#64647a",
 	light_grey = "#73738a",
 	red = "#ff568e",
-	baby_pink = "#ff69a2",
-	pink = "#ff69a2",
+	baby_pink = "#FD02FF",
+	pink = "#A609AF",
 	line = "#2a2a38",
 	green = "#64de83",
 	vibrant_green = "#73de8a",
@@ -28,34 +28,34 @@ M.base_30 = {
 	yellow = "#efff73",
 	sun = "#f3ff85",
 	purple = "#946ff7",
-	dark_purple = "#a481f7",
-	teal = "#71c2d9",
-	orange = "#ff69a2",
-	cyan = "#62c6da",
-	statusline_bg = "#252533",
-	lightbg = "#2a2a38",
-	pmenu_bg = "#ff568e",
-	folder_bg = "#42A5F5",
+	dark_purple = "#2BF6E0",
+	teal = "#f4176f",
+	orange = "#d9f429",
+	cyan = "#26ee66",
+	statusline_bg = "#ff3c15",
+	lightbg = "#1da5ff",
+	pmenu_bg = "#22b9ff",
+	folder_bg = "#22e3d3",
 }
 
 -- Base16 colors
 M.base_16 = {
-	base00 = "#101017",
-	base01 = "#252533",
-	base02 = "#2a2a38",
+	base00 = "#1b1b2f",
+	base01 = "#282846",
+	base02 = "#282846",
 	base03 = "#323240",
 	base04 = "#3a3a48",
 	base05 = "#bdc3df",
 	base06 = "#dedeff",
 	base07 = "#ebebff",
-	base08 = "#ff568e",
-	base09 = "#ff69a2",
-	base0A = "#efff73",
-	base0B = "#64de83",
-	base0C = "#62c6da",
-	base0D = "#73a9ff",
-	base0E = "#946ff7",
-	base0F = "#ff69a2",
+	base08 = "#2BF6E0",
+	base09 = "#f4176f",
+	base0A = "#d9f429",
+	base0B = "#26ee66",
+	base0C = "#ffaaff",
+	base0D = "#1ab6ff",
+	base0E = "#ffa361",
+	base0F = "#22e3d3",
 }
 
 -- OPTIONAL: Custom highlights

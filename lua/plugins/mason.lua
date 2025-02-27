@@ -33,7 +33,6 @@ local mason_config = {
 		mason_tool_installer.setup({
 			ensure_installed = {
 				"efm",
-				-- "ruff",
 				"pyright",
 				-- "flake8",
 
@@ -71,7 +70,7 @@ local mason_config = {
 				"clang-format",
 				"clangd",
 				"alejandra", -- Nix
-				"ruff",
+				-- "ruff",
 				-- "nil", -- Nix Language server
 			},
 		})
