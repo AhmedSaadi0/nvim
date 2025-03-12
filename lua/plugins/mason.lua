@@ -41,7 +41,6 @@ local mason_config = {
 				"isort", -- python formatter
 				"black", -- python formatter
 				-- "pylint",
-				"eslint_d",
 				"shellcheck",
 				"shfmt",
 				"black",
@@ -55,6 +54,7 @@ local mason_config = {
 				"lua-language-server",
 				"typescript-language-server",
 				"eslint-lsp",
+				-- "eslint_d",
 				"html-lsp",
 				"css-lsp",
 				"djlint",

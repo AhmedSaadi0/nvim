@@ -4,9 +4,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
 	build = ":TSUpdate",
-	dependencies = {
-		"windwp/nvim-ts-autotag",
-	},
 	config = function()
 		-- import nvim-treesitter plugin
 		local treesitter = require("nvim-treesitter.configs")
@@ -18,15 +15,10 @@ return {
 				use_languagetree = true,
 			},
 			indent = { enable = true },
-			-- enable autotagging (w/ nvim-ts-autotag plugin)
-			autotag = {
-				enable = true,
-			},
-			-- ensure these language parsers are installed
 			ensure_installed = {
 				"json",
-				"javascript",
 				"graphql",
+				"javascript",
 				"typescript",
 				"tsx",
 				"yaml",
