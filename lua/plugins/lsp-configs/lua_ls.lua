@@ -2,19 +2,21 @@ local navic = require("nvim-navic")
 
 local lua_ls_config = {
 	on_attach = function(client, bufnr)
-		if client.server_capabilities.documentSymbolProvider then
-			navic.attach(client, bufnr)
-		end
+		-- Debug: Check the type of bufnr
+		-- print("Buffer number type:", type(bufnr)) -- Expected output: number
+		-- if client.server_capabilities.documentSymbolProvider then
+		-- 	navic.attach(client, bufnr)
+		-- end
 	end,
 	cmd = { "lua-language-server" },
 	settings = {
 		Lua = {
 			runtime = {
-				version = "LuaJIT", -- or "Lua 5.1", "Lua 5.2", etc.
+				version = "LuaJIT", -- or the version you need
 				path = vim.split(package.path, ";"),
 			},
 			diagnostics = {
-				globals = { "vim" }, -- Add any global variables you use
+				globals = { "vim" },
 			},
 			workspace = {
 				checkThirdParty = false,
@@ -25,11 +27,6 @@ local lua_ls_config = {
 				completion = {
 					workspaceWord = true,
 					callSnippet = "Both",
-				},
-				misc = {
-					parameters = {
-						-- "--log-level=trace",
-					},
 				},
 				hint = {
 					enable = true,
@@ -47,24 +44,23 @@ local lua_ls_config = {
 				},
 				diagnostics = {
 					disable = { "incomplete-signature-doc", "trailing-space" },
-					-- enable = false,
 					groupSeverity = {
 						strong = "Warning",
 						strict = "Warning",
 					},
 					groupFileStatus = {
-						["ambiguity"] = "Opened",
-						["await"] = "Opened",
-						["codestyle"] = "None",
-						["duplicate"] = "Opened",
-						["global"] = "Opened",
-						["luadoc"] = "Opened",
-						["redefined"] = "Opened",
-						["strict"] = "Opened",
-						["strong"] = "Opened",
+						ambiguity = "Opened",
+						await = "Opened",
+						codestyle = "None",
+						duplicate = "Opened",
+						global = "Opened",
+						luadoc = "Opened",
+						redefined = "Opened",
+						strict = "Opened",
+						strong = "Opened",
 						["type-check"] = "Opened",
-						["unbalanced"] = "Opened",
-						["unused"] = "Opened",
+						unbalanced = "Opened",
+						unused = "Opened",
 					},
 					unusedLocalExclude = { "_*" },
 				},

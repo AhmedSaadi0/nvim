@@ -66,8 +66,6 @@ vim.keymap.set({ "n", "v" }, "<leader>fm", function()
 	})
 end, { desc = "Format file or range (in visual mode)" })
 
-local timer = nil -- Global timer variable
-
 local function update_pylsp_settings(enable_linting)
 	local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
 	for _, client in ipairs(clients) do
@@ -79,6 +77,7 @@ local function update_pylsp_settings(enable_linting)
 	end
 end
 
+-- local timer = nil -- Global timer variable
 -- -- Function to handle enabling linting with a delay
 -- local function schedule_enable_linting()
 -- 	if timer then
