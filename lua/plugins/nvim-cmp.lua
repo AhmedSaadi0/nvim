@@ -26,7 +26,8 @@ return {
 			bind = true,
 			handler_opts = { border = "single" },
 			hint_enable = false,
-			always_trigger = true,
+			always_trigger = false,
+			focus_on_open = false,
 		})
 
 		require("luasnip.loaders.from_vscode").load()

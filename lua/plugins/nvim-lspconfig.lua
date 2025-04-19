@@ -71,11 +71,11 @@ return {
 			["pyright"] = function()
 				lspconfig["pyright"].setup(add_capabilities(pyright_config))
 			end,
-			["efm"] = function()
-				lspconfig["efm"].setup(add_capabilities(efm_configs))
-			end,
 			["pylsp"] = function()
 				lspconfig["pylsp"].setup(add_capabilities(pylsp_config))
+			end,
+			["efm"] = function()
+				lspconfig["efm"].setup(add_capabilities(efm_configs))
 			end,
 			-- ["tsserver"] = function()
 			-- 	lspconfig["tsserver"].setup(add_capabilities(tsserver_configs))

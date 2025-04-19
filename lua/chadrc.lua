@@ -72,7 +72,7 @@ local options = {
 		},
 	},
 
-	lsp = { signature = true },
+	lsp = { signature = false, focus_on_open = false },
 
 	cheatsheet = {
 		enabled = false,

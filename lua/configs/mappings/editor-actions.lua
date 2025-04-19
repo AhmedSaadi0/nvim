@@ -169,3 +169,6 @@ end, { desc = "Open Main Menu" })
 map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 -- map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+
+map("i", "<C-s>", vim.lsp.buf.signature_help, opts)
+map("n", "<C-s>", vim.lsp.buf.signature_help, opts)
