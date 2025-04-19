@@ -80,4 +80,4 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 -- })
 
 -- local navic = require("nvim-navic")
-vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+-- vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"

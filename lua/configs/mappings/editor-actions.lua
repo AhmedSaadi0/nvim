@@ -133,10 +133,10 @@ map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Tog
 -- end, { desc = "Toggle transparency" })
 
 map("n", "<leader>tt", function()
-	if vim.g.neovide_transparency == 1.0 then
-		vim.g.neovide_transparency = 0.9
+	if vim.g.neovide_opacity == 1.0 then
+		vim.g.neovide_opacity = 0.9
 	else
-		vim.g.neovide_transparency = 1.0
+		vim.g.neovide_opacity = 1.0
 	end
 end, { noremap = true, silent = true })
 
@@ -148,7 +148,7 @@ map(
 )
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
-vim.api.nvim_set_keymap("n", "<leader>o", ":Navbuddy<CR>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>o", ":Navbuddy<CR>", opts)
 
 vim.keymap.set("n", "<leader>th", function()
 	require("nvchad.themes").open()

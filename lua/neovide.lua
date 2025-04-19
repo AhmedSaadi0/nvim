@@ -1,5 +1,5 @@
 -- Basic appearance
-vim.g.neovide_transparency = 0.85
+vim.g.neovide_opacity = 0.85
 -- vim.opt.guifont = "FiraCode Nerd Font:h12"
 
 -- Cursor effects

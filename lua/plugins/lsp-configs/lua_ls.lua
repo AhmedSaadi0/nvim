@@ -1,13 +1,4 @@
-local navic = require("nvim-navic")
-
 local lua_ls_config = {
-	on_attach = function(client, bufnr)
-		-- Debug: Check the type of bufnr
-		-- print("Buffer number type:", type(bufnr)) -- Expected output: number
-		-- if client.server_capabilities.documentSymbolProvider then
-		-- 	navic.attach(client, bufnr)
-		-- end
-	end,
 	cmd = { "lua-language-server" },
 	settings = {
 		Lua = {
