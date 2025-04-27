@@ -24,6 +24,13 @@ return {
 		local keymapping_config = require("plugins.lsp-configs.keymap")
 
 		-- Load LSP configurations
+		-- QML
+		lspconfig.qmlls.setup({
+			cmd = { "qmlls" },
+			filetypes = { "qml" },
+			root_dir = lspconfig.util.root_pattern(".git", "*.qml", "*.pro"),
+			capabilities = capabilities,
+		})
 		local type_lsp_config = require("plugins.lsp-configs.typo_lsp")
 		local eslint_config = require("plugins.lsp-configs.eslint")
 		local lua_ls_config = require("plugins.lsp-configs.lua_ls")
@@ -71,11 +78,11 @@ return {
 			["pyright"] = function()
 				lspconfig["pyright"].setup(add_capabilities(pyright_config))
 			end,
-			["pylsp"] = function()
-				lspconfig["pylsp"].setup(add_capabilities(pylsp_config))
-			end,
 			["efm"] = function()
 				lspconfig["efm"].setup(add_capabilities(efm_configs))
+			end,
+			["pylsp"] = function()
+				lspconfig["pylsp"].setup(add_capabilities(pylsp_config))
 			end,
 			-- ["tsserver"] = function()
 			-- 	lspconfig["tsserver"].setup(add_capabilities(tsserver_configs))
@@ -86,26 +93,6 @@ return {
 			["emmet_ls"] = function()
 				lspconfig["emmet_ls"].setup(add_capabilities(emmet_ls_consigs))
 			end,
-			-- ["vala"] = function()
-			-- 	lspconfig.valalsp.setup({
-			-- 		-- on_attach = on_attach,
-			-- 		capabilities = capabilities,
-			-- 		settings = {
-			-- 			vala = {
-			-- 				lint = {
-			-- 					style = true, -- Enable style checking
-			-- 					fix = true, -- Enable automatic fixing
-			-- 				},
-			-- 			},
-			-- 		},
-			-- 	})
-			-- end,
 		})
-
-		-- vim.api.nvim_create_autocmd("BufWritePost", {
-		-- 	callback = function()
-		-- 		update_pylsp_settings(true)
-		-- 	end,
-		-- })
 	end,
 }

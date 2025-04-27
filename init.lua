@@ -1,6 +1,14 @@
 require("configs.options")
 require("configs.mappings")
 
+-- Filetype detection for requirements.txt files
+vim.filetype.add({
+	pattern = {
+		["requirements%-3.13%.txt$"] = "requirements",
+		["requirements%.txt$"] = "requirements",
+	},
+})
+
 if vim.fn.has("termguicolors") == 1 then
 	vim.opt.termguicolors = true
 end
@@ -67,6 +75,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.cmd("set filetype=htmldjango")
 	end,
 })
+--
 
 -- vim.api.nvim_create_autocmd("InsertEnter", {
 -- 	callback = function()

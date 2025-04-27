@@ -41,6 +41,8 @@ return {
 				"query",
 				"vimdoc",
 				"c",
+				"requirements",
+				"qmljs",
 			},
 			query_linter = {
 				enable = true,
