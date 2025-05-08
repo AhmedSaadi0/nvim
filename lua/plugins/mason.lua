@@ -8,8 +8,6 @@ local mason_config = {
 	config = function()
 		-- import mason
 		local mason = require("mason")
-
-		-- import mason-lspconfig
 		-- local mason_lspconfig = require("mason-lspconfig")
 
 		local mason_tool_installer = require("mason-tool-installer")
@@ -31,6 +29,8 @@ local mason_config = {
 		-- })
 
 		mason_tool_installer.setup({
+			automatic_installation = true,
+			automatic_enable = true,
 			ensure_installed = {
 				"efm",
 				"pyright",
