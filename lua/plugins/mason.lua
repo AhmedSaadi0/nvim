@@ -72,6 +72,8 @@ local mason_config = {
 				"alejandra", -- Nix
 				-- "ruff",
 				-- "nil", -- Nix Language server
+				-- "jinja-lsp",
+				"emmet-ls",
 			},
 		})
 	end,

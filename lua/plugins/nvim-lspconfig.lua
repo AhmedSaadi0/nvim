@@ -66,11 +66,11 @@ return {
 			root_dir = lspconfig.util.root_pattern(".git", "*.qml", "*.pro"),
 		}))
 
-		-- Jinja-LSP (direct setup)
-		lspconfig.jinja_lsp.setup(add_capabilities({
-			cmd = { "jinja-lsp" },
-			filetypes = { "html", "htmldjango", "jinja", "django-html" },
-		}))
+		-- -- Jinja-LSP (direct setup)
+		-- lspconfig.jinja_lsp.setup(add_capabilities({
+		-- 	cmd = { "jinja-lsp" },
+		-- 	filetypes = { "html", "htmldjango", "jinja", "django-html" },
+		-- }))
 
 		-- All other servers using your existing config modules
 		lspconfig.typos_lsp.setup(add_capabilities(type_lsp_config))
