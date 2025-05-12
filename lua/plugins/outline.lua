@@ -9,9 +9,9 @@ return {
 	},
 	opts = {
 		symbol_folding = {
-			autofold_depth = 1, -- Deeper initial folding for cleaner view
+			autofold_depth = 1,
 			auto_unfold = {
-				only = 3, -- More gradual unfolding
+				only = 3,
 			},
 			-- Add animations for better UX
 			animation = {
