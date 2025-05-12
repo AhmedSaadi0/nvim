@@ -1,37 +1,19 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
-	-- event = { "BufWritePost", "InsertLeave" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
-
-		-- import mason_lspconfig plugin
 		local mason_lspconfig = require("mason-lspconfig")
-
-		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 		local capabilities = cmp_nvim_lsp.default_capabilities()
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-
-		-- Load LSP custom key mappings
 		local keymapping_config = require("plugins.lsp-configs.keymap")
 
-		-- Load LSP configurations
-		-- QML
-		lspconfig.qmlls.setup({
-			cmd = { "qmlls" },
-			filetypes = { "qml" },
-			root_dir = lspconfig.util.root_pattern(".git", "*.qml", "*.pro"),
-			capabilities = capabilities,
-		})
-		local type_lsp_config = require("plugins.lsp-configs.typo_lsp")
+		local typos_lsp_config = require("plugins.lsp-configs.typo_lsp")
 		local eslint_config = require("plugins.lsp-configs.eslint")
 		local lua_ls_config = require("plugins.lsp-configs.lua_ls")
 		local pyright_config = require("plugins.lsp-configs.pyright")
@@ -40,11 +22,19 @@ return {
 		-- local tsserver_configs = require("plugins.lsp-configs.tsserver")
 		local graphql_configs = require("plugins.lsp-configs.graphql")
 		local emmet_ls_consigs = require("plugins.lsp-configs.emmet_ls")
+		local djlsp_consigs = require("plugins.lsp-configs.djlsp")
 
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+		vim.diagnostic.config({
+			signs = {
+				Error = " ",
+				Warn = " ",
+				Hint = "󰠠 ",
+				Info = " ",
+			},
+			-- Optional: Keep other diagnostic settings (e.g., virtual_text, underline)
+			virtual_text = true,
+			underline = true,
+		})
 
 		vim.api.nvim_create_autocmd("LspAttach", keymapping_config)
 
@@ -52,49 +42,26 @@ return {
 			return vim.tbl_extend("force", { capabilities = capabilities }, additional_config)
 		end
 
-		mason_lspconfig.setup({
-			handlers = {
-				-- default handler for installed servers
-				function(server_name)
-					lspconfig[server_name].setup({
-						capabilities = capabilities,
-					})
-				end,
-				["jinja_lsp"] = function()
-					lspconfig["jinja_lsp"].setup({
-						capabilities = capabilities,
-						cmd = { "jinja-lsp" },
-						filetypes = { "html", "htmldjango", "jinja", "django-html" }, -- Specify the filetypes
-					})
-				end,
-				["typos_lsp"] = function()
-					lspconfig["typos_lsp"].setup(add_capabilities(type_lsp_config))
-				end,
-				["lua_ls"] = function()
-					lspconfig["lua_ls"].setup(add_capabilities(lua_ls_config))
-				end,
-				["eslint"] = function()
-					lspconfig["eslint"].setup(add_capabilities(eslint_config))
-				end,
-				["pyright"] = function()
-					lspconfig["pyright"].setup(add_capabilities(pyright_config))
-				end,
-				["efm"] = function()
-					lspconfig["efm"].setup(add_capabilities(efm_configs))
-				end,
-				["pylsp"] = function()
-					lspconfig["pylsp"].setup(add_capabilities(pylsp_config))
-				end,
-				-- ["tsserver"] = function()
-				-- 	lspconfig["tsserver"].setup(add_capabilities(tsserver_configs))
-				-- end,
-				["graphql"] = function()
-					lspconfig["graphql"].setup(add_capabilities(graphql_configs))
-				end,
-				["emmet_ls"] = function()
-					lspconfig["emmet_ls"].setup(add_capabilities(emmet_ls_consigs))
-				end,
-			},
+		lspconfig["pyright"].setup(add_capabilities(pyright_config))
+		lspconfig["pylsp"].setup(add_capabilities(pylsp_config))
+		lspconfig["djlsp"].setup(add_capabilities(djlsp_consigs))
+		-- lspconfig["jinja_lsp"].setup({
+		-- 	capabilities = capabilities,
+		-- 	cmd = { "jinja-lsp" },
+		-- 	filetypes = { "html", "htmldjango", "jinja", "django-html" }, -- Specify the filetypes
+		-- })
+		-- lspconfig["typos_lsp"].setup(add_capabilities(typos_lsp_config))
+		lspconfig["lua_ls"].setup(add_capabilities(lua_ls_config))
+		lspconfig["eslint"].setup(add_capabilities(eslint_config))
+		lspconfig["efm"].setup(add_capabilities(efm_configs))
+		lspconfig["graphql"].setup(add_capabilities(graphql_configs))
+		lspconfig["emmet_ls"].setup(add_capabilities(emmet_ls_consigs))
+		lspconfig["qmlls"].setup({
+			cmd = { "qmlls" },
+			filetypes = { "qml" },
+			root_dir = lspconfig.util.root_pattern(".git", "*.qml", "*.pro"),
+			capabilities = capabilities,
 		})
+		mason_lspconfig.setup()
 	end,
 }

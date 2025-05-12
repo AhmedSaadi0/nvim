@@ -1,5 +1,4 @@
 local eslint_config = {
-
 	settings = {
 		codeAction = {
 			disableRuleComment = {
