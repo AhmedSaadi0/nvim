@@ -72,7 +72,10 @@ vim.opt.ttyfast = true
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.html",
 	callback = function()
-		vim.cmd("set filetype=htmldjango")
+		if vim.fn.filereadable("manage.py") == 1 then
+			vim.bo.filetype = "htmldjango"
+			-- vim.cmd("set filetype=htmldjango")
+		end
 	end,
 })
 --

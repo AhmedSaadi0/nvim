@@ -65,6 +65,7 @@ local mason_config = {
 				-- "nil", -- Nix Language server
 				-- "jinja-lsp",
 				"emmet-ls",
+				"gomodifytags",
 			},
 		})
 	end,
