@@ -1,3 +1,5 @@
+-- ملف: lua/plugins/lsp-configs/keymap.lua
+
 local keymap = vim.keymap -- for conciseness
 
 local keymapping = {

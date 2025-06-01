@@ -5,7 +5,7 @@ return {
 	keys = {
 		{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
 		-- Add additional keymaps for symbol navigation
-		{ "<leader>os", "<cmd>Telescope outline<CR>", desc = "Search symbols" }, -- Requires telescope.nvim
+		-- { "<leader>os", "<cmd>Telescope outline<CR>", desc = "Search symbols" }, -- Requires telescope.nvim
 	},
 	opts = {
 		symbol_folding = {
@@ -16,7 +16,7 @@ return {
 			-- Add animations for better UX
 			animation = {
 				enable = true,
-				duration = 400,
+				duration = 100,
 			},
 		},
 		symbols = {
@@ -50,7 +50,7 @@ return {
 			},
 		},
 		outline_window = {
-			width = 25, -- Slightly wider for better readability
+			width = 20, -- Slightly wider for better readability
 			position = "right", -- Alternative position
 			border = "rounded", -- Modern border style
 			keymaps = {

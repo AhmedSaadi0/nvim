@@ -13,6 +13,7 @@ local typo_lsp_config = {
 		config = typos_config_path,
 		diagnosticSeverity = "Warning",
 	},
+	config = {},
 	-- on_attach = function(client, bufnr)
 	-- 	print("Typos LSP attached to buffer " .. bufnr)
 	-- end,

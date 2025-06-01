@@ -66,6 +66,7 @@ local mason_config = {
 				-- "jinja-lsp",
 				"emmet-ls",
 				"gomodifytags",
+				"ltex-ls",
 			},
 		})
 	end,
