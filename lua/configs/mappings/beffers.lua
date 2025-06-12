@@ -33,6 +33,9 @@ end, { noremap = true, silent = true, desc = "اغلاق اي بفر اخر لم
 map("n", "<C-S-h>", ":tabnext<CR>", opt)
 map("n", "<C-S-l>", ":tabprevious<CR>", opt)
 
+map("n", "<C-A-h>", ":tabnext<CR>", opt)
+map("n", "<C-A-l>", ":tabprevious<CR>", opt)
+
 -- Navigate buffers
 map("n", "<C-S-Left>", function()
 	require("nvchad.tabufline").next()
