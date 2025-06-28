@@ -17,7 +17,7 @@ return {
 			stop_eof = true, -- Stop at <EOF> when scrolling downwards
 			respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
 			cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-			duration_multiplier = 1.5, -- Global duration multiplier
+			duration_multiplier = 0.8, -- Global duration multiplier
 			-- easing = "linear", -- Default easing function
 			easing = "quadratic",
 			pre_hook = nil, -- Function to run before the scrolling animation starts
