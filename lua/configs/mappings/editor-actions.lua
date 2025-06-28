@@ -11,7 +11,7 @@ end, { desc = "تصغير العرضض -5" })
 
 map("n", "<c-a>", function()
 	vim.cmd("normal! ggVG")
-end, { desc = "تصغير العرضض -5" })
+end, { desc = "Select All" })
 
 -- delete instead of cut
 -- map("n", "x", '"_x')
@@ -128,17 +128,19 @@ end
 -- Key mapping to toggle mouse
 map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Toggle Mouse" }))
 
--- map("n", "<leader>tt", function()
--- 	require("base46").toggle_transparency()
--- end, { desc = "Toggle transparency" })
-
-map("n", "<leader>tt", function()
-	if vim.g.neovide_opacity == 1.0 then
-		vim.g.neovide_opacity = 0.9
-	else
-		vim.g.neovide_opacity = 1.0
-	end
-end, { noremap = true, silent = true })
+if not vim.g.neovide then
+	map("n", "<leader>tt", function()
+		require("base46").toggle_transparency()
+	end, { desc = "Toggle transparency" })
+else
+	map("n", "<leader>tt", function()
+		if vim.g.neovide_opacity == 1.0 then
+			vim.g.neovide_opacity = 0.9
+		else
+			vim.g.neovide_opacity = 1.0
+		end
+	end, { noremap = true, silent = true })
+end
 
 map(
 	"n",
