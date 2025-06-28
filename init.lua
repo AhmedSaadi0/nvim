@@ -54,6 +54,7 @@ if vim.g.neovide then
 	require("neovide")
 end
 -- require("current-theme")
+vim.o.ttyfast = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_matchparen = 1
