@@ -1,70 +1,90 @@
--- Basic appearance
-vim.g.neovide_opacity = 0.95
--- vim.opt.guifont = "FiraCode Nerd Font:h12"
+-- =============================================================================
+-- Neovide GUI Settings
+-- =============================================================================
+-- NOTE: This file should be conditionally loaded only when running Neovide.
 
--- Cursor effects
-vim.g.neovide_cursor_animation_length = 0.04
-vim.g.neovide_cursor_trail_length = 0.5
-vim.g.neovide_cursor_antialiasing = true
-vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
-vim.g.neovide_cursor_vfx_opacity = 200.0
-
--- vim.g.neovide_cursor_vfx_mode = "sonicboom"
-vim.g.neovide_cursor_vfx_mode = "railgun"
--- vim.g.neovide_cursor_vfx_mode = "ripple"
-vim.g.neovide_cursor_vfx_particle_lifetime = 1.0
-
--- Window effects and scaling
--- vim.g.neovide_initial_window_width = 1280
--- vim.g.neovide_initial_window_height = 720
-vim.g.neovide_fullscreen = false
-vim.g.neovide_maximized = false
-vim.g.neovide_no_idle_tiling = true
-vim.g.neovide_scale_factor = 1.0
-
--- Performance and refresh rate
-vim.g.neovide_refresh_rate = 240
-vim.g.neovide_refresh_rate_idle = 5
-
--- Miscellaneous
-vim.g.neovide_remember_window_size = true
--- vim.g.neovide_input_use_logo = true -- Enable Cmd as meta on MacOS
-vim.g.neovide_hide_mouse_when_typing = true
-vim.g.neovide_input_use_alt_key = true -- Use Alt key for shortcuts on Windows
-
--- Copy to system clipboard in normal, visual, and insert modes
-vim.keymap.set({ "n", "x" }, "<C-S-C>", '"+y', { desc = "Copy to system clipboard" })
-vim.keymap.set("i", "<C-S-C>", '"+y', { desc = "Copy to system clipboard" })
-
--- Paste from system clipboard in normal, visual, and insert modes
-vim.keymap.set("n", "<C-S-V>", '"+p', { desc = "Paste from system clipboard" })
-vim.keymap.set("x", "<C-S-V>", '"+P', { desc = "Paste from system clipboard" })
-vim.keymap.set("i", "<C-S-V>", function()
-	return vim.fn.getreg("+")
-end, { expr = true, desc = "Paste system clipboard" })
-
-vim.keymap.set("!", "<C-S-V>", "<C-r>+", { noremap = true, silent = true })
-
--- Apply mappings in Telescope prompt
-local telescope_mappings = function()
-	vim.api.nvim_buf_set_keymap(
-		0,
-		"i",
-		"<C-S-C>",
-		'"+y',
-		{ noremap = true, silent = true, desc = "Copy to system clipboard" }
-	)
-	vim.api.nvim_buf_set_keymap(
-		0,
-		"i",
-		"<C-S-V>",
-		"<C-r>+",
-		{ noremap = true, silent = true, desc = "Paste system clipboard" }
-	)
+-- Helper function to set Neovide options cleanly from a table
+local function set_neovide_options(options)
+	for k, v in pairs(options) do
+		vim.g["neovide_" .. k] = v
+	end
 end
 
--- Autocmd to apply mappings in TelescopePrompt windows
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "TelescopePrompt",
-	callback = telescope_mappings,
+set_neovide_options({
+	-- ------------------
+	-- Appearance
+	-- ------------------
+	-- guifont = "JetBrainsMono Nerd Font:h11",
+	opacity = 0.95,
+	unfocused_contrast = 0.8,
+	-- background_blur = 0.2,
+
+	-- ------------------
+	-- Window & Startup
+	-- ------------------
+	-- Set to true to automatically maximize the window on startup
+	maximized = true,
+	-- Remember window size and position.
+	remember_window_size = true,
+	-- Hide the mouse cursor when typing
+	hide_mouse_when_typing = true,
+
+	-- ------------------
+	-- Animations & Visual Effects
+	-- ------------------
+	-- A shorter, snappier scroll animation
+	scroll_animation_length = 0.35,
+
+	-- Cursor animation settings
+	cursor_animation_length = 0.01,
+	cursor_trail_length = 0.0,
+	cursor_antialiasing = true,
+
+	-- Cursor VFX (Visual Effects)
+	-- Modes: "railgun", "sonicboom", "ripple", "pixiedust", "torpedo", "wireframe"
+	-- "ripple" is a clean, balanced default.
+	cursor_vfx_mode = nil,
+	cursor_vfx_opacity = 150.0, -- Opacity from 0.0 to 255.0
+	cursor_vfx_particle_lifetime = 0.8,
+	cursor_vfx_particle_density = 1.0,
+	cursor_vfx_particle_speed = 1.0,
+
+	-- ------------------
+	-- Performance
+	-- ------------------
+	-- Target frames per second. High refresh rate monitors benefit from this.
+	refresh_rate = 240,
+	-- Lower refresh rate when Neovim is idle to save power
+	refresh_rate_idle = 5,
+	-- Disable idle refresh rate for tiling window managers to prevent flickering
+	no_idle = false,
 })
+
+-- ------------------
+-- Platform-Specific Settings
+-- ------------------
+-- Use Cmd key for mappings on macOS
+if vim.fn.has("macunix") == 1 then
+	vim.g.neovide_input_use_logo = true
+else
+	-- Use Alt key for mappings on Windows/Linux
+	vim.g.neovide_input_use_alt_key = true
+end
+
+-- ------------------
+-- Keymaps for GUI-like behavior (Ctrl+Shift+C/V)
+-- ------------------
+-- Copy to system clipboard
+vim.keymap.set({ "n", "v" }, "<C-S-c>", '"+y', { desc = "Copy to System Clipboard" })
+
+-- Paste from system clipboard
+vim.keymap.set("n", "<C-S-v>", '"+P', { desc = "Paste from System Clipboard" })
+vim.keymap.set("v", "<C-S-v>", '"+P', { desc = "Paste from System Clipboard" })
+vim.keymap.set("c", "<C-S-v>", "<C-R>+", { desc = "Paste from System Clipboard" })
+vim.keymap.set("i", "<C-S-v>", "<C-R>+", { desc = "Paste from System Clipboard" })
+
+-- NOTE: The above global keymaps should work in Telescope's prompt buffer.
+-- A copy mapping for insert mode is omitted as it's not a standard Vim operation
+-- and can have unintuitive behavior. Exit to normal mode (`<Esc>`) to copy.
+
+print("Neovide settings loaded.")

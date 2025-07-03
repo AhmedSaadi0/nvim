@@ -69,6 +69,10 @@ vim.g.loaded_tutor_mode_plugin = 1
 -- vim.opt.lazyredraw = true
 vim.opt.ttyfast = true
 
+if vim.loader then
+	vim.loader.enable()
+end
+
 -- Set all .html files to be treated as htmldjango
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.html",

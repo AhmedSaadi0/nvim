@@ -1,0 +1,55 @@
+return {
+	"shellRaining/hlchunk.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	config = function()
+		-- لن نحتاج إلى تعريف قائمة الهايلايت بنفس الطريقة القديمة،
+		-- ولكن سنحتفظ بالألوان لاستخدامها مباشرة.
+
+		-- ألوانك المفضلة
+		local colors = {
+			blue = "#42A5F5",
+			yellow = "#FFD54F",
+			cyan = "#26C6DA",
+			orange = "#FFA726",
+			green = "#66BB6A",
+			red = "#FF6B6B",
+			purple = "#AB47BC",
+		}
+
+		require("hlchunk").setup({
+			-- 1. تظليل الكتلة (Chunk)
+			chunk = {
+				enable = true,
+				style = {
+					-- لون خلفية الكتلة: سنستخدم اللون الأرجواني ولكن سنجعله شفافًا جدًا
+					-- حتى لا يكون مزعجًا.
+					bg = colors.purple,
+					blend = 0.05, -- شفافية عالية جدًا (5% لون فقط)
+
+					-- لون الإطار: سنستخدم اللون الأصفر الساطع لتمييز حدود الكتلة
+					border = colors.yellow,
+				},
+			},
+
+			-- 2. خطوط المسافات البادئة (Indent Lines)
+			indent = {
+				enable = true,
+				char = "▏",
+				-- سنستخدم اللون الأزرق للخطوط، وسيكون متناسقًا مع الخلفية الأرجوانية
+				style = { fg = colors.blue },
+			},
+
+			-- 3. تظليل أرقام الأسطر
+			line_num = {
+				enable = true,
+				-- سنستخدم اللون البرتقالي لتمييز أرقام الأسطر الخاصة بالكتلة الحالية
+				style = { fg = colors.orange },
+			},
+
+			-- 4. تظليل الأسطر الفارغة
+			blank = {
+				enable = false,
+			},
+		})
+	end,
+}

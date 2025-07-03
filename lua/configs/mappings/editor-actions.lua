@@ -139,7 +139,7 @@ else
 		else
 			vim.g.neovide_opacity = 1.0
 		end
-	end, { noremap = true, silent = true })
+	end, { noremap = true, silent = true, desc = "Toggle transparency" })
 end
 
 map(

@@ -1,18 +1,18 @@
 -- Import necessary modules
 local hooks = require("ibl.hooks")
 
--- Define highlight groups with a mix of vibrant colors
+-- Define highlight groups with a mix of dim/muted colors
 local highlight_groups = {
-	{ name = "IndentSymbolBlue", fg = "#42A5F5" },
-	{ name = "IndentSymbolYellow", fg = "#FFD54F" },
-	{ name = "IndentSymbolCyan", fg = "#26C6DA" },
-	{ name = "IndentSymbolOrange", fg = "#FFA726" },
-	{ name = "IndentSymbolGreen", fg = "#66BB6A" },
-	{ name = "IndentSymbolRed", fg = "#FF6B6B" },
-	{ name = "IndentSymbolPurple", fg = "#AB47BC" },
+	{ name = "IndentSymbolDimBlue", fg = "#6185a6" },
+	{ name = "IndentSymbolDimYellow", fg = "#d8a657" },
+	{ name = "IndentSymbolDimCyan", fg = "#569a9e" },
+	{ name = "IndentSymbolDimOrange", fg = "#c77f6b" },
+	{ name = "IndentSymbolDimGreen", fg = "#879967" },
+	{ name = "IndentSymbolDimRed", fg = "#b1626a" },
+	{ name = "IndentSymbolDimPurple", fg = "#967bb6" },
 }
 
--- Register highlight setup hook
+-- Register highlight setup hook (لا تغيير هنا)
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 	for _, group in ipairs(highlight_groups) do
 		vim.api.nvim_set_hl(0, group.name, { fg = group.fg })
@@ -21,14 +21,15 @@ end)
 
 require("ibl").setup({
 	indent = {
-		-- char = { "│" }, -- Characters to use for indentation
+		-- نستخدم قائمة الألوان القاتمة الجديدة
 		highlight = vim.tbl_map(function(group)
 			return group.name
 		end, highlight_groups),
-		smart_indent_cap = true,
-		repeat_linebreak = true,
+		-- يمكنك تغيير شكل الخط هنا إذا أردت
+		-- char = "▏",
 	},
 	whitespace = {
+		-- نستخدم نفس القائمة للمسافات البيضاء
 		highlight = vim.tbl_map(function(group)
 			return group.name
 		end, highlight_groups),
@@ -38,10 +39,11 @@ require("ibl").setup({
 		enabled = true,
 		show_start = true,
 		show_end = true,
-		char = "ǀ",
-		-- highlight = spaceHighlight, -- Use the purple color for scope highlight
+		char = "│", -- غيرت الحرف إلى خط عمودي أوضح
+		-- نجعل لون النطاق مميزًا باستخدام اللون الأرجواني القاتم
+		highlight = { "IndentSymbolDimPurple" },
 	},
 })
 
--- Register scope highlight hook
+-- Register scope highlight hook (لا تغيير هنا)
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
