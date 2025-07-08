@@ -26,37 +26,45 @@ map("n", "<leader>ss", function()
 	end
 end, { desc = "تحويل الى snake_case" })
 
-map("x", "<leader>re", function()
-	require("refactoring").refactor("Extract Function")
-end, { desc = "استخراج الى دالة" })
+map("x", "<leader>re", ":Refactor extract ")
+map("x", "<leader>rf", ":Refactor extract_to_file ")
+map("x", "<leader>rv", ":Refactor extract_var ")
+map({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+map("n", "<leader>rI", ":Refactor inline_func")
+map("n", "<leader>rb", ":Refactor extract_block")
+map("n", "<leader>rbf", ":Refactor extract_block_to_file")
 
-map("x", "<leader>rf", function()
-	require("refactoring").refactor("Extract Function To File")
-end, { desc = "استخراج الدالة الى ملف" })
-
--- Extract function supports only visual mode
-map("x", "<leader>rv", function()
-	require("refactoring").refactor("Extract Variable")
-end, { desc = "استخراج المتغير" })
-
--- Extract variable supports only visual mode
-map("n", "<leader>rI", function()
-	require("refactoring").refactor("Inline Function")
-end, { desc = "جعل الدالة بسطر واحد" })
-
--- Inline func supports only normal
-map({ "n", "x" }, "<leader>ri", function()
-	require("refactoring").refactor("Inline Variable")
-end, { desc = "جعل المتغير في سطر" })
-
--- Inline var supports both normal and visual mode
-map("n", "<leader>rb", function()
-	require("refactoring").refactor("Extract Block")
-end, { desc = "استخراج البلوك" })
-
-map("n", "<leader>rbf", function()
-	require("refactoring").refactor("Extract Block To File")
-end, { desc = "استخراج البلوك الى ملف" })
+-- map("x", "<leader>re", function()
+-- 	require("refactoring").refactor("Extract Function")
+-- end, { desc = "استخراج الى دالة" })
+--
+-- map("x", "<leader>rf", function()
+-- 	require("refactoring").refactor("Extract Function To File")
+-- end, { desc = "استخراج الدالة الى ملف" })
+--
+-- -- Extract function supports only visual mode
+-- map("x", "<leader>rv", function()
+-- 	require("refactoring").refactor("Extract Variable")
+-- end, { desc = "استخراج المتغير" })
+--
+-- -- Extract variable supports only visual mode
+-- map("n", "<leader>rI", function()
+-- 	require("refactoring").refactor("Inline Function")
+-- end, { desc = "جعل الدالة بسطر واحد" })
+--
+-- -- Inline func supports only normal
+-- map({ "n", "x" }, "<leader>ri", function()
+-- 	require("refactoring").refactor("Inline Variable")
+-- end, { desc = "جعل المتغير في سطر" })
+--
+-- -- Inline var supports both normal and visual mode
+-- map("n", "<leader>rb", function()
+-- 	require("refactoring").refactor("Extract Block")
+-- end, { desc = "استخراج البلوك" })
+--
+-- map("n", "<leader>rbf", function()
+-- 	require("refactoring").refactor("Extract Block To File")
+-- end, { desc = "استخراج البلوك الى ملف" })
 
 -- Keymap for formatting
 vim.keymap.set({ "n", "v" }, "<leader>fm", function()
