@@ -7,20 +7,20 @@ local keymapping = {
 	callback = function(ev)
 		local opts = { buffer = ev.buf, silent = true }
 
-		opts.desc = "عرض مراجع LSP"
+		opts.desc = "عرض المراجع باستخدام Telescope"
 		keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
 		opts.desc = "الانتقال إلى التصريح"
 		keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-		opts.desc = "عرض تعريفات LSP"
-		keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		opts.desc = "عرض التعريفات باستخدام Telescope"
+		keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
 
-		opts.desc = "عرض تطبيقات LSP"
-		keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+		opts.desc = "عرض التطبيقات باستخدام Telescope"
+		keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
 
-		opts.desc = "عرض تعريفات نوع LSP"
-		keymap.set("n", "gt", "<cmd:Telescope lsp_type_definitions<CR>", opts)
+		opts.desc = "عرض تعريفات النوع باستخدام Telescope"
+		keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
 		opts.desc = "عرض الإجراءات المتاحة"
 		keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -28,8 +28,8 @@ local keymapping = {
 		opts.desc = "إعادة تسمية ذكية"
 		keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
-		opts.desc = "عرض تشخيصات الملف"
-		keymap.set("n", "<leader>D", "<cmd:Telescope diagnostics bufnr=0<CR>", opts)
+		opts.desc = "عرض تشخيصات الملف باستخدام Telescope"
+		keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
 
 		opts.desc = "عرض تشخيصات السطر"
 		keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)

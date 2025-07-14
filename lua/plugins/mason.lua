@@ -30,7 +30,6 @@ local mason_config = {
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
-				-- "pylint",
 				"shellcheck",
 				"shfmt",
 				"black",

@@ -14,22 +14,16 @@ local pylsp_config = {
 				},
 				-- إعداد pylint للتحليل القواعدي مع تعطيل بعض التحذيرات غير المرغوب فيها
 				pylint = {
-					enabled = true,
+					-- enabled = true,
+					enabled = false,
 					executable = "pylint",
 					args = { "--disable=C0301,C0114,C0115,C0116", "--enable=W0611,W0614" },
 				},
 				-- تفعيل jedi_completion لتحسين الإكمال التلقائي وعرض معلمات الدوال
 				jedi_completion = {
-					enabled = false, -- Set this to false
-					-- include_params = true, -- This won't matter now
+					enabled = true,
+					include_params = true,
 				},
-				-- Add these if your pylsp version might have them as separate
-				-- (though disabling jedi_completion often handles all of them)
-				jedi_definition = { enabled = false },
-				jedi_hover = { enabled = false },
-				jedi_references = { enabled = false },
-				jedi_rename = { enabled = false },
-				jedi_symbols = { enabled = false },
 				-- تفعيل pyls_isort لترتيب الاستيرادات تلقائيًا
 				pyls_isort = {
 					enabled = true,
