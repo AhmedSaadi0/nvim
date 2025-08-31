@@ -9,7 +9,8 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			build = ":TSUpdate",
 		},
-		-- "nvim-telescope/telescope-ui-select.nvim",
+		--- تحسين مقترح: تم تفعيل هذه الإضافة لتوحيد واجهة المستخدم (مثل Code Actions)
+		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -17,22 +18,20 @@ return {
 		local actions = require("telescope.actions")
 		local themes = require("telescope.themes")
 
-		-- Key mappings
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
+		-- Key mappings (اختصارات لوحة المفاتيح)
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
 		vim.keymap.set("n", "<leader>fg", function()
 			require("telescope").extensions.live_grep_args.live_grep_args()
-		end, { desc = "Live Grep" })
+		end, { desc = "[F]ind by [G]rep (Live)" })
 		vim.keymap.set("n", "<leader>fc", function()
 			builtin.live_grep({ glob_pattern = "!{spec,test}" })
-		end, { desc = "Live Grep Code" })
-		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help Tags" })
-		vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find Symbols" })
-		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find Old Files" })
-		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word under Cursor" })
-		-- vim.keymap.set("n", "<leader>fgc", builtin.git_commits, { desc = "Search Git Commits" })
-		-- vim.keymap.set("n", "<leader>fgb", builtin.git_bcommits, { desc = "Search Git Commits for Buffer" })
-		vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Find Keymaps" })
+		end, { desc = "[F]ind in [C]ode (Live Grep)" })
+		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [B]uffers" })
+		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp Tags" })
+		vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "[F]ind [S]ymbols" })
+		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind [O]ld Files" })
+		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord under Cursor" })
+		vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
 		vim.keymap.set("n", "<leader>/", function()
 			builtin.current_buffer_fuzzy_find(themes.get_dropdown({
 				winblend = 10,
@@ -40,9 +39,14 @@ return {
 				layout_config = { width = 0.7 },
 			}))
 		end, { desc = "[/] Fuzzily search in current buffer" })
-		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "[F]ind [T]odos" })
 
-		-- Telescope setup
+		--- تحسين مقترح: إضافة اختصارات جديدة مفيدة
+		vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume Last Search" })
+		vim.keymap.set("n", "<leader>fD", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+		vim.keymap.set("n", "<leader>fgs", builtin.git_status, { desc = "[F]ind [G]it [S]tatus" })
+
+		-- Telescope setup (إعدادات Telescope الرئيسية)
 		telescope.setup({
 			defaults = {
 				initial_mode = "insert",
@@ -62,7 +66,6 @@ return {
 					},
 					width = 0.9,
 					height = 0.9,
-					-- preview_cutoff = 120,
 				},
 				vimgrep_arguments = {
 					"rg",
@@ -73,8 +76,7 @@ return {
 					"--column",
 					"--smart-case",
 					"--max-depth",
-					"50", -- Reduce search depth
-					-- "--color=never",
+					"50",
 				},
 				path_display = { "truncate" },
 				mappings = {
@@ -106,18 +108,27 @@ return {
 				},
 			},
 			pickers = {
+				--- تحسين مقترح: استخدام "fd" للبحث الأسرع عن الملفات
+				-- تأكد من تثبيت "fd" على نظامك: https://github.com/sharkdp/fd
 				find_files = {
-					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+					find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" },
+				},
+			},
+			--- تحسين مقترح: تفعيل إعدادات الإضافات هنا
+			extensions = {
+				["ui-select"] = {
+					themes.get_dropdown({
+						-- يمكنك تخصيص المظهر هنا إذا أردت
+					}),
 				},
 			},
 		})
 
-		-- Load extensions lazily
+		-- Load extensions lazily (تحميل الإضافات بشكل كسول لتحسين سرعة بدء التشغيل)
 		vim.defer_fn(function()
 			telescope.load_extension("fzf")
-			telescope.load_extension("ui-select")
 			telescope.load_extension("live_grep_args")
-			-- Load more extensions here as needed
+			telescope.load_extension("ui-select") -- تأكد من تحميل الإضافة هنا
 		end, 100)
 	end,
 }

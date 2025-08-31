@@ -174,3 +174,5 @@ map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 map("i", "<C-s>", vim.lsp.buf.signature_help, opts)
 map("n", "<C-s>", vim.lsp.buf.signature_help, opts)
+
+map("n", "<leader>rl", "<cmd>set rl!<CR>", { desc = "Toggle Right-to-Left (RTL) mode" })

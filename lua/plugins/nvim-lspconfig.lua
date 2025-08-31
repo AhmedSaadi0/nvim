@@ -40,14 +40,14 @@ return {
 		local pyright_capabilities = vim.deepcopy(base_capabilities)
 
 		-- Capabilities for Pylsp (customized to disable overlapping features)
-		-- local pylsp_capabilities = vim.deepcopy(base_capabilities)
-		-- pylsp_capabilities.textDocument.definition = nil
-		-- pylsp_capabilities.textDocument.hover = nil
-		-- pylsp_capabilities.textDocument.implementation = nil
-		-- pylsp_capabilities.textDocument.references = nil
-		-- pylsp_capabilities.textDocument.rename = nil
-		-- pylsp_capabilities.textDocument.typeDefinition = nil
-		-- pylsp_capabilities.textDocument.completion = nil
+		local pylsp_capabilities = vim.deepcopy(base_capabilities)
+		pylsp_capabilities.textDocument.definition = nil
+		pylsp_capabilities.textDocument.hover = nil
+		pylsp_capabilities.textDocument.implementation = nil
+		pylsp_capabilities.textDocument.references = nil
+		pylsp_capabilities.textDocument.rename = nil
+		pylsp_capabilities.textDocument.typeDefinition = nil
+		pylsp_capabilities.textDocument.completion = nil
 
 		-- Helper to merge user config with capabilities
 		local function setup_server(server_name, user_config, capabilities_to_use)
@@ -58,7 +58,7 @@ return {
 
 		-- Setup LSPs
 		setup_server("pyright", pyright_config, pyright_capabilities)
-		-- setup_server("pylsp", pylsp_config_settings, pylsp_capabilities)
+		setup_server("pylsp", pylsp_config_settings, pylsp_capabilities)
 		setup_server("djlsp", djlsp_consigs, base_capabilities)
 		setup_server("typos_lsp", typos_lsp_config, base_capabilities)
 		setup_server("lua_ls", lua_ls_config, base_capabilities)
@@ -68,16 +68,9 @@ return {
 		setup_server("emmet_ls", emmet_ls_consigs, base_capabilities)
 
 		lspconfig["qmlls"].setup({
-			cmd = { "qmlls", "-E" },
+			cmd = { "qmlls" },
 			filetypes = { "qml" },
 			root_dir = lspconfig.util.root_pattern(".git", "*.qml", "*.pro"),
-			settings = {
-				qml = {
-					importPaths = {
-						vim.fn.getcwd(),
-					},
-				},
-			},
 			capabilities = base_capabilities,
 		})
 
