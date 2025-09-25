@@ -1,4 +1,3 @@
--- Your main lsp config file (e.g., lua/plugins/lsp.lua or similar)
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
@@ -8,7 +7,7 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		local lspconfig = require("lspconfig")
+		-- local lspconfig = vim.lsp.config
 		local mason_lspconfig = require("mason-lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local keymapping_config = require("plugins.lsp-configs.keymap")
@@ -23,6 +22,8 @@ return {
 		local graphql_configs = require("plugins.lsp-configs.graphql")
 		local emmet_ls_consigs = require("plugins.lsp-configs.emmet_ls")
 		local djlsp_consigs = require("plugins.lsp-configs.djlsp")
+		local navic = require("plugins.lsp-configs.navic")
+		navic.setup()
 
 		vim.diagnostic.config({
 			signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " },
@@ -49,11 +50,18 @@ return {
 		pylsp_capabilities.textDocument.typeDefinition = nil
 		pylsp_capabilities.textDocument.completion = nil
 
-		-- Helper to merge user config with capabilities
 		local function setup_server(server_name, user_config, capabilities_to_use)
-			lspconfig[server_name].setup(vim.tbl_extend("force", {
+			local cfg = vim.tbl_extend("force", user_config or {}, {
 				capabilities = capabilities_to_use,
-			}, user_config))
+				on_attach = function(client, bufnr)
+					if user_config and user_config.on_attach then
+						user_config.on_attach(client, bufnr)
+					end
+					-- navic.on_attach(client, bufnr)
+				end,
+			})
+			vim.lsp.config[server_name] = cfg
+			vim.lsp.enable({ server_name })
 		end
 
 		-- Setup LSPs
@@ -67,36 +75,10 @@ return {
 		setup_server("graphql", graphql_configs, base_capabilities)
 		setup_server("emmet_ls", emmet_ls_consigs, base_capabilities)
 
-		lspconfig["qmlls"].setup({
-			cmd = { "qmlls" },
-			filetypes = { "qml" },
-			root_dir = lspconfig.util.root_pattern(".git", "*.qml", "*.pro"),
+		vim.lsp.config["qmlls"] = vim.tbl_extend("force", {
 			capabilities = base_capabilities,
-		})
-
-		-- lspconfig["qmlls"].setup({
-		-- 	cmd = { "qmlls" },
-		-- 	filetypes = { "qml" },
-		-- 	-- This root_dir function is used by nvim-lspconfig to decide when to START the server.
-		-- 	root_dir = lspconfig.util.root_pattern(".git", "CMakeLists.txt", "*.qmlproject", "*.pro"),
-		-- 	capabilities = base_capabilities,
-		-- 	-- [[ START NEW CONFIGURATION ]]
-		-- 	-- The 'settings' table is how you pass server-specific options.
-		-- 	settings = {
-		-- 		-- Settings for qmlls are nested under a 'qml' key.
-		-- 		qml = {
-		-- 			-- 'importPaths' is an array of strings. Each string is a directory
-		-- 			-- that the server will search when trying to resolve an import.
-		-- 			importPaths = {
-		-- 				-- We dynamically get the project's root directory.
-		-- 				-- This will be the same directory found by the `root_dir` function above.
-		-- 				-- This tells qmlls: "In addition to relative paths, also search in the project root".
-		-- 				lspconfig.util.root_dir(),
-		-- 			},
-		-- 		},
-		-- 	},
-		-- 	-- [[ END NEW CONFIGURATION ]]
-		-- })
+		}, {})
+		vim.lsp.enable({ "qmlls" })
 
 		mason_lspconfig.setup()
 	end,
