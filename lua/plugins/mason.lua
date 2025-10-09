@@ -66,6 +66,8 @@ local mason_config = {
 				"emmet-ls",
 				"gomodifytags",
 				"ltex-ls",
+				"angular-language-server",
+				"tailwindcss-language-server",
 			},
 		})
 	end,

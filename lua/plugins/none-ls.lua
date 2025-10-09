@@ -5,7 +5,7 @@ return {
 
 		null_ls.setup({
 			sources = {
-				null_ls.builtins.diagnostics.djlint,
+				-- null_ls.builtins.diagnostics.djlint,
 				null_ls.builtins.code_actions.gomodifytags,
 
 				-- null_ls.builtins.diagnostics.pylint.with({
