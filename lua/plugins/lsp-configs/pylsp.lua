@@ -28,6 +28,11 @@ local pylsp_config = {
 				pyls_isort = {
 					enabled = true,
 				},
+				-- jedi_definition = { enabled = false },
+				-- jedi_hover = { enabled = false },
+				-- jedi_references = { enabled = false },
+				-- jedi_rename = { enabled = false },
+				-- jedi_symbols = { enabled = false },
 				-- تعطيل mccabe لمراقبة التعقيد (يمكن تفعيله إذا رغبت)
 				mccabe = {
 					enabled = false,
