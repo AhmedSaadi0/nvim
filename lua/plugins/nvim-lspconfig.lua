@@ -1,6 +1,7 @@
 -- Your main lsp config file (e.g., lua/plugins/lsp.lua or similar)
 return {
 	"neovim/nvim-lspconfig",
+	branch = "master",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
@@ -8,13 +9,10 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		local lspconfig = require("lspconfig")
-		-- local lspconfig = vim.lsp.config
-		-- local lspconfig = vim.lsp._config or require("lspconfig")
-
 		local mason_lspconfig = require("mason-lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local keymapping_config = require("plugins.lsp-configs.keymap")
+		local lspconfig_util = require("lspconfig.util")
 
 		-- Load server-specific configurations
 		local typos_lsp_config = require("plugins.lsp-configs.typo_lsp")
@@ -22,7 +20,7 @@ return {
 		local lua_ls_config = require("plugins.lsp-configs.lua_ls")
 		local pyright_config = require("plugins.lsp-configs.pyright")
 		local efm_configs = require("plugins.lsp-configs.efm")
-		local pylsp_config_settings = require("plugins.lsp-configs.pylsp") -- User's variable name
+		local pylsp_config_settings = require("plugins.lsp-configs.pylsp")
 		local graphql_configs = require("plugins.lsp-configs.graphql")
 		local emmet_ls_consigs = require("plugins.lsp-configs.emmet_ls")
 		local djlsp_consigs = require("plugins.lsp-configs.djlsp")
@@ -33,6 +31,7 @@ return {
 			underline = true,
 		})
 
+		-- *** السطر الذي تم تصحيحه ***
 		vim.api.nvim_create_autocmd("LspAttach", keymapping_config)
 
 		-- Base capabilities for most LSPs
@@ -41,38 +40,83 @@ return {
 		-- Capabilities for Pyright (full)
 		local pyright_capabilities = vim.deepcopy(base_capabilities)
 
-		-- Capabilities for Pylsp (customized to disable overlapping features)
+		-- Capabilities for Pylsp (customized)
 		local pylsp_capabilities = vim.deepcopy(base_capabilities)
-		pylsp_capabilities.textDocument.definition = nil -- Disable Pylsp's definition provider
-		pylsp_capabilities.textDocument.hover = nil -- Disable Pylsp's hover provider
+		pylsp_capabilities.textDocument.definition = nil
+		pylsp_capabilities.textDocument.hover = nil
 		pylsp_capabilities.textDocument.implementation = nil
 		pylsp_capabilities.textDocument.references = nil
 		pylsp_capabilities.textDocument.rename = nil
 		pylsp_capabilities.textDocument.typeDefinition = nil
-		-- pylsp_capabilities.textDocument.completion = nil -- Optionally disable if you only want Pyright's completion
 
-		-- Helper to merge user config with capabilities
-		local function setup_server(server_name, user_config, capabilities_to_use)
-			lspconfig[server_name].setup(vim.tbl_extend("force", {
-				capabilities = capabilities_to_use,
-			}, user_config))
-		end
+		-- Configure servers using the new API
+		vim.lsp.config(
+			"pyright",
+			vim.tbl_extend("force", {
+				capabilities = pyright_capabilities,
+			}, pyright_config)
+		)
 
-		-- Setup LSPs
-		setup_server("pyright", pyright_config, pyright_capabilities)
-		setup_server("pylsp", pylsp_config_settings, pylsp_capabilities) -- Use customized capabilities
-		setup_server("djlsp", djlsp_consigs, base_capabilities)
-		setup_server("typos_lsp", typos_lsp_config, base_capabilities)
-		setup_server("lua_ls", lua_ls_config, base_capabilities)
-		setup_server("eslint", eslint_config, base_capabilities)
-		setup_server("efm", efm_configs, base_capabilities)
-		setup_server("graphql", graphql_configs, base_capabilities)
-		setup_server("emmet_ls", emmet_ls_consigs, base_capabilities)
+		vim.lsp.config(
+			"pylsp",
+			vim.tbl_extend("force", {
+				capabilities = pylsp_capabilities,
+			}, pylsp_config_settings)
+		)
 
-		lspconfig["qmlls"].setup({
+		vim.lsp.config(
+			"djlsp",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, djlsp_consigs)
+		)
+
+		vim.lsp.config(
+			"typos_lsp",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, typos_lsp_config)
+		)
+
+		vim.lsp.config(
+			"lua_ls",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, lua_ls_config)
+		)
+
+		vim.lsp.config(
+			"eslint",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, eslint_config)
+		)
+
+		vim.lsp.config(
+			"efm",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, efm_configs)
+		)
+
+		vim.lsp.config(
+			"graphql",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, graphql_configs)
+		)
+
+		vim.lsp.config(
+			"emmet_ls",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, emmet_ls_consigs)
+		)
+
+		vim.lsp.config("qmlls", {
 			cmd = { "qmlls" },
-			filetypes = { "qml" },
-			root_dir = lspconfig.util.root_pattern(".git", "*.qml", "*.pro"),
+			-- filetypes = { "qml" },
+			root_dir = lspconfig_util.root_pattern(".git", "*.qml", "*.pro"),
 			capabilities = base_capabilities,
 		})
 
