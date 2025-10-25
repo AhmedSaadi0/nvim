@@ -4,16 +4,23 @@ return {
 	cmd = { "Outline", "OutlineOpen" },
 	keys = {
 		{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
-		-- Add additional keymaps for symbol navigation
-		-- { "<leader>os", "<cmd>Telescope outline<CR>", desc = "Search symbols" }, -- Requires telescope.nvim
 	},
 	opts = {
+		providers = {
+			lsp = {
+				client_filter = function(client)
+					if vim.bo.filetype == "python" then
+						return client.name == "pyright"
+					end
+					return true
+				end,
+			},
+		},
 		symbol_folding = {
 			autofold_depth = 1,
 			auto_unfold = {
 				only = 3,
 			},
-			-- Add animations for better UX
 			animation = {
 				enable = true,
 				duration = 100,
@@ -21,7 +28,6 @@ return {
 		},
 		symbols = {
 			filter = {
-				-- Add more granular filtering
 				default = { "String", "Comment", exclude = true },
 				python = {
 					"Function",
@@ -30,7 +36,7 @@ return {
 					"Module",
 					"Variable",
 					"Constant",
-					"Attribute", -- Additional relevant symbols
+					"Attribute",
 				},
 			},
 			display = {
@@ -40,28 +46,26 @@ return {
 					Method = { icon = "ƒ", hl = "TSMethod" },
 					Module = { icon = "📦", hl = "TSModule" },
 					Variable = { icon = "", hl = "TSConstant" },
-					Constant = { icon = "π", hl = "TSConstant" }, -- New constant symbol
+					Constant = { icon = "π", hl = "TSConstant" },
 				},
 			},
-			-- Add sorting configuration
 			sort = {
 				enable = true,
-				method = "frequency", -- Sort by usage frequency
+				method = "frequency",
 			},
 		},
 		outline_window = {
-			width = 20, -- Slightly wider for better readability
-			position = "right", -- Alternative position
-			border = "rounded", -- Modern border style
+			width = 20,
+			position = "right",
+			border = "rounded",
 			keymaps = {
 				close = { "q", "<Esc>" },
 				jump = { "<CR>", "<2-LeftMouse>" },
 				hover = "K",
 				toggle_symbol_details = "d",
-				toggle_all_symbols = "a", -- New global toggle
-				search = "/", -- Quick search functionality
+				toggle_all_symbols = "a",
+				search = "/",
 			},
-			-- Add preview window configuration
 			preview = {
 				enable = true,
 				height = 10,
@@ -70,37 +74,6 @@ return {
 					winblend = 10,
 				},
 			},
-		},
-		lsp = {
-			auto_attach = true,
-			-- Add multi-LSP support
-			servers = {
-				"pyright",
-				"tsserver",
-				"clangd", -- Explicitly support multiple languages
-			},
-			-- Improve diagnostics integration
-			diagnostics = {
-				enable = true,
-				icons = {
-					error = "✘",
-					warning = "⚠",
-					info = "ℹ",
-					hint = "",
-				},
-			},
-		},
-		-- Add performance optimizations
-		performance = {
-			debounce_delay = 150,
-			max_file_size = 2048, -- KB
-			async = true,
-		},
-		-- Add status line integration
-		statusline = {
-			enable = true,
-			symbol_count = true,
-			file_path = true,
 		},
 	},
 }

@@ -28,11 +28,11 @@ local pylsp_config = {
 				pyls_isort = {
 					enabled = true,
 				},
-				-- jedi_definition = { enabled = false },
-				-- jedi_hover = { enabled = false },
-				-- jedi_references = { enabled = false },
-				-- jedi_rename = { enabled = false },
-				-- jedi_symbols = { enabled = false },
+				jedi_definition = { enabled = false },
+				jedi_hover = { enabled = false },
+				jedi_references = { enabled = false },
+				jedi_rename = { enabled = false },
+				jedi_symbols = { enabled = false },
 				-- تعطيل mccabe لمراقبة التعقيد (يمكن تفعيله إذا رغبت)
 				mccabe = {
 					enabled = false,
@@ -42,6 +42,14 @@ local pylsp_config = {
 	},
 	filetypes = { "python" },
 	on_attach = function(client, bufnr)
+		client.server_capabilities.documentSymbolProvider = false
+		-- client.server_capabilities.definition = false
+		-- client.server_capabilities.hover = false
+		-- client.server_capabilities.implementation = false
+		-- client.server_capabilities.references = false
+		-- client.server_capabilities.rename = false
+		-- client.server_capabilities.typeDefinition = false
+
 		-- local opts = { noremap = true, silent = true }
 		-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 		-- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)

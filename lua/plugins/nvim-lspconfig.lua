@@ -25,6 +25,9 @@ return {
 		local emmet_ls_consigs = require("plugins.lsp-configs.emmet_ls")
 		local djlsp_consigs = require("plugins.lsp-configs.djlsp")
 
+		local navic = require("plugins.lsp-configs.navic")
+		navic.setup()
+
 		vim.diagnostic.config({
 			signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " },
 			virtual_text = true,
@@ -42,6 +45,7 @@ return {
 
 		-- Capabilities for Pylsp (customized)
 		local pylsp_capabilities = vim.deepcopy(base_capabilities)
+		-- pylsp_capabilities.textDocument.documentSymbolProvider = nil
 		pylsp_capabilities.textDocument.definition = nil
 		pylsp_capabilities.textDocument.hover = nil
 		pylsp_capabilities.textDocument.implementation = nil
@@ -49,19 +53,18 @@ return {
 		pylsp_capabilities.textDocument.rename = nil
 		pylsp_capabilities.textDocument.typeDefinition = nil
 
-		-- Configure servers using the new API
-		vim.lsp.config(
-			"pyright",
-			vim.tbl_extend("force", {
-				capabilities = pyright_capabilities,
-			}, pyright_config)
-		)
-
 		vim.lsp.config(
 			"pylsp",
 			vim.tbl_extend("force", {
 				capabilities = pylsp_capabilities,
 			}, pylsp_config_settings)
+		)
+
+		vim.lsp.config(
+			"pyright",
+			vim.tbl_extend("force", {
+				capabilities = pyright_capabilities,
+			}, pyright_config)
 		)
 
 		vim.lsp.config(

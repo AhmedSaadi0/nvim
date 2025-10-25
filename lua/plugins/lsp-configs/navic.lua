@@ -38,13 +38,13 @@ function M.setup()
 			Module = " ",
 			Namespace = "󰌗 ",
 			Package = " ",
-			Class = "𝓒 ",
+			Class = "𝓒  ",
 			Method = "󰊕 ",
 			Property = "󰆨 ",
 			Field = " ",
 			Constructor = " ",
-			Enum = "󰕘",
-			Interface = "󰕘",
+			Enum = "󰕘 ",
+			Interface = "󰕘 ",
 			Function = "󰊕 ",
 			Variable = " ",
 			Constant = "󰏿 ",
@@ -61,10 +61,31 @@ function M.setup()
 			Operator = "󰆕 ",
 			TypeParameter = "󰊄 ",
 		},
-		-- نوقف output الخاص بالـ statusline-highlighting لنتلقى نصًا عاديًا
-		lsp = { auto_attach = true },
+		lsp = {
+			auto_attach = true,
+			preference = {
+				"pyright",
+				"pylsp",
+				"typescript-language-server",
+				"eslint-lsp",
+				"tailwindcss-language-server",
+				"html-lsp",
+				"css-lsp",
+				"angular-language-server",
+				"emmet-ls",
+				"lua-language-server",
+				"vim-language-server",
+				"django-template-lsp",
+				"bash-language-server",
+				"clangd",
+				"typos-lsp",
+				"ltex-ls",
+				"efm",
+			},
+		},
 		highlight = false,
-		separator = " > ",
+		separator = "  ",
+		-- separator = "  ",
 		depth_limit = 0,
 		depth_limit_indicator = "..",
 		safe_output = true,
@@ -94,7 +115,7 @@ function M.setup()
 
 	-- ضع الـ winbar: نُطبق مجموعة NavicWinbar كخلفية، ونستدعي النتيجة كنص عادي
 	-- لا نستخدم %! لتجنّب مشاكل التحليل؛ لأن get_location الآن لا يولّد رموز تمييز statusline
-	vim.o.winbar = "%#NavicWinbar#%{v:lua.NavicLocation()}%#Normal#"
+	vim.o.winbar = "      %#NavicWinbar#%{v:lua.NavicLocation()}%#Normal#"
 end
 
 function M.on_attach(client, bufnr)
