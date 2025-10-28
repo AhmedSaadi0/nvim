@@ -1,3 +1,10 @@
 return {
 	"mcookly/bidi.nvim",
+	config = function()
+		require("bidi").setup({
+			create_user_commands = true,
+			default_base_direction = "LR",
+			intuitive_delete = true,
+		})
+	end,
 }

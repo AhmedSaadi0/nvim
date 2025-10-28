@@ -118,8 +118,8 @@ return {
 
 		vim.lsp.config("qmlls", {
 			cmd = { "qmlls" },
-			-- filetypes = { "qml" },
-			root_dir = lspconfig_util.root_pattern(".git", "*.qml", "*.pro"),
+			filetypes = { "qml" },
+			-- root_dir = lspconfig_util.root_pattern(".git", "*.qml", "*.pro"),
 			capabilities = base_capabilities,
 		})
 
