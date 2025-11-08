@@ -3,7 +3,7 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "doomchad", -- default theme
+		theme = "bearded-arc", -- default theme
 		hl_add = {},
 		-- hl_override = {
 		--           Function = { "blue", "red", 20 }
@@ -11,7 +11,7 @@ local options = {
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		-- theme_toggle = { "doomchad", "doomchad" },
+		-- theme_toggle = { "bearded-arc", "bearded-arc" },
 	},
 
 	ui = {

@@ -12,5 +12,5 @@ My nvim config
 ### Fedora 41
 
 ```bash
-sudo dnf Install fzf ripgrep
+sudo dnf install fzf ripgrep
 ```

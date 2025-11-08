@@ -24,6 +24,7 @@ return {
 				htmldjango = { "djlint" },
 				bash = { "beautysh" },
 				nix = { "alejandra" },
+				-- qml = { "qmlformat" },
 			},
 			format_after_save = {
 				lsp_format = "fallback",
