@@ -13,4 +13,5 @@ My nvim config
 
 ```bash
 sudo dnf install fzf ripgrep fd-find
+pip install --user 'python-lsp-server[all]' isort
 ```
