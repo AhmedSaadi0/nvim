@@ -1,5 +1,24 @@
 -- ملف: lua/plugins/lsp-configs/pylsp.lua
 
+local function get_pylint_executable()
+	-- 1. ابحث أولاً إذا كانت هناك بيئة مفعلة في النظام (VIRTUAL_ENV)
+	if vim.env.VIRTUAL_ENV then
+		local venv_pylint = vim.env.VIRTUAL_ENV .. "/bin/pylint"
+		if vim.fn.executable(venv_pylint) == 1 then
+			return venv_pylint
+		end
+	end
+
+	-- 2. إذا لم يجد، ابحث عن مجلد venv محلي (للاحتياط)
+	local local_venv = vim.fn.getcwd() .. "/venv/bin/pylint"
+	if vim.fn.executable(local_venv) == 1 then
+		return local_venv
+	end
+
+	-- 3. الملاذ الأخير: pylint العالمي
+	return "pylint"
+end
+
 local pylsp_config = {
 	settings = {
 		pylsp = {
@@ -16,8 +35,17 @@ local pylsp_config = {
 				pylint = {
 					-- enabled = true,
 					enabled = false,
-					executable = "pylint",
-					args = { "--disable=C0301,C0114,C0115,C0116", "--enable=W0611,W0614" },
+					executable = get_pylint_executable(),
+					-- args = {
+					-- 	"--disable=C0301,C0114,C0115,C0116",
+					-- 	"--enable=W0611,W0614",
+					-- 	"--load-plugins=pylint_django",
+					-- 	"--django-settings-module=hopofy.settings",
+					-- 	-- "--rcfile",
+					-- 	-- ".pylintrc",
+					-- 	-- "--init-hook",
+					-- 	-- "import sys, os; sys.path.insert(0, os.getcwd())",
+					-- },
 				},
 				-- تفعيل jedi_completion لتحسين الإكمال التلقائي وعرض معلمات الدوال
 				jedi_completion = {
@@ -59,7 +87,7 @@ local pylsp_config = {
 		-- vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 	end,
 	flags = {
-		debounce_text_changes = 150,
+		debounce_text_changes = 5000,
 	},
 }
 

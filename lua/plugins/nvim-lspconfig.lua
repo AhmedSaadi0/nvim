@@ -34,6 +34,7 @@ return {
 			signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " },
 			virtual_text = true,
 			underline = true,
+			update_in_insert = false,
 		})
 
 		-- *** السطر الذي تم تصحيحه ***
