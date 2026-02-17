@@ -34,8 +34,8 @@ M.base_30 = {
 	orange = "#ffb86c",
 	cyan = "#8be9fd",
 	statusline_bg = "#141620", -- خلفية شريط الحالة
-	lightbg = "#191c2b",
-	pmenu_bg = "#11121d", -- خلفية القوائم المنبثقة
+	lightbg = "#bd93f9",
+	pmenu_bg = "#ab86e2", -- خلفية القوائم المنبثقة
 	folder_bg = "#bd93f9", -- لون المجلدات
 }
 

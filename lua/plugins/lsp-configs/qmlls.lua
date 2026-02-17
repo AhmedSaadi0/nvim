@@ -46,16 +46,29 @@ local function find_root(fname)
 	-- fallback نهائي
 	return vim.loop.cwd()
 end
-
+local on_attach = function(client, bufnr)
+	if client.name == "qmlls" then
+		local diagnostics = vim.diagnostic.get(bufnr)
+		local filtered_diagnostics = {}
+		for _, d in ipairs(diagnostics) do
+			-- تجاهل رسالة التحذير العامة عند استيراد الوحدة
+			if not d.message:match("Warnings occurred while importing module") then
+				table.insert(filtered_diagnostics, d)
+			end
+		end
+		vim.diagnostic.set(bufnr, filtered_diagnostics, {
+			namespace = vim.lsp.diagnostic.get_namespace(client.id),
+		})
+	end
+end
 return {
-	cmd = { "qmlls" },
-	cmd_env = {
-		QML2_IMPORT_PATH = qt_import_path,
-	},
-	filetypes = { "qml" },
-	root_dir = require("lspconfig.util").root_pattern("qmlls.ini", ".git", "."),
+	-- cmd = { "qmlls" },
+	-- cmd_env = {
+	-- 	QML2_IMPORT_PATH = qt_import_path,
+	-- },
+	-- filetypes = { "qml" },
 	-- root_dir = find_root,
-	single_file_support = true,
+	-- single_file_support = true,
 	settings = {
 		qmlls = {
 			completion = { enable = true, completeEnums = true },
@@ -63,9 +76,10 @@ return {
 			format = { enable = true, indentSize = 4 },
 		},
 	},
-	on_new_config = function(new_config)
-		new_config.cmd_env = vim.tbl_extend("force", new_config.cmd_env or {}, {
-			QML2_IMPORT_PATH = qt_import_path,
-		})
-	end,
+	-- on_new_config = function(new_config)
+	-- 	new_config.cmd_env = vim.tbl_extend("force", new_config.cmd_env or {}, {
+	-- 		QML2_IMPORT_PATH = qt_import_path,
+	-- 	})
+	-- end,
+	-- on_attach = on_attach,
 }

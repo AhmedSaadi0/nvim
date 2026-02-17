@@ -25,7 +25,7 @@ return {
 		local graphql_configs = require("plugins.lsp-configs.graphql")
 		local emmet_ls_consigs = require("plugins.lsp-configs.emmet_ls")
 		local djlsp_consigs = require("plugins.lsp-configs.djlsp")
-		-- local qmlls_config = require("plugins.lsp-configs.qmlls")
+		local qmlls_config = require("plugins.lsp-configs.qmlls")
 
 		local navic = require("plugins.lsp-configs.navic")
 		navic.setup()
@@ -119,12 +119,12 @@ return {
 			}, emmet_ls_consigs)
 		)
 
-		-- vim.lsp.config(
-		-- 	"qmlls",
-		-- 	vim.tbl_extend("force", {
-		-- 		capabilities = base_capabilities,
-		-- 	}, qmlls_config)
-		-- )
+		vim.lsp.config(
+			"qmlls",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, qmlls_config)
+		)
 
 		mason_lspconfig.setup()
 	end,
