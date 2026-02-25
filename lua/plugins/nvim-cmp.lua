@@ -118,7 +118,6 @@ return {
 			},
 		}
 
-		options = vim.tbl_deep_extend("force", options, require("nvchad.cmp"))
 		cmp.setup(options)
 	end,
 }

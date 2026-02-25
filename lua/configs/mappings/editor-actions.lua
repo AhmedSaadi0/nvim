@@ -130,7 +130,15 @@ map("n", "<leader>tm", toggle_mouse, vim.tbl_extend("force", opts, { desc = "Tog
 
 if not vim.g.neovide then
 	map("n", "<leader>tt", function()
-		require("base46").toggle_transparency()
+		if vim.o.winblend == 0 then
+			vim.o.winblend = 10
+			vim.o.pumblend = 10
+			print("Transparency enabled")
+		else
+			vim.o.winblend = 0
+			vim.o.pumblend = 0
+			print("Transparency disabled")
+		end
 	end, { desc = "Toggle transparency" })
 else
 	map("n", "<leader>tt", function()
@@ -153,19 +161,19 @@ vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent =
 -- vim.api.nvim_set_keymap("n", "<leader>o", ":Navbuddy<CR>", opts)
 
 vim.keymap.set("n", "<leader>th", function()
-	require("nvchad.themes").open()
+	Snacks.picker.colorschemes()
 end, { desc = "تغيير الثيم" })
 
 vim.keymap.set("n", "<leader>nc", function()
-	require("notify").dismiss({ silent = true, pending = true })
+	Snacks.notifier.hide()
 end, { desc = "Clear Notifications" })
 
 vim.keymap.set("n", "<leader>nv", function()
-	require("noice").cmd("history")
+	Snacks.notifier.show_history()
 end, { desc = "Show Notification History" })
 
 vim.keymap.set("n", "<leader>m", function()
-	require("menu").open("default")
+	Snacks.picker.commands()
 end, { desc = "Open Main Menu" })
 
 map("i", "<C-k>", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)

@@ -13,7 +13,6 @@ if vim.fn.has("termguicolors") == 1 then
 	vim.opt.termguicolors = true
 end
 
-vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -37,18 +36,9 @@ require("lazy").setup({ { import = "plugins" } }, {
 		notify = false,
 	},
 	install = {
-		colorscheme = { "nvchad" },
+		colorscheme = { "habamax" },
 	},
 })
-
--- (method 1, For heavy lazyloaders)
--- dofile(vim.g.base46_cache .. "defaults")
--- dofile(vim.g.base46_cache .. "statusline")
--- dofile(vim.g.base46_cache .. "syntax")
--- dofile(vim.g.base46_cache .. "treesitter")
-for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
-	dofile(vim.g.base46_cache .. v)
-end
 
 if vim.g.neovide then
 	require("neovide")

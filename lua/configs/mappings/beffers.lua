@@ -6,7 +6,12 @@ local opt = {
 }
 
 map("n", "<leader>bo", function()
-	require("nvchad.tabufline").closeAllBufs()
+	local buffers = vim.api.nvim_list_bufs()
+	for _, buf in ipairs(buffers) do
+		if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted then
+			pcall(vim.api.nvim_buf_delete, buf, { force = false })
+		end
+	end
 end, {
 	noremap = true,
 	silent = true,
@@ -38,21 +43,21 @@ map("n", "<A-S-l>", ":tabprevious<CR>", opt)
 
 -- Navigate buffers
 map("n", "<C-S-Left>", function()
-	require("nvchad.tabufline").next()
+	vim.cmd("bnext")
 end, opt)
 map("n", "<C-S-Right>", function()
-	require("nvchad.tabufline").prev()
+	vim.cmd("bprevious")
 end, opt)
 
 map("n", "<S-h>", function()
-	require("nvchad.tabufline").prev()
+	vim.cmd("bprevious")
 end, opt)
 map("n", "<S-l>", function()
-	require("nvchad.tabufline").next()
+	vim.cmd("bnext")
 end, opt)
 
 map("n", "<leader>x", function()
-	require("nvchad.tabufline").close_buffer()
+	vim.api.nvim_buf_delete(0, { force = false })
 end, opt)
 
 map("n", "<leader>tn", function()
