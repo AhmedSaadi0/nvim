@@ -1,5 +1,5 @@
 require("configs.options")
-require("configs.mappings")
+require("mappings")
 
 -- Filetype detection for requirements.txt files
 vim.filetype.add({
@@ -9,10 +9,20 @@ vim.filetype.add({
 	},
 })
 
-if vim.fn.has("termguicolors") == 1 then
-	vim.opt.termguicolors = true
-end
+-- Disable built-in plugins we don't use (nvim-tree handles file explorer)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_matchparen = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_shada_plugin = 1
+vim.g.loaded_spellfile_plugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
 
+vim.o.ttyfast = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -27,7 +37,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "plugins" } }, {
+require("lazy").setup("plugins", {
 	checker = {
 		enabled = true,
 		notify = false,
@@ -36,27 +46,17 @@ require("lazy").setup({ { import = "plugins" } }, {
 		notify = false,
 	},
 	install = {
-		colorscheme = { "habamax" },
+		colorscheme = { "tokyonight", "catppuccin" },
 	},
 })
 
 if vim.g.neovide then
 	require("neovide")
 end
--- require("current-theme")
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_matchparen = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_shada_plugin = 1
-vim.g.loaded_spellfile_plugin = 1
-vim.g.loaded_tutor_mode_plugin = 1
--- vim.opt.lazyredraw = true
-vim.opt.ttyfast = true
+
+if vim.loader then
+	vim.loader.enable()
+end
 
 -- Set all .html files to be treated as htmldjango
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
@@ -64,22 +64,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	callback = function()
 		if vim.fn.filereadable("manage.py") == 1 then
 			vim.bo.filetype = "htmldjango"
-			-- vim.cmd("set filetype=htmldjango")
 		end
 	end,
 })
---
-
--- vim.api.nvim_create_autocmd("InsertEnter", {
--- 	callback = function()
--- 		-- إغلاق جميع النوافذ العائمة (Floating Windows)
--- 		for _, win in ipairs(vim.api.nvim_list_wins()) do
--- 			if vim.api.nvim_win_get_config(win).relative ~= "" then
--- 				vim.api.nvim_win_close(win, true)
--- 			end
--- 		end
--- 	end,
--- })
-
--- local navic = require("nvim-navic")
--- vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"

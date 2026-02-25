@@ -30,7 +30,6 @@ local mason_config = {
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
-				-- "pylint",
 				"shellcheck",
 				"shfmt",
 				"black",
@@ -67,6 +66,8 @@ local mason_config = {
 				"emmet-ls",
 				"gomodifytags",
 				"ltex-ls",
+				"angular-language-server",
+				"tailwindcss-language-server",
 			},
 		})
 	end,

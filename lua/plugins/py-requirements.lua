@@ -4,7 +4,7 @@ return {
 	config = function()
 		require("py-requirements").setup({
 			-- Enabled by default if you want to disable lsp completions set to false
-			enable_lsp = true,
+			enable_lsp = false,
 			-- Disabled by default if you want to use `nvim-cmp` source set to true
 			enable_cmp = true,
 			-- Endpoint used for getting package versions

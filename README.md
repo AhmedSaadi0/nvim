@@ -12,5 +12,6 @@ My nvim config
 ### Fedora 41
 
 ```bash
-sudo dnf Install fzf ripgrep
+sudo dnf install fzf ripgrep fd-find
+pip install --user 'python-lsp-server[all]' isort
 ```

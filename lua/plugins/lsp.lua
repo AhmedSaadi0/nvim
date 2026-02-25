@@ -1,0 +1,123 @@
+return {
+	"neovim/nvim-lspconfig",
+	branch = "master",
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		{ "antosha417/nvim-lsp-file-operations", config = true },
+		{ "folke/neodev.nvim", opts = {} },
+	},
+	config = function()
+		local mason_lspconfig = require("mason-lspconfig")
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local mappings = require("mappings")
+
+		local typos_lsp_config = require("plugins.lsp-configs.typo_lsp")
+		local eslint_config = require("plugins.lsp-configs.eslint")
+		local lua_ls_config = require("plugins.lsp-configs.lua_ls")
+		local pyright_config = require("plugins.lsp-configs.pyright")
+		local efm_configs = require("plugins.lsp-configs.efm")
+		local pylsp_config_settings = require("plugins.lsp-configs.pylsp")
+		local graphql_configs = require("plugins.lsp-configs.graphql")
+		local emmet_ls_consigs = require("plugins.lsp-configs.emmet_ls")
+		local djlsp_consigs = require("plugins.lsp-configs.djlsp")
+		local qmlls_config = require("plugins.lsp-configs.qmlls")
+
+		local navic = require("plugins.lsp-configs.navic")
+		navic.setup()
+
+		vim.diagnostic.config({
+			signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " },
+			virtual_text = true,
+			underline = true,
+			update_in_insert = false,
+		})
+
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = mappings.lsp_attach,
+		})
+
+		local base_capabilities = cmp_nvim_lsp.default_capabilities()
+		local pyright_capabilities = vim.deepcopy(base_capabilities)
+		local pylsp_capabilities = vim.deepcopy(base_capabilities)
+		pylsp_capabilities.textDocument.definition = nil
+		pylsp_capabilities.textDocument.hover = nil
+		pylsp_capabilities.textDocument.implementation = nil
+		pylsp_capabilities.textDocument.references = nil
+		pylsp_capabilities.textDocument.rename = nil
+		pylsp_capabilities.textDocument.typeDefinition = nil
+
+		vim.lsp.config(
+			"pylsp",
+			vim.tbl_extend("force", {
+				capabilities = pylsp_capabilities,
+			}, pylsp_config_settings)
+		)
+
+		vim.lsp.config(
+			"pyright",
+			vim.tbl_extend("force", {
+				capabilities = pyright_capabilities,
+			}, pyright_config)
+		)
+
+		vim.lsp.config(
+			"djlsp",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, djlsp_consigs)
+		)
+
+		vim.lsp.config(
+			"typos_lsp",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, typos_lsp_config)
+		)
+
+		vim.lsp.config(
+			"lua_ls",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, lua_ls_config)
+		)
+
+		vim.lsp.config(
+			"eslint",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, eslint_config)
+		)
+
+		vim.lsp.config(
+			"efm",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, efm_configs)
+		)
+
+		vim.lsp.config(
+			"graphql",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, graphql_configs)
+		)
+
+		vim.lsp.config(
+			"emmet_ls",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, emmet_ls_consigs)
+		)
+
+		vim.lsp.config(
+			"qmlls",
+			vim.tbl_extend("force", {
+				capabilities = base_capabilities,
+			}, qmlls_config)
+		)
+
+		mason_lspconfig.setup()
+	end,
+}

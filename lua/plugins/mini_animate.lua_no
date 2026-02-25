@@ -1,0 +1,15 @@
+-- ~/.config/nvim/lua/plugins/mini_animate.lua (الخيار الأبسط)
+
+return {
+	"echasnovski/mini.animate",
+	event = "VeryLazy",
+	config = function()
+		require("mini.animate").setup({
+			-- فقط عطّل التمرير هنا لتجنب التعارض مع neoscroll
+			-- واترك كل شيء آخر على الإعدادات الافتراضية الرائعة
+			scroll = {
+				enable = false,
+			},
+		})
+	end,
+}

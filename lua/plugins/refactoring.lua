@@ -1,35 +1,29 @@
+-- ملف: lua/plugins/refactoring.lua
+
 return {
 	"ThePrimeagen/refactoring.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
+	-- تحميل الإضافة فقط عند فتح ملفات من هذه الأنواع لتحسين الأداء
+	ft = { "python", "lua", "go", "java", "c", "cpp" },
 	config = function()
 		require("refactoring").setup({
-			prompt_func_return_type = {
-				go = false,
-				java = false,
+			-- الإعدادات التي تفضلها
+			prompt_func_return_type = { python = false, go = false, java = false },
+			prompt_func_param_type = { python = false, go = false, java = false },
 
-				cpp = false,
-				c = false,
-				h = false,
-				hpp = false,
-				cxx = false,
+			-- الإعدادات الأساسية لـ Python
+			print_var_statements = {
+				python = 'print(f"{var_name} = {var}")',
 			},
-			prompt_func_param_type = {
-				go = false,
-				java = false,
-
-				cpp = false,
-				c = false,
-				h = false,
-				hpp = false,
-				cxx = false,
+			printf_statements = {
+				python = 'print("DEBUG: L{line}")',
 			},
-			printf_statements = {},
-			print_var_statements = {},
-			show_success_message = false, -- shows a message with information about the refactor on success
-			-- i.e. [Refactor] Inlined 3 variable occurrences
 		})
+
+		-- تعيين الاختصارات بعد تحميل الإعدادات (النسخة المصححة)
+		-- تم دمج الإعدادات مباشرة في كل استدعاء
 	end,
 }

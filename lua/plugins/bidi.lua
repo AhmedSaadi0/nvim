@@ -1,3 +1,0 @@
-return {
-	"mcookly/bidi.nvim",
-}

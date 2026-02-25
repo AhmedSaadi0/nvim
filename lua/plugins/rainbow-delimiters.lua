@@ -1,10 +1,8 @@
 return {
 	"HiPhish/rainbow-delimiters.nvim",
+	event = "BufReadPre", -- يتم تحميل البلوقين عند فتح ملف
 	config = function()
-		local rainbow_delimiters = require("rainbow-delimiters")
-
-		-- Assign the highlight groups to rainbow-delimiters
-		vim.g.rainbow_delimiters = {
+		require("rainbow-delimiters.setup").setup({
 			highlight = {
 				"IndentSymbolGreen",
 				"IndentSymbolOrange",
@@ -14,6 +12,6 @@ return {
 				"IndentSymbolCyan",
 				"IndentSymbolBlue",
 			},
-		}
+		})
 	end,
 }
