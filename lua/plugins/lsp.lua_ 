@@ -1,22 +1,16 @@
--- lua/plugins/nvim-lspconfig.lua
-
 return {
 	"neovim/nvim-lspconfig",
 	branch = "master",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		-- "hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
 		local mason_lspconfig = require("mason-lspconfig")
-		local lspconfig = require("lspconfig")
-		-- local cmp_nvim_lsp = require("cmp_nvim_lsp")
-		local keymapping_config = require("plugins.lsp-configs.keymap")
-		-- local lspconfig_util = require("lspconfig.util")
+		-- local mappings = require("mappings")
+		local mappings = require("plugins.lsp-configs.keymap")
 
-		-- Load server-specific configurations
 		local typos_lsp_config = require("plugins.lsp-configs.typo_lsp")
 		local eslint_config = require("plugins.lsp-configs.eslint")
 		local lua_ls_config = require("plugins.lsp-configs.lua_ls")
@@ -38,17 +32,14 @@ return {
 			update_in_insert = false,
 		})
 
-		vim.api.nvim_create_autocmd("LspAttach", keymapping_config)
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = mappings.lsp_attach,
+		})
 
-		-- Base capabilities for most LSPs
 		local base_capabilities = require("blink.cmp").get_lsp_capabilities()
-
-		-- Capabilities for Pyright (full)
 		local pyright_capabilities = vim.deepcopy(base_capabilities)
-
-		-- Capabilities for Pylsp (customized)
 		local pylsp_capabilities = vim.deepcopy(base_capabilities)
-		-- pylsp_capabilities.textDocument.documentSymbolProvider = nil
 		pylsp_capabilities.textDocument.definition = nil
 		pylsp_capabilities.textDocument.hover = nil
 		pylsp_capabilities.textDocument.implementation = nil

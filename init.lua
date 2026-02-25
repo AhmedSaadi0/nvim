@@ -1,5 +1,4 @@
 require("configs.options")
-require("configs.mappings")
 
 -- Filetype detection for requirements.txt files
 vim.filetype.add({
@@ -73,6 +72,7 @@ if vim.loader then
 	vim.loader.enable()
 end
 
+require("configs.mappings")
 -- Set all .html files to be treated as htmldjango
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.html",

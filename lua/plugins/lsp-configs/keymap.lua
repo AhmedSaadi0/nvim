@@ -1,26 +1,35 @@
 -- ملف: lua/plugins/lsp-configs/keymap.lua
 
 local keymap = vim.keymap -- for conciseness
+local Snacks = require("snacks")
 
 local keymapping = {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		local opts = { buffer = ev.buf, silent = true }
 
-		opts.desc = "عرض المراجع باستخدام Telescope"
-		keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+		opts.desc = "عرض المراجع باستخدام Snacks"
+		keymap.set("n", "gr", function()
+			Snacks.picker.lsp_references()
+		end, opts)
 
 		opts.desc = "الانتقال إلى التصريح"
 		keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-		opts.desc = "عرض التعريفات باستخدام Telescope"
-		keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+		opts.desc = "عرض التعريفات باستخدام Snacks"
+		keymap.set("n", "gd", function()
+			Snacks.picker.lsp_definitions()
+		end, opts)
 
-		opts.desc = "عرض التطبيقات باستخدام Telescope"
-		keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+		opts.desc = "عرض التطبيقات باستخدام Snacks"
+		keymap.set("n", "gi", function()
+			Snacks.picker.lsp_implementations()
+		end, opts)
 
-		opts.desc = "عرض تعريفات النوع باستخدام Telescope"
-		keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+		opts.desc = "عرض تعريفات النوع باستخدام Snacks"
+		keymap.set("n", "gt", function()
+			Snacks.picker.lsp_type_definitions()
+		end, opts)
 
 		opts.desc = "عرض الإجراءات المتاحة"
 		keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -28,8 +37,10 @@ local keymapping = {
 		opts.desc = "إعادة تسمية ذكية"
 		keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
-		opts.desc = "عرض تشخيصات الملف باستخدام Telescope"
-		keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+		opts.desc = "عرض تشخيصات الملف باستخدام Snacks"
+		keymap.set("n", "<leader>D", function()
+			Snacks.picker.diagnostics_buffer()
+		end, opts)
 
 		opts.desc = "عرض تشخيصات السطر"
 		keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)

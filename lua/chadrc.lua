@@ -3,7 +3,7 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "catppuccin", -- default theme
+		theme = "chadracula", -- default theme
 		hl_add = {},
 		-- hl_override = {
 		--           Function = { "blue", "red", 20 }
@@ -11,7 +11,7 @@ local options = {
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		-- theme_toggle = { "catppuccin", "catppuccin" },
+		-- theme_toggle = { "chadracula", "chadracula" },
 	},
 
 	ui = {
@@ -28,7 +28,8 @@ local options = {
 		telescope = { style = "bordered" }, -- borderless / bordered
 
 		statusline = {
-			enabled = false,
+			-- enabled = false,
+			enabled = true,
 			theme = "vscode", -- default/vscode/vscode_colored/minimal
 			-- default/round/block/arrow separators work only for default statusline theme
 			-- round and block will work for minimal theme only
@@ -64,8 +65,8 @@ local options = {
 		-- lazyload it when there are 1+ buffers
 		tabufline = {
 			enabled = true,
-			lazyload = true,
-			-- lazyload = false,
+			-- lazyload = true,
+			lazyload = false,
 			order = { "treeOffset", "buffers", "tabs", "btns" },
 			modules = nil,
 			bufwidth = 21,

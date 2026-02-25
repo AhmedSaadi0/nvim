@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local Snacks = require("snacks")
 
 map("n", "<leader>+", function()
 	vim.cmd(":vertical resize +5")
@@ -142,12 +143,9 @@ else
 	end, { noremap = true, silent = true, desc = "Toggle transparency" })
 end
 
-map(
-	"n",
-	"<leader>gh",
-	"<cmd>Telescope git_bcommits<CR>",
-	{ noremap = true, silent = true, desc = "تاريخ GIT للملف" }
-)
+map("n", "<leader>gh", function()
+	Snacks.picker.git_log_file()
+end, { noremap = true, silent = true, desc = "تاريخ GIT للملف" })
 
 vim.api.nvim_set_keymap("n", "<leader>aw", ":wa<CR>", { noremap = true, silent = true, desc = "حفظ الكل" })
 -- vim.api.nvim_set_keymap("n", "<leader>o", ":Navbuddy<CR>", opts)
