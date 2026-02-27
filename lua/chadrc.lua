@@ -3,7 +3,7 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "a-mirage", -- default theme
+		theme = "a-cherry-midnight", -- default theme
 		hl_add = {},
 		-- hl_override = {
 		--           Function = { "blue", "red", 20 }
@@ -11,7 +11,7 @@ local options = {
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		-- theme_toggle = { "a-mirage", "a-mirage" },
+		-- theme_toggle = { "a-cherry-midnight", "a-cherry-midnight" },
 	},
 
 	ui = {

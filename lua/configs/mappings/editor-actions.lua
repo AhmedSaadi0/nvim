@@ -177,3 +177,11 @@ map("n", "<leader>rl", "<cmd>set rl!<CR>", { desc = "Toggle Right-to-Left (RTL) 
 map("n", "<leader>gl", function()
 	Snacks.lazygit.open()
 end, { desc = "Lazygit" })
+
+map("n", "<c-n>", function()
+	Snacks.explorer()
+end, { desc = "explorer" })
+
+map("n", "<leader>n", function()
+	Snacks.picker.lsp_symbols()
+end, { desc = "lsp_symbols" })

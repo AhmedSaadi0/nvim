@@ -28,8 +28,8 @@ return {
 		local djlsp_consigs = require("plugins.lsp-configs.djlsp")
 		local qmlls_config = require("plugins.lsp-configs.qmlls")
 
-		local navic = require("plugins.lsp-configs.navic")
-		navic.setup()
+		-- local navic = require("plugins.lsp-configs.navic")
+		-- navic.setup()
 
 		vim.diagnostic.config({
 			signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " },

@@ -33,7 +33,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Modern Additions
-vim.opt.signcolumn = "yes" -- Always show sign column (for LSP/Diagnostic icons)
+vim.opt.signcolumn = "yes:1" -- Always show sign column (for LSP/Diagnostic icons)
 vim.opt.updatetime = 50 -- Faster updates for CursorHold, etc.
 vim.opt.timeoutlen = 500 -- Reduce mapping timeout
 vim.opt.undofile = true -- Persistent undo history
