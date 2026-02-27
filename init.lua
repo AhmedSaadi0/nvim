@@ -1,17 +1,40 @@
-require("configs.options")
+-- 1. تفعيل محمل Lua لتسريع الإقلاع (يجب أن يكون في السطر الأول)
+if vim.loader then
+	vim.loader.enable()
+end
 
--- Filetype detection for requirements.txt files
+-- 2. تعطيل إضافات Neovim الافتراضية غير المستخدمة لتسريع الإقلاع
+local default_plugins = {
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"matchparen",
+	"matchit",
+	"tarPlugin",
+	"gzip",
+	"zipPlugin",
+	"2html_plugin",
+	"shada_plugin",
+	"spellfile_plugin",
+	"tutor_mode_plugin",
+}
+for _, plugin in ipairs(default_plugins) do
+	vim.g["loaded_" .. plugin] = 1
+end
+
+-- 3. تحميل الخيارات الأساسية
+require("configs.options")
+vim.opt.termguicolors = true -- تفعيل الألوان الحقيقية (لا حاجة للتحقق منها في الإصدارات الحديثة)
+
+-- 4. التعرف على صيغ الملفات (تم دمج النمط ليشمل أي ملف يبدأ أو يحتوي على requirements)
 vim.filetype.add({
 	pattern = {
-		["requirements%-3.13%.txt$"] = "requirements",
-		["requirements%.txt$"] = "requirements",
+		[".*requirements.*%.txt$"] = "requirements",
 	},
 })
 
-if vim.fn.has("termguicolors") == 1 then
-	vim.opt.termguicolors = true
-end
-
+-- 5. إعداد Lazy.nvim و NvChad Themes
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -28,73 +51,38 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "plugins" } }, {
-	checker = {
-		enabled = true,
-		notify = false,
-	},
-	change_detection = {
-		notify = false,
-	},
-	install = {
-		colorscheme = { "nvchad" },
-	},
+	checker = { enabled = true, notify = false },
+	change_detection = { notify = false },
+	install = { colorscheme = { "nvchad" } },
 })
 
--- (method 1, For heavy lazyloaders)
--- dofile(vim.g.base46_cache .. "defaults")
--- dofile(vim.g.base46_cache .. "statusline")
--- dofile(vim.g.base46_cache .. "syntax")
--- dofile(vim.g.base46_cache .. "treesitter")
-for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
-	dofile(vim.g.base46_cache .. v)
+-- تحميل الثيمات بشكل آمن (التحقق من وجود المجلد أولاً لتجنب الأخطاء عند التثبيت لأول مرة)
+if vim.fn.isdirectory(vim.g.base46_cache) == 1 then
+	for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+		dofile(vim.g.base46_cache .. v)
+	end
 end
 
+-- 6. إعدادات Neovide
 if vim.g.neovide then
 	require("neovide")
 end
--- require("current-theme")
-vim.o.ttyfast = true
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_matchparen = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_shada_plugin = 1
-vim.g.loaded_spellfile_plugin = 1
-vim.g.loaded_tutor_mode_plugin = 1
--- vim.opt.lazyredraw = true
-vim.opt.ttyfast = true
 
-if vim.loader then
-	vim.loader.enable()
-end
-
+-- 7. تحميل الاختصارات
 require("configs.mappings")
--- Set all .html files to be treated as htmldjango
+
+-- 8. الأحداث التلقائية (Autocmds)
+-- إنشاء مجموعة لتجنب تكرار الحدث عند إعادة تحميل الإعدادات
+local augroup = vim.api.nvim_create_augroup("CustomConfig", { clear = true })
+
+-- تحديد نوع الملف كـ htmldjango إذا كان مشروع Django
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = augroup,
 	pattern = "*.html",
 	callback = function()
-		if vim.fn.filereadable("manage.py") == 1 then
+		-- البحث عن manage.py في المجلد الحالي والمجلدات الأب (صعوداً)
+		if vim.fn.findfile("manage.py", ".;") ~= "" then
 			vim.bo.filetype = "htmldjango"
-			-- vim.cmd("set filetype=htmldjango")
 		end
 	end,
 })
---
-
--- vim.api.nvim_create_autocmd("InsertEnter", {
--- 	callback = function()
--- 		-- إغلاق جميع النوافذ العائمة (Floating Windows)
--- 		for _, win in ipairs(vim.api.nvim_list_wins()) do
--- 			if vim.api.nvim_win_get_config(win).relative ~= "" then
--- 				vim.api.nvim_win_close(win, true)
--- 			end
--- 		end
--- 	end,
--- })
-
--- local navic = require("nvim-navic")
--- vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"

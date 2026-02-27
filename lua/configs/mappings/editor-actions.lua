@@ -174,3 +174,6 @@ map("i", "<C-s>", vim.lsp.buf.signature_help, opts)
 map("n", "<C-s>", vim.lsp.buf.signature_help, opts)
 
 map("n", "<leader>rl", "<cmd>set rl!<CR>", { desc = "Toggle Right-to-Left (RTL) mode" })
+map("n", "<leader>gl", function()
+	Snacks.lazygit.open()
+end, { desc = "Lazygit" })

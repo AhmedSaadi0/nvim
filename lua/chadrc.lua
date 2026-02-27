@@ -3,7 +3,7 @@ vim.opt.laststatus = 3
 local options = {
 
 	base46 = {
-		theme = "chadracula", -- default theme
+		theme = "a-mirage", -- default theme
 		hl_add = {},
 		-- hl_override = {
 		--           Function = { "blue", "red", 20 }
@@ -11,7 +11,7 @@ local options = {
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		-- theme_toggle = { "chadracula", "chadracula" },
+		-- theme_toggle = { "a-mirage", "a-mirage" },
 	},
 
 	ui = {
@@ -25,11 +25,11 @@ local options = {
 			},
 		},
 
-		telescope = { style = "bordered" }, -- borderless / bordered
+		-- telescope = { style = "bordered" }, -- borderless / bordered
 
 		statusline = {
-			-- enabled = false,
-			enabled = true,
+			enabled = false,
+			-- enabled = true,
 			theme = "vscode", -- default/vscode/vscode_colored/minimal
 			-- default/round/block/arrow separators work only for default statusline theme
 			-- round and block will work for minimal theme only

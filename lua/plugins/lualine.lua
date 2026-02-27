@@ -1,125 +1,186 @@
+-- lua/plugins/lualine.lua
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = "VeryLazy", -- تحميل متأخر لأسرع startup
 	config = function()
 		local lualine = require("lualine")
-		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
-		-- local noice = require("noice")
+		local lazy_status = require("lazy.status")
 
-		local vibrant_m3_palette = {
-			bg = "#1A1B26", -- Deep dark blue background
-			fg = "#F4F4F4", -- Off-white text color
-			primary = "#63B1EA", -- Deep Purple (Primary)
-			secondary = "#E1C07B", -- Teal (Secondary)
-			tertiary = "#E06C75", -- Deep Orange (Tertiary)
-			error = "#D32F2F", -- Red (Error color)
-			surface = "#2A2E37", -- Dark surface for inactive parts
-			on_surface = "#FFFFFF", -- White text for inactive surfaces
-			on_primary = "#FFFFFF", -- White text on primary color
-			on_secondary = "#000000", -- Black text on secondary color
-			on_error = "#FFFFFF", -- White text on error color
-			background = "#121212", -- Dark background for inactive sections
-			success = "#F89888", -- Green for success
-			info = "#0288D1", -- Blue for info
-			warning = "#FF9800", -- Amber for warning
-			accent = "#9C27B0", -- Purple accent
-		}
+		-- 🎨 دالة لاستخراج لون من Highlight Group ديناميكياً
+		local function get_hl_color(group, attr)
+			local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+			if attr == "fg" then
+				return hl.fg and string.format("#%06x", hl.fg) or nil
+			elseif attr == "bg" then
+				return hl.bg and string.format("#%06x", hl.bg) or nil
+			end
+			return nil
+		end
 
-		local vibrant_m3_theme = {
-			normal = {
-				a = { fg = vibrant_m3_palette.bg, bg = vibrant_m3_palette.primary, gui = "bold" }, -- Primary mode (Deep Purple)
-				b = { fg = vibrant_m3_palette.on_primary, bg = vibrant_m3_palette.surface }, -- Section background
-				c = { fg = vibrant_m3_palette.fg, bg = vibrant_m3_palette.bg }, -- Text on background
-			},
-			insert = {
-				a = { fg = vibrant_m3_palette.bg, bg = vibrant_m3_palette.secondary, gui = "bold" }, -- Insert mode (Teal)
-				b = { fg = vibrant_m3_palette.on_secondary, bg = vibrant_m3_palette.surface }, -- Section background
-				c = { fg = vibrant_m3_palette.fg, bg = vibrant_m3_palette.bg }, -- Text in insert mode
-			},
-			visual = {
-				a = { fg = vibrant_m3_palette.bg, bg = vibrant_m3_palette.tertiary, gui = "bold" }, -- Visual mode (Deep Orange)
-				b = { fg = vibrant_m3_palette.on_primary, bg = vibrant_m3_palette.surface }, -- Section background
-				c = { fg = vibrant_m3_palette.fg, bg = vibrant_m3_palette.bg }, -- Text in visual mode
-			},
-			replace = {
-				a = { fg = vibrant_m3_palette.bg, bg = vibrant_m3_palette.error, gui = "bold" }, -- Replace mode (Red)
-				b = { fg = vibrant_m3_palette.on_error, bg = vibrant_m3_palette.surface }, -- Section background
-				c = { fg = vibrant_m3_palette.fg, bg = vibrant_m3_palette.bg }, -- Text in replace mode
-			},
-			command = {
-				a = { fg = vibrant_m3_palette.bg, bg = vibrant_m3_palette.success, gui = "bold" }, -- Command mode (Green)
-				b = { fg = vibrant_m3_palette.on_primary, bg = vibrant_m3_palette.surface }, -- Section background
-				c = { fg = vibrant_m3_palette.fg, bg = vibrant_m3_palette.bg }, -- Text in command mode
-			},
-			inactive = {
-				a = { fg = vibrant_m3_palette.on_surface, bg = vibrant_m3_palette.surface }, -- Inactive sections (Light text on dark surface)
-				b = { fg = vibrant_m3_palette.on_surface, bg = vibrant_m3_palette.surface },
-				c = { fg = vibrant_m3_palette.on_surface, bg = vibrant_m3_palette.bg },
-			},
-			tabline = {
-				a = { fg = vibrant_m3_palette.bg, bg = vibrant_m3_palette.primary, gui = "bold" },
-				b = { fg = vibrant_m3_palette.on_primary, bg = vibrant_m3_palette.surface },
-				c = { fg = vibrant_m3_palette.fg, bg = vibrant_m3_palette.bg },
-			},
-			extensions = {},
-		}
+		-- 🎨 دالة لبناء ثيم ديناميكي يعتمد على الألوان النشطة
+		local function get_dynamic_theme()
+			-- نستخدم Normal للون النص والخلفية الأساسي
+			local normal_fg = get_hl_color("Normal", "fg") or "#ffffff"
+			local normal_bg = get_hl_color("Normal", "bg") or "#000000"
 
-		-- Configure Lualine with theme colors
+			-- نستخدم StatusLine للوضع النشط
+			local statusline_fg = get_hl_color("StatusLine", "fg") or normal_fg
+			local statusline_bg = get_hl_color("StatusLine", "bg") or "#444444"
+
+			-- نستخدم StatusLineNC للوضع غير النشط
+			local statusline_nc_bg = get_hl_color("StatusLineNC", "bg") or "#222222"
+
+			-- ألوان الأوضاع المختلفة (نستخلصها من highlight groups الخاصة بـ Neovim)
+			local mode_colors = {
+				normal = {
+					a = { fg = normal_bg, bg = get_hl_color("Keyword", "fg") or "#569CD6", gui = "bold" },
+					b = { fg = statusline_fg, bg = statusline_bg },
+					c = { fg = normal_fg, bg = normal_bg },
+				},
+				insert = {
+					a = { fg = normal_bg, bg = get_hl_color("String", "fg") or "#6A9955", gui = "bold" },
+					b = { fg = statusline_fg, bg = statusline_bg },
+					c = { fg = normal_fg, bg = normal_bg },
+				},
+				visual = {
+					a = { fg = normal_bg, bg = get_hl_color("Constant", "fg") or "#B5CEA8", gui = "bold" },
+					b = { fg = statusline_fg, bg = statusline_bg },
+					c = { fg = normal_fg, bg = normal_bg },
+				},
+				replace = {
+					a = { fg = normal_bg, bg = get_hl_color("Error", "fg") or "#F44747", gui = "bold" },
+					b = { fg = statusline_fg, bg = statusline_bg },
+					c = { fg = normal_fg, bg = normal_bg },
+				},
+				command = {
+					a = { fg = normal_bg, bg = get_hl_color("Function", "fg") or "#DCDCAA", gui = "bold" },
+					b = { fg = statusline_fg, bg = statusline_bg },
+					c = { fg = normal_fg, bg = normal_bg },
+				},
+				inactive = {
+					a = { fg = "#888888", bg = statusline_nc_bg },
+					b = { fg = "#888888", bg = statusline_nc_bg },
+					c = { fg = "#888888", bg = normal_bg },
+				},
+			}
+
+			return {
+				normal = mode_colors.normal,
+				insert = mode_colors.insert,
+				visual = mode_colors.visual,
+				replace = mode_colors.replace,
+				command = mode_colors.command,
+				inactive = mode_colors.inactive,
+				tabline = {
+					a = mode_colors.normal.a,
+					b = mode_colors.normal.b,
+					c = mode_colors.normal.c,
+				},
+				extensions = {},
+			}
+		end
+
+		-- ⚙️ إعداد Lualine
 		lualine.setup({
 			options = {
-				globalstatus = true,
-				theme = vibrant_m3_theme, -- Use the defined custom theme			theme = "auto", -- Automatically use colors from the current theme
-				-- component_separators = { left = "", right = "" },
+				globalstatus = true, -- شريط حالة واحد في أسفل الشاشة
+				theme = get_dynamic_theme(), -- 🎯 الثيم الديناميكي
+				component_separators = { left = "", right = "" },
 				-- section_separators = { left = "", right = "" },
-				-- disabled_filetypes = {},
+				disabled_filetypes = {
+					statusline = { "dashboard", "snacks_dashboard" },
+					winbar = {},
+				},
+				ignore_focus = {},
+				always_divide_middle = true,
+				section_separators = { left = "", right = "" },
 			},
 			sections = {
-				lualine_a = { "mode" },
-				lualine_b = { "branch" },
-				lualine_c = { { "filename", path = 1 } }, -- Show full path
+				lualine_a = {
+					{
+						"mode",
+						icon = "",
+						padding = { left = 1, right = 1 },
+					},
+				},
+				lualine_b = {
+					{
+						"branch",
+						icon = "",
+						padding = { left = 1, right = 1 },
+					},
+					{
+						"diff",
+						symbols = { added = " ", modified = " ", removed = " " },
+						padding = { left = 1, right = 1 },
+					},
+				},
+				lualine_c = {
+					{
+						"filename",
+						file_status = true,
+						path = 1, -- مسار نسبي
+						symbols = {
+							modified = "●",
+							readonly = "󰌾",
+							unnamed = "[No Name]",
+						},
+						padding = { left = 1, right = 1 },
+					},
+				},
 				lualine_x = {
-					-- {
-					-- 	noice.api.status.mode.get,
-					-- 	cond = noice.api.status.mode.has,
-					-- },
-					{ "diagnostics", sources = { "nvim_lsp" } }, -- Adding diagnostics from LSP
+					{
+						"diagnostics",
+						sources = { "nvim_diagnostic" },
+						symbols = { error = " ", warn = " ", info = " ", hint = " " },
+						padding = { left = 1, right = 1 },
+					},
+					{
+						"filetype",
+						icon_only = false,
+						padding = { left = 1, right = 1 },
+					},
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
-						color = { fg = "#ff9e64" }, -- Keeping the custom color for updates
+						color = { fg = get_hl_color("WarningMsg", "fg") or "#ff9e64" },
+						padding = { left = 1, right = 1 },
 					},
-					-- "encoding",
-					-- "fileformat",
-					"filetype",
 				},
-				lualine_y = { "progress" },
+				lualine_y = {
+					{
+						"progress",
+						padding = { left = 1, right = 1 },
+					},
+				},
 				lualine_z = {
 					{
 						function()
-							local clients = vim.lsp.get_clients()
-							if next(clients) == nil then
-								return "No LSP"
+							local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+							if #clients == 0 then
+								return "󰅖 No LSP"
 							end
 							local names = {}
-							for _, client in pairs(clients) do
+							for _, client in ipairs(clients) do
 								table.insert(names, client.name)
 							end
-							return table.concat(names, ",")
+							return " " .. table.concat(names, ",")
 						end,
-						icon = " LSP:",
+						padding = { left = 1, right = 1 },
 					},
 				},
 			},
 			inactive_sections = {
-				lualine_a = { { "filename", path = 1 } }, -- Show full path
+				lualine_a = {},
 				lualine_b = {},
-				lualine_c = {},
+				lualine_c = { { "filename", file_status = true, path = 1 } },
 				lualine_x = { "location" },
 				lualine_y = {},
 				lualine_z = {},
 			},
 			tabline = {},
-			extensions = {},
+			extensions = { "lazy", "fugitive", "nvim-tree" },
 		})
 	end,
 }
