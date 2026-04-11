@@ -23,13 +23,25 @@ return {
 			server_bridge = {
 				__inherited_from = "openai",
 				endpoint = "http://localhost:5000/v1",
+				-- system_prompt = "You are an expert Django developer. YOUR TASK IS TO REFLECT AND EDIT. Do not perform recursive planning. Do not search for TODOs. If the user asks to clean code, analyze the code immediately and use the 'str_replace' tool to apply changes in one shot. DO NOT OUTPUT INTERNAL THOUGHTS. Focus on code quality and clean code principles.",
+				system_prompt = [[
+You are an expert Django developer.
+
+STRICT RULES:
+- DO NOT think step by step
+- DO NOT repeat analysis
+- DO NOT explain multiple times
+- You MUST directly edit code using str_replace
+- AFTER editing, you MUST immediately call attempt_completion
+- NEVER continue after editing
+]],
 				model = "qwen3-480b",
-				timeout = 120000, -- رفع الوقت لأن الموديل الضخم قد يحتاج وقت للتفكير
+				timeout = 120000,
 				disable_tools = false,
-				extra_request_body = {
-					temperature = 0.1, -- دقة عالية جداً
-					max_tokens = 16384,
-				},
+				-- extra_request_body = {
+				-- 	temperature = 0.1,
+				-- 	max_tokens = 5000000,
+				-- },
 			},
 		},
 		-- openai = {
