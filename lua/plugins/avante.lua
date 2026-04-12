@@ -23,21 +23,18 @@ return {
 			server_bridge = {
 				__inherited_from = "openai",
 				endpoint = "http://localhost:5000/v1",
-				-- system_prompt = "You are an expert Django developer. YOUR TASK IS TO REFLECT AND EDIT. Do not perform recursive planning. Do not search for TODOs. If the user asks to clean code, analyze the code immediately and use the 'str_replace' tool to apply changes in one shot. DO NOT OUTPUT INTERNAL THOUGHTS. Focus on code quality and clean code principles.",
-				system_prompt = [[
-You are an expert Django developer.
-
-STRICT RULES:
-- DO NOT think step by step
-- DO NOT repeat analysis
-- DO NOT explain multiple times
-- You MUST directly edit code using str_replace
-- AFTER editing, you MUST immediately call attempt_completion
-- NEVER continue after editing
-]],
-				model = "qwen3-480b",
+				model = "custom-model",
 				timeout = 120000,
 				disable_tools = false,
+				-- 				sgstem_prompt = [[
+				-- You are an expert Django developer.
+				--
+				-- CRITICAL RULES FOR TOOLS:
+				-- 1. You MUST ONLY use the 'str_replace' tool to modify code.
+				-- 2. DO NOT USE 'read_todos', 'write_todos', 'bash', or 'run_python' under any circumstances.
+				-- 3. Once you successfully apply a fix using 'str_replace', you MUST IMMEDIATELY use the 'attempt_completion' tool to end the task.
+				-- 4. Ignore any automated verification or LSP checks after you have applied your fix.
+				-- ]],
 				-- extra_request_body = {
 				-- 	temperature = 0.1,
 				-- 	max_tokens = 5000000,
