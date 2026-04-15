@@ -10,26 +10,39 @@ return {
 	end,
 	opts = {
 		provider = "llamacpp",
+		-- root_dir = function()
+		-- 	return vim.fn.getcwd()
+		-- end,
+		-- root_dir = function()
+		-- 	local file = vim.api.nvim_buf_get_name(0)
+		-- 	if file ~= "" then
+		-- 		return vim.fn.fnamemodify(file, ":p:h")
+		-- 	end
+		-- 	return vim.fn.getcwd()
+		-- end,
+		-- mappings = {
+		-- 	submit = "<C-j>",
+		-- },
 		providers = {
 			llamacpp = {
 				__inherited_from = "openai",
 				endpoint = "http://127.0.0.1:8080/v1",
-				model = "qwen",
+				model = "---",
 				api_key = "sk-local-key",
 				timeout = 60000,
-				disable_tools = true,
+				disable_tools = false,
 				extra_request_body = { temperature = 0.1, max_tokens = 4096 },
 			},
-			server_bridge = {
+			server_bridge_agent = {
 				__inherited_from = "openai",
 				endpoint = "http://localhost:5000/v1",
 				model = "custom-model",
-				timeout = 120000,
+				timeout = 220000,
 				disable_tools = false,
-				-- 				sgstem_prompt = [[
+				-- sgstem_prompt = [[
 				-- You are an expert Django developer.
 				--
-				-- CRITICAL RULES FOR TOOLS:
+				-- ** CRITICAL RULES FOR TOOLS:
 				-- 1. You MUST ONLY use the 'str_replace' tool to modify code.
 				-- 2. DO NOT USE 'read_todos', 'write_todos', 'bash', or 'run_python' under any circumstances.
 				-- 3. Once you successfully apply a fix using 'str_replace', you MUST IMMEDIATELY use the 'attempt_completion' tool to end the task.
@@ -39,6 +52,19 @@ return {
 				-- 	temperature = 0.1,
 				-- 	max_tokens = 5000000,
 				-- },
+			},
+			server_bridge_chat = {
+				__inherited_from = "openai",
+				endpoint = "http://localhost:5000/v1",
+				model = "custom-model",
+				timeout = 120000,
+				disable_tools = true,
+				sgstem_prompt = [[
+				You are an expert Django developer.
+
+				** CRITICAL RULES FOR TOOLS:
+				1. DO NOT USE ANY TOOLS YOU JUST CHAT WITH ME AS A REGULAR CHAT.
+				]],
 			},
 		},
 		-- openai = {
@@ -57,28 +83,32 @@ return {
 		},
 		file_selector = {
 			provider = "fzf",
+			-- provider_opts = {
+			-- 	-- إجبار fzf-lua على استخدام مسار العمل الحالي لـ Neovim
+			-- 	cwd = vim.fn.getcwd(),
+			-- },
 		},
 		windows = {
 			position = "right", -- مكان النافذة (right, left, top, bottom)
 			wrap = true, -- التفاف النص الطويل
 			width = 45,
-			sidebar_header = {
-				align = "center", -- محاذاة عنوان النافذة (center, left)
-				rounded = true, -- حواف دائرية للعنوان
-			},
-			input = {
-				prefix = "❯ ", -- الرمز الذي يظهر قبل كتابة سؤالك
-				height = 5, -- ارتفاع مربع إدخال النص
-			},
-			edit = {
-				border = "rounded", -- نوع حواف نافذة التعديل (rounded, single, solid)
-				start_insert = true, -- الدخول في وضع الإدخال فوراً
-			},
-			ask = {
-				floating = false, -- هل تريدها نافذة عائمة بدلاً من شريط جانبي؟
-				start_insert = true,
-				border = "rounded",
-			},
+			-- sidebar_header = {
+			-- 	align = "center", -- محاذاة عنوان النافذة (center, left)
+			-- 	rounded = true, -- حواف دائرية للعنوان
+			-- },
+			-- input = {
+			-- 	prefix = "❯ ", -- الرمز الذي يظهر قبل كتابة سؤالك
+			-- 	height = 5, -- ارتفاع مربع إدخال النص
+			-- },
+			-- edit = {
+			-- 	border = "rounded", -- نوع حواف نافذة التعديل (rounded, single, solid)
+			-- 	start_insert = true, -- الدخول في وضع الإدخال فوراً
+			-- },
+			-- ask = {
+			-- 	floating = false, -- هل تريدها نافذة عائمة بدلاً من شريط جانبي؟
+			-- 	start_insert = true,
+			-- 	border = "rounded",
+			-- },
 		},
 	},
 	config = function(_, opts)

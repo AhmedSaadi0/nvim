@@ -41,3 +41,4 @@ vim.opt.colorcolumn = "88" -- Visual line length guide (from your `linelength` [
 vim.opt.wildmenu = true -- Enhanced command-line completion
 -- vim.opt.lazyredraw = true -- Better performance during macros
 vim.opt.termguicolors = true -- True color support for terminals
+-- vim.opt.autochdir = true
