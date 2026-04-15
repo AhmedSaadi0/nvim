@@ -1,0 +1,88 @@
+return {
+	"nickjvandyke/opencode.nvim",
+	version = "*", -- استخدام أحدث إصدار مستقر
+	dependencies = {
+		"folke/snacks.nvim", -- التكامل مع نافذة الأوامر التي تملكها بالفعل
+	},
+	config = function()
+		-- إعداد الخيارات الأساسية
+		vim.g.opencode_opts = {
+			-- يمكنك تفعيل الـ LSP التجريبي إذا أردت
+			-- lsp = { enabled = true }
+		}
+
+		-- ضروري جداً لكي يتم تحديث الملفات تلقائياً عند تعديلها من الوكيل
+		vim.o.autoread = true
+
+		-- ===========================
+		-- اختصارات لوحة المفاتيح
+		-- ===========================
+
+		-- فتح نافذة لسؤال الوكيل (الذكاء الاصطناعي) وإرسال السياق الحالي
+		vim.keymap.set({ "n", "x" }, "<leader>oa", function()
+			require("opencode").ask("@this: ", { submit = true })
+		end, { desc = "Ask OpenCode about this" })
+
+		-- فتح قائمة (Picker) للوصول إلى مهام الوكيل المختلفة
+		vim.keymap.set({ "n", "x" }, "<leader>ox", function()
+			require("opencode").select()
+		end, { desc = "Execute OpenCode action" })
+
+		-- إظهار / إخفاء واجهة OpenCode
+		vim.keymap.set({ "n", "t" }, "<leader>ot", function()
+			require("opencode").toggle()
+		end, { desc = "Toggle OpenCode UI" })
+
+		-- ===========================
+		-- اختصارات التنقل والتحكم
+		-- ===========================
+
+		vim.keymap.set({ "n", "x" }, "go", function()
+			return require("opencode").operator("@this ")
+		end, { desc = "Add range to opencode", expr = true })
+
+		vim.keymap.set("n", "goo", function()
+			return require("opencode").operator("@this ") .. "_"
+		end, { desc = "Add line to opencode", expr = true })
+
+		vim.keymap.set("n", "<S-C-u>", function()
+			require("opencode").command("session.half.page.up")
+		end, { desc = "Scroll opencode up" })
+
+		vim.keymap.set("n", "<S-C-d>", function()
+			require("opencode").command("session.half.page.down")
+		end, { desc = "Scroll opencode down" })
+
+		vim.keymap.set("n", "<leader>og", function()
+			require("opencode").command("session.first")
+		end, { desc = "Go to first message" })
+
+		vim.keymap.set("n", "<leader>oG", function()
+			require("opencode").command("session.last")
+		end, { desc = "Go to last message" })
+
+		vim.keymap.set("n", "<leader>oi", function()
+			require("opencode").command("session.interrupt")
+		end, { desc = "Interrupt opencode" })
+
+		vim.keymap.set("n", "<leader>on", function()
+			require("opencode").command("session.new")
+		end, { desc = "New opencode session" })
+
+		vim.keymap.set("n", "<leader>os", function()
+			require("opencode").command("session.select")
+		end, { desc = "Select opencode session" })
+
+		vim.keymap.set("n", "<leader>ol", function()
+			require("opencode").command("session.list")
+		end, { desc = "List opencode sessions" })
+
+		vim.keymap.set("n", "<leader>oc", function()
+			require("opencode").command("session.compact")
+		end, { desc = "Compact session (reduce context)" })
+
+		vim.keymap.set("n", "<leader>op", function()
+			require("opencode").prompt()
+		end, { desc = "Prompt opencode" })
+	end,
+}

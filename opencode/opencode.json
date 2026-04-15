@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "llamacpp/qwen",
+  "provider": {
+    "llamacpp": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Llama.cpp (Local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:8080/v1"
+      },
+      "models": {
+        "qwen": {
+          "name": "(Local)",
+          "limit": {
+            "context": 128000,
+            "output": 32768
+          }
+        }
+      }
+    },
+    "server_bridge_agent": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Server Bridge (Agent)",
+      "options": {
+        "baseURL": "http://localhost:5000/v1"
+      },
+      "models": {
+        "custom-model": {
+          "name": "Custom Agent Model Using Ollama.com",
+          "limit": {
+            "context": 128000,
+            "output": 65536
+          }
+        }
+      }
+    }
+  }
+}
