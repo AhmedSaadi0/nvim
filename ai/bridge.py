@@ -16,6 +16,25 @@ logger = logging.getLogger("PURE_BRIDGE")
 
 app = Flask(__name__)
 
+
+def extract_error_message(response):
+    """استخراج رسالة الخطأ من الاستجابة بغض النظر عن نوعها"""
+    try:
+        data = response.json()
+        if isinstance(data, dict):
+            error = data.get("error", {})
+            if isinstance(error, dict):
+                return error.get("message", str(data))
+            elif isinstance(error, str):
+                return error
+            return str(data)
+        elif isinstance(data, str):
+            return data
+        else:
+            return str(data)
+    except Exception:
+        return response.text or f"HTTP {response.status_code}"
+
 PROVIDERS = {
     "ollama": {
         "endpoint": "https://ollama.com",
@@ -34,6 +53,8 @@ parser.add_argument(
 )
 parser.add_argument("--model", default="qwen3-coder:480b-cloud")
 parser.add_argument("--port", type=int, default=5000)
+parser.add_argument("--referer", default="http://localhost", help="HTTP Referer for OpenRouter")
+parser.add_argument("--title", default="OpenCode Bridge", help="X-Title for OpenRouter")
 args = parser.parse_args()
 
 provider_config = PROVIDERS[args.provider]
@@ -68,6 +89,11 @@ def proxy():
     headers["Authorization"] = f"Bearer {args.api_key}"
     headers["Content-Type"] = "application/json"
 
+    # إضافة رؤوس خاصة ببعض المزودين
+    if args.provider == "openrouter":
+        headers["HTTP-Referer"] = args.referer
+        headers["X-Title"] = args.title
+
     # استخدام المسار القياسي بناءً على المزود
     logger.info(f"🚀 FORWARDING PURE REQUEST TO: {target_url}")
 
@@ -93,16 +119,19 @@ def proxy():
                         retry_delay *= 2
                         continue
                     else:
-                        error_msg = response.json().get("error", {}).get("message", "Rate limit exceeded")
+                        error_msg = extract_error_message(response)
+                        if not error_msg or error_msg == str(response.status_code):
+                            error_msg = "Rate limit exceeded"
                         logger.error(f"❌ RATE LIMIT AFTER {max_retries} ATTEMPTS")
                         yield f'data: {{"error": {{"message": "{error_msg}", "code": 429}}}}\n\n'.encode("utf-8")
                         yield b"data: [DONE]\n\n"
                         return
 
                 if response.status_code != 200:
-                    error_data = response.json()
-                    error_msg = error_data.get("error", {}).get("message", f"API error: {response.status_code}")
-                    logger.error(f"❌ API ERROR: {response.status_code}")
+                    error_msg = extract_error_message(response)
+                    if not error_msg or error_msg == str(response.status_code):
+                        error_msg = f"API error: {response.status_code}"
+                    logger.error(f"❌ API ERROR: {response.status_code} - Response: {response.text[:500]}")
                     yield f'data: {{"error": {{"message": "{error_msg}", "code": {response.status_code}}}}}\n\n'.encode("utf-8")
                     yield b"data: [DONE]\n\n"
                     return
