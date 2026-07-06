@@ -10,7 +10,7 @@ return {
 			enabled = true,
 			sources = {
 				explorer = {
-					layout = { layout = { position = "left", width = 35 } },
+					layout = { position = "left", width = 35 },
 				},
 			},
 		},
@@ -30,5 +30,17 @@ return {
 	},
 	config = function(_, opts)
 		require("snacks").setup(opts)
+
+		-- Override picker highlights for better contrast.
+		-- These must be set at runtime since theme engines (base46)
+		-- don't intercept highlights defined after colorscheme loads.
+		local hl = vim.api.nvim_set_hl
+		hl(0, "SnacksPickerNormal",   { link = "Normal" })
+		hl(0, "SnacksPickerMatch",    { link = "Type" })
+		hl(0, "SnacksPickerMatchRoot",{ link = "Type" })
+		hl(0, "SnacksPickerPrompt",   { link = "Type" })
+		hl(0, "SnacksPickerDir",      { link = "SpecialKey" })
+		hl(0, "SnacksPickerList",     { link = "Normal" })
+		hl(0, "SnacksPickerListCursorLine", { link = "CursorLine" })
 	end,
 }
